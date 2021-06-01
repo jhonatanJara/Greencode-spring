@@ -18,7 +18,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.UniqueConstraint;
-
+//hola
 @Entity
 @Table(name="Gatherers",
 indexes= {@Index(columnList="first-name",name = "gatherers_index_first_name")},
