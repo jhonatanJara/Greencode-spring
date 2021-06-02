@@ -15,6 +15,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.UniqueConstraint;
 
+//NO PREOCUPARSE TESTEO PULL
 
 @Entity
 @Table(name="Transactions")
