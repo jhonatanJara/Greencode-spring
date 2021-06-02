@@ -21,7 +21,7 @@ import javax.persistence.UniqueConstraint;
 
 @Entity
 @Table(name="Gatherers",
-indexes= {@Index(columnList="last_name,first_name",name = "gatherers_index_first_name"),
+indexes= {@Index(columnList="last_name,first_name",name = "gatherers_index_last_first_name"),
 		@Index(columnList = "district_id", name="gatherers_index_district_id")},
 uniqueConstraints = {@UniqueConstraint(columnNames = {"email", "dni", "gatherer_user", "mobile_number"}) })
 public class Gatherer {
