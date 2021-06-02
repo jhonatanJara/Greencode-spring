@@ -23,7 +23,7 @@ public class CouponServiceImpl implements CouponService{
 	@Transactional(readOnly=true)
 	@Override
 	public List<Coupon> findByNameCoupon(String nameCoupon) throws Exception {
-		return couponRepository.finByNameCoupon(nameCoupon);
+		return couponRepository.findByNameCoupon(nameCoupon);
 	}
 
 }

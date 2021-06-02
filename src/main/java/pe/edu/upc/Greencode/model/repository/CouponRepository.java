@@ -9,5 +9,5 @@ import pe.edu.upc.Greencode.model.entity.Coupon;
 
 @Repository
 public interface CouponRepository extends JpaRepository<Coupon,Integer>{
-	List<Coupon> finByNameCoupon (String nameCoupon);
+	List<Coupon> findByNameCoupon (String nameCoupon);
 }
