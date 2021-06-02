@@ -19,17 +19,17 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.UniqueConstraint;
 
-
 @Entity
 @Table(name="Recyclers",
-indexes = { @Index(columnList = "first_name", name = "recyclers_index_first_name")},
+indexes = { @Index(columnList = "last_name, first_name", name = "recyclers_index_last_first_name"),
+			@Index(columnList = "district_id", name="recyclers_index_district_id")},
 uniqueConstraints = {@UniqueConstraint(columnNames = {"email", "dni", "user", "mobile_number"}) })
 
 public class Recycler {
 	@Id
 	@GeneratedValue(strategy= GenerationType.IDENTITY)
 	@Column(name = "recycler_id", nullable = false)
-	private int id;
+	private Integer id;
 	
 	@Column(name="user", nullable=false, length=30)
 	private String user;
@@ -65,7 +65,7 @@ public class Recycler {
 	@Column(name="points", nullable=false, columnDefinition = "DECIMAL(4,1)")
 	private Float point;
 	
-	@Column(name="type", nullable=false, length=15) //OJO
+	@Column(name="type", nullable=false, length=15) 
 	private String type;
 	
 	@ManyToOne
@@ -74,17 +74,25 @@ public class Recycler {
 	
 	@OneToMany(mappedBy = "recycler", fetch = FetchType.LAZY)
 	private List<Coupon> coupons;
+	
+	@OneToMany(mappedBy = "recycler", fetch = FetchType.LAZY)
+	private List<Waste> wastes;
+	
+	@OneToMany(mappedBy = "recycler", fetch = FetchType.LAZY)
+	private List<Order> orders;
 
 	public Recycler() {
 		super();
 		coupons= new ArrayList<Coupon>();
+		orders= new ArrayList<Order>();
+		wastes= new ArrayList<Waste>();
 	}
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -200,6 +208,22 @@ public class Recycler {
 		this.coupons = coupons;
 	}
 
+	public List<Waste> getWastes() {
+		return wastes;
+	}
+
+	public void setWastes(List<Waste> wastes) {
+		this.wastes = wastes;
+	}
+
+	public List<Order> getOrders() {
+		return orders;
+	}
+
+	public void setOrders(List<Order> orders) {
+		this.orders = orders;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -211,7 +235,7 @@ public class Recycler {
 		result = prime * result + ((dni == null) ? 0 : dni.hashCode());
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
 		result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
-		result = prime * result + id;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
 		result = prime * result + ((mobileNumber == null) ? 0 : mobileNumber.hashCode());
 		result = prime * result + ((password == null) ? 0 : password.hashCode());
@@ -265,7 +289,10 @@ public class Recycler {
 				return false;
 		} else if (!firstName.equals(other.firstName))
 			return false;
-		if (id != other.id)
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
 			return false;
 		if (lastName == null) {
 			if (other.lastName != null)
@@ -299,6 +326,8 @@ public class Recycler {
 			return false;
 		return true;
 	}
+
+	
 	
 	
 }

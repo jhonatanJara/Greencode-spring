@@ -15,12 +15,12 @@ import javax.persistence.TemporalType;
 
 @Entity
 @Table(name="Coupons")
-//Ver US búsqueda de cuopon
+
 public class Coupon {
 	@Id
 	@GeneratedValue(strategy= GenerationType.IDENTITY)
 	@Column(name = "coupon_id", nullable = false)
-	private int id;
+	private Integer id;
 	
 	@Column(name="name_coupon", nullable=false, length=30)
 	private String nameCoupon;
@@ -43,11 +43,11 @@ public class Coupon {
 		super();
 	}
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -90,6 +90,8 @@ public class Coupon {
 	public void setRecycler(Recycler recycler) {
 		this.recycler = recycler;
 	}
+
+	
 	
 	
 }

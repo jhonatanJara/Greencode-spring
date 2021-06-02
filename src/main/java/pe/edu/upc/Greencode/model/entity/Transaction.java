@@ -16,17 +16,15 @@ import javax.persistence.TemporalType;
 import javax.persistence.UniqueConstraint;
 
 
-
 @Entity
 @Table(name="Transactions")
-//indexes = { @Index(columnList = "first_name", name = "recyclers_index_first_name")})
 
 public class Transaction {
 
 	@Id
 	@GeneratedValue(strategy= GenerationType.IDENTITY)
 	@Column(name = "transaction_id", nullable = false)
-	private int id;
+	private Integer id;
 	
 	@Column(name="name", nullable=false, length=20) 
 	private String name;
@@ -44,38 +42,19 @@ public class Transaction {
 	@Column(name="amount", nullable=false, columnDefinition = "DECIMAL(3,1)")
 	private Float amount;
 	
-	//COMENTARIO
-	//@ManyToOne
-	//@JoinColumn(name = "account_id", nullable = false)
-	//private Account account;
+	@ManyToOne
+	@JoinColumn(name = "account_id", nullable = false)
+	private Account account;
 
 	public Transaction() {
-		super();
-		
-		// TODO Auto-generated constructor stub
+		super();	
 	}
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((amount == null) ? 0 : amount.hashCode());
-		result = prime * result + ((date == null) ? 0 : date.hashCode());
-		result = prime * result + id;
-		result = prime * result + ((name == null) ? 0 : name.hashCode());
-		result = prime * result + ((typePayment == null) ? 0 : typePayment.hashCode());
-		result = prime * result + ((typeTransaction == null) ? 0 : typeTransaction.hashCode());
-		return result;
-	}
-
-	
-	
-	
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -119,7 +98,6 @@ public class Transaction {
 		this.amount = amount;
 	}
 
-	/*
 	public Account getAccount() {
 		return account;
 	}
@@ -127,8 +105,21 @@ public class Transaction {
 	public void setAccount(Account account) {
 		this.account = account;
 	}
-	 */
-	
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((account == null) ? 0 : account.hashCode());
+		result = prime * result + ((amount == null) ? 0 : amount.hashCode());
+		result = prime * result + ((date == null) ? 0 : date.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + ((typePayment == null) ? 0 : typePayment.hashCode());
+		result = prime * result + ((typeTransaction == null) ? 0 : typeTransaction.hashCode());
+		return result;
+	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -138,6 +129,11 @@ public class Transaction {
 		if (getClass() != obj.getClass())
 			return false;
 		Transaction other = (Transaction) obj;
+		if (account == null) {
+			if (other.account != null)
+				return false;
+		} else if (!account.equals(other.account))
+			return false;
 		if (amount == null) {
 			if (other.amount != null)
 				return false;
@@ -148,7 +144,10 @@ public class Transaction {
 				return false;
 		} else if (!date.equals(other.date))
 			return false;
-		if (id != other.id)
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
 			return false;
 		if (name == null) {
 			if (other.name != null)
@@ -167,8 +166,5 @@ public class Transaction {
 			return false;
 		return true;
 	}
-	
-	
-	
-	
+
 }

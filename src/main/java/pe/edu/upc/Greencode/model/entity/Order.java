@@ -1,28 +1,30 @@
 package pe.edu.upc.Greencode.model.entity;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-
-
 @Entity
-@Table(name="Transactions")
+@Table(name="Orders")
 public class Order {
 
 	@Id
 	@GeneratedValue(strategy= GenerationType.IDENTITY)
 	@Column(name = "order_id", nullable = false)
-	private int id;
+	private Integer id;
 	
 	@Column(name="date", nullable=false)
 	@Temporal(TemporalType.DATE)
@@ -41,16 +43,20 @@ public class Order {
 	@JoinColumn(name="recycler_id", nullable = false)
 	private Recycler recycler;
 
+	@OneToMany(mappedBy = "order", fetch = FetchType.LAZY)
+	private List<GathererOrder> gathererOrders;
+	
 	public Order() {
 		super();
-		// TODO Auto-generated constructor stub
+		gathererOrders= new ArrayList<GathererOrder>();
+		
 	}
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -94,13 +100,21 @@ public class Order {
 		this.recycler = recycler;
 	}
 
+	public List<GathererOrder> getGathererOrders() {
+		return gathererOrders;
+	}
+
+	public void setGathererOrders(List<GathererOrder> gathererOrders) {
+		this.gathererOrders = gathererOrders;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((arrivalTime == null) ? 0 : arrivalTime.hashCode());
 		result = prime * result + ((date == null) ? 0 : date.hashCode());
-		result = prime * result + id;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((recycler == null) ? 0 : recycler.hashCode());
 		result = prime * result + ((status == null) ? 0 : status.hashCode());
 		result = prime * result + ((totalAmount == null) ? 0 : totalAmount.hashCode());
@@ -126,7 +140,10 @@ public class Order {
 				return false;
 		} else if (!date.equals(other.date))
 			return false;
-		if (id != other.id)
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
 			return false;
 		if (recycler == null) {
 			if (other.recycler != null)
@@ -145,6 +162,8 @@ public class Order {
 			return false;
 		return true;
 	}
+
+	
 	
 	
 }

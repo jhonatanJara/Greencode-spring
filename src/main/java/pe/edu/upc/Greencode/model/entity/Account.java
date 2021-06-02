@@ -1,7 +1,6 @@
 package pe.edu.upc.Greencode.model.entity;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -14,18 +13,15 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-
 
 @Entity
-@Table(name="Account")
+@Table(name="Accounts")
 public class Account {
 
 	@Id
 	@GeneratedValue(strategy= GenerationType.IDENTITY)
 	@Column(name = "account_id", nullable = false)
-	private int id;
+	private Integer id;
 
 	@Column(name="number_Account", nullable=false)
 	private Integer numberAccount;
@@ -38,62 +34,61 @@ public class Account {
 	private Gatherer gatherer;
 	
 	@OneToMany(mappedBy = "account", fetch = FetchType.LAZY)
-	private List<Transaction> Transaction;
+	private List<Transaction> Transactions;
 
 	public Account() {
 		super();
-		Transaction = new  ArrayList<Transaction>();
+		Transactions = new  ArrayList<Transaction>();
 	}
 
-	public List<Transaction> getTransaction() {
-		return Transaction;
-	}
-
-	public void setTransaction(List<Transaction> Transaction) {
-		this.Transaction = Transaction;
-	}
-	
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
-	public Integer getnumberAccount() {
+	public Integer getNumberAccount() {
 		return numberAccount;
 	}
 
-	public void setnumberAccount(Integer numberAccount) {
+	public void setNumberAccount(Integer numberAccount) {
 		this.numberAccount = numberAccount;
 	}
 
-	public Integer getpasswordAccount() {
+	public Integer getPasswordAccount() {
 		return passwordAccount;
 	}
 
-	public void setpasswordAccount(Integer passwordAccount) {
+	public void setPasswordAccount(Integer passwordAccount) {
 		this.passwordAccount = passwordAccount;
 	}
 
-
-	public Gatherer getgatherer() {
+	public Gatherer getGatherer() {
 		return gatherer;
 	}
 
-	public void setRecycler(Gatherer gatherer) {
+	public void setGatherer(Gatherer gatherer) {
 		this.gatherer = gatherer;
+	}
+
+	public List<Transaction> getTransactions() {
+		return Transactions;
+	}
+
+	public void setTransactions(List<Transaction> transactions) {
+		Transactions = transactions;
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((gatherer == null) ? 0 : gatherer.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((numberAccount == null) ? 0 : numberAccount.hashCode());
 		result = prime * result + ((passwordAccount == null) ? 0 : passwordAccount.hashCode());
-		result = prime * result + id;
-		result = prime * result + ((gatherer == null) ? 0 : gatherer.hashCode());
 		return result;
 	}
 
@@ -106,6 +101,16 @@ public class Account {
 		if (getClass() != obj.getClass())
 			return false;
 		Account other = (Account) obj;
+		if (gatherer == null) {
+			if (other.gatherer != null)
+				return false;
+		} else if (!gatherer.equals(other.gatherer))
+			return false;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
 		if (numberAccount == null) {
 			if (other.numberAccount != null)
 				return false;
@@ -116,13 +121,7 @@ public class Account {
 				return false;
 		} else if (!passwordAccount.equals(other.passwordAccount))
 			return false;
-		if (id != other.id)
-			return false;
-		if (gatherer == null) {
-			if (other.gatherer != null)
-				return false;
-		} else if (!gatherer.equals(other.gatherer))
-			return false;
 		return true;
 	}
+
 }
