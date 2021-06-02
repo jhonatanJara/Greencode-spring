@@ -72,52 +72,7 @@ public class GathererOrder {
 		this.gatherer = gatherer;
 	}
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((amount == null) ? 0 : amount.hashCode());
-		result = prime * result + ((gatherer == null) ? 0 : gatherer.hashCode());
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + ((order == null) ? 0 : order.hashCode());
-		result = prime * result + Float.floatToIntBits(price);
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		GathererOrder other = (GathererOrder) obj;
-		if (amount == null) {
-			if (other.amount != null)
-				return false;
-		} else if (!amount.equals(other.amount))
-			return false;
-		if (gatherer == null) {
-			if (other.gatherer != null)
-				return false;
-		} else if (!gatherer.equals(other.gatherer))
-			return false;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
-			return false;
-		if (order == null) {
-			if (other.order != null)
-				return false;
-		} else if (!order.equals(other.order))
-			return false;
-		if (Float.floatToIntBits(price) != Float.floatToIntBits(other.price))
-			return false;
-		return true;
-	}
-
+	
 	
 }
 

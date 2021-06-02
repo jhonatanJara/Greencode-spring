@@ -26,11 +26,11 @@ public class Waste {
 	
 	@ManyToOne
 	@JoinColumn(name = "category_id", nullable = false)
-	private Category categories;
+	private Category category;
 	
 	@ManyToOne
 	@JoinColumn(name = "recycler_id", nullable = false)
-	private Recycler recyclers;
+	private Recycler recycler;
 
 	public Waste() {
 		super();
@@ -60,22 +60,23 @@ public class Waste {
 		this.weight = weight;
 	}
 
-	public Category getCategories() {
-		return categories;
+	public Category getCategory() {
+		return category;
 	}
 
-	public void setCategories(Category categories) {
-		this.categories = categories;
+	public void setCategory(Category category) {
+		this.category = category;
 	}
 
-	public Recycler getRecyclers() {
-		return recyclers;
+	public Recycler getRecycler() {
+		return recycler;
 	}
 
-	public void setRecyclers(Recycler recyclers) {
-		this.recyclers = recyclers;
+	public void setRecycler(Recycler recycler) {
+		this.recycler = recycler;
 	}
 
+	
 	
 	
 }

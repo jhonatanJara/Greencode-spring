@@ -81,47 +81,6 @@ public class Account {
 		Transactions = transactions;
 	}
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((gatherer == null) ? 0 : gatherer.hashCode());
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + ((numberAccount == null) ? 0 : numberAccount.hashCode());
-		result = prime * result + ((passwordAccount == null) ? 0 : passwordAccount.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Account other = (Account) obj;
-		if (gatherer == null) {
-			if (other.gatherer != null)
-				return false;
-		} else if (!gatherer.equals(other.gatherer))
-			return false;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
-			return false;
-		if (numberAccount == null) {
-			if (other.numberAccount != null)
-				return false;
-		} else if (!numberAccount.equals(other.numberAccount))
-			return false;
-		if (passwordAccount == null) {
-			if (other.passwordAccount != null)
-				return false;
-		} else if (!passwordAccount.equals(other.passwordAccount))
-			return false;
-		return true;
-	}
+	
 
 }

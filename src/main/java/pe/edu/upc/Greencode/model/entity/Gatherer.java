@@ -21,18 +21,18 @@ import javax.persistence.UniqueConstraint;
 
 @Entity
 @Table(name="Gatherers",
-indexes= {@Index(columnList="first-name",name = "gatherers_index_first_name")},
-uniqueConstraints = {@UniqueConstraint(columnNames = {"email", "dni", "user", "mobile_number"}) })
+indexes= {@Index(columnList="first_name",name = "gatherers_index_first_name")},
+uniqueConstraints = {@UniqueConstraint(columnNames = {"email", "dni", "gatherer_user", "mobile_number"}) })
 public class Gatherer {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "gatherer_id", nullable = false)
 	private Integer id;
 	
-	@Column(name="user", nullable=false, length=30)
+	@Column(name="gatherer_user", nullable=false, length=30)
 	private String user;
 	
-	@Column(name="password", nullable=false, length=60)
+	@Column(name="gatherer_password", nullable=false, length=60)
 	private String password;
 	
 	@Column(name="first_name", nullable=false, length=20)
@@ -210,108 +210,6 @@ public class Gatherer {
 		this.gathererOrders = gathererOrders;
 	}
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((address == null) ? 0 : address.hashCode());
-		result = prime * result + ((calification == null) ? 0 : calification.hashCode());
-		result = prime * result + ((dateBirth == null) ? 0 : dateBirth.hashCode());
-		result = prime * result + ((district == null) ? 0 : district.hashCode());
-		result = prime * result + ((dni == null) ? 0 : dni.hashCode());
-		result = prime * result + ((email == null) ? 0 : email.hashCode());
-		result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
-		result = prime * result + ((mobileNumber == null) ? 0 : mobileNumber.hashCode());
-		result = prime * result + ((password == null) ? 0 : password.hashCode());
-		result = prime * result + ((profit == null) ? 0 : profit.hashCode());
-		result = prime * result + ((type == null) ? 0 : type.hashCode());
-		result = prime * result + ((user == null) ? 0 : user.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Gatherer other = (Gatherer) obj;
-		if (address == null) {
-			if (other.address != null)
-				return false;
-		} else if (!address.equals(other.address))
-			return false;
-		if (calification == null) {
-			if (other.calification != null)
-				return false;
-		} else if (!calification.equals(other.calification))
-			return false;
-		if (dateBirth == null) {
-			if (other.dateBirth != null)
-				return false;
-		} else if (!dateBirth.equals(other.dateBirth))
-			return false;
-		if (district == null) {
-			if (other.district != null)
-				return false;
-		} else if (!district.equals(other.district))
-			return false;
-		if (dni == null) {
-			if (other.dni != null)
-				return false;
-		} else if (!dni.equals(other.dni))
-			return false;
-		if (email == null) {
-			if (other.email != null)
-				return false;
-		} else if (!email.equals(other.email))
-			return false;
-		if (firstName == null) {
-			if (other.firstName != null)
-				return false;
-		} else if (!firstName.equals(other.firstName))
-			return false;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
-			return false;
-		if (lastName == null) {
-			if (other.lastName != null)
-				return false;
-		} else if (!lastName.equals(other.lastName))
-			return false;
-		if (mobileNumber == null) {
-			if (other.mobileNumber != null)
-				return false;
-		} else if (!mobileNumber.equals(other.mobileNumber))
-			return false;
-		if (password == null) {
-			if (other.password != null)
-				return false;
-		} else if (!password.equals(other.password))
-			return false;
-		if (profit == null) {
-			if (other.profit != null)
-				return false;
-		} else if (!profit.equals(other.profit))
-			return false;
-		if (type == null) {
-			if (other.type != null)
-				return false;
-		} else if (!type.equals(other.type))
-			return false;
-		if (user == null) {
-			if (other.user != null)
-				return false;
-		} else if (!user.equals(other.user))
-			return false;
-		return true;
-	}
 
 	
 }
