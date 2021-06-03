@@ -9,6 +9,5 @@ import pe.edu.upc.Greencode.model.entity.Account;
 
 @Repository
 public interface AccountRepository extends JpaRepository<Account, Integer>{
-List<Account> findByNameAccount (Integer numberAccount);
 }
 
