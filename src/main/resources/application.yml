@@ -4,6 +4,7 @@ spring:
     url: jdbc:postgresql://localhost:5432/Greencodedb      
     username: postgres
     password: postgress
+
   jpa:
     database: postgresql
     hibernate:
