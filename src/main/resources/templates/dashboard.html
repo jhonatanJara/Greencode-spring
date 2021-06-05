@@ -1,6 +1,9 @@
 <!doctype html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -36,7 +39,7 @@
 							<a class="nav-link active" aria-current="page" href="#">Home</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link active" href="#">Wastes</a>
+							<a class="nav-link active" href="#">Requests</a>
 						</li>
 						<li class="nav-item">
 							<a class="nav-link active" href="#">Orders</a>
@@ -46,8 +49,9 @@
 							role="button" data-bs-toggle="dropdown" aria-expanded="false"> Movements History 
 							</a>
 							<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-								<li><a class="dropdown-item" href="#">Transacctions</a></li>
-								<li><a class="dropdown-item" href="#">Orders</a></li>
+								<li><a class="dropdown-item" href="#">Sale History</a></li>
+								<li><a class="dropdown-item" href="#">Purchase History</a></li>
+								<li><a class="dropdown-item" href="#">Requests History</a></li>
 							</ul>
 						</li>
 						<li class="nav-item"><a class="nav-link active" href="#"
@@ -82,36 +86,37 @@
 	
 
 	<footer class="container-fluid text-center fixed-bottom"
-		style="background-color: #b4ff33">
+		style="background-color: #707070">
 		<div class="row">
 			<div class="col-4 p-3">
-				<p>
-					<strong>Greencode</strong>
-				</p>
-				<p>Forma parte de Greencode, junto a nosotros podrás contribuir
+
+				<a href="#" class="navbar-brand"> <img class="d-inline-block align-middle" src="images/logo.png" width="45"
+					height="45">  <strong class="text-white fw-bold">Greencode</strong>
+				</a>
+				<p class="text-white fw-bold">Forma parte de Greencode, junto a nosotros podrás contribuir
 					con el medio ambiente para vivir en un lugar libre de contaminación
 					y para el bienestar de las futuras generaciones</p>
 			</div>
 			<div class="col-4 p-3">
-				<p>
+				<p class="text-white">
 					<strong>Bussiness</strong>
 				</p>
-				<ul style="list-style: none">
-					<li class="d-flex align-middle"><p>About us</p></li>
-					<li class="d-flex align-middle"><p>Our team</p></li>
+				<ul class="align-items-center"  style="list-style: none">
+					<li class="d-flex align-items-center text-white"><p class="fw-bold">About us</p></li>
+					<li class="d-flex align-middle text-white"><p class="fw-bold">Our team</p></li>
 				</ul>
 			</div>
 			<div class="col-4 p-3">
-				<p>
+				<p class="text-white">
 					<strong>Contact Us</strong>
 				</p>
 				<ul style="list-style: none">
-					<li class="d-flex align-middle fas fa-envelope"><p>greencode@hotmail.com</p></li>
-					<li class="d-flex align-middle fas fa-phone-volume"><p>928996325</p></li>
+					<li class="d-flex align-middle fas fa-envelope text-white"><p>greencode@hotmail.com</p></li>
+					<li class="d-flex align-middle fas fa-phone-volume text-white"><p>928996325</p></li>
 				</ul>
 			</div>
 		</div>
-		<p class="text-white bg-dark"><strong>&copy; All rights reserved by Greencode 2021</strong></p>
+		<p class="text-white"><strong>&copy; All rights reserved by Greencode 2021</strong></p>
 	</footer>
 
 
