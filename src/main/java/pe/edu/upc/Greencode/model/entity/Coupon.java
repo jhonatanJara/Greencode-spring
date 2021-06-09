@@ -23,7 +23,7 @@ public class Coupon {
 	@Column(name = "coupon_id", nullable = false)
 	private Integer id;
 	
-	@Column(name="name_coupon", nullable=false, length=30)
+	@Column(name="name_coupon", nullable=false, length=50)
 	private String nameCoupon;
 	
 	@Column(name="date_expiration", nullable=true)
@@ -37,7 +37,7 @@ public class Coupon {
 	private Integer score;
 	
 	@ManyToOne
-	@JoinColumn(name="recycler_id", nullable = false)
+	@JoinColumn(name="recycler_id", nullable = true)
 	private Recycler recycler;
 
 	public Coupon() {

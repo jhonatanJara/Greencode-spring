@@ -2,12 +2,14 @@ package pe.edu.upc.Greencode.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-public class GathererController {
+@RequestMapping("/layout")
+public class FrontController {
 	
-	@GetMapping("/dashboard")
+	@GetMapping
 	public String Home() {
-		return "dashboard";
+		return "layout/layout";
 	}
 }
