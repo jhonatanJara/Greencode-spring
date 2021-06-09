@@ -1,18 +1,18 @@
 <!doctype html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
+<head th:fragment="head">
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-	<link href="css/bootstrap.min.css" rel="stylesheet">
-	<link href="css/fontawesome.min.css" rel="stylesheet">
-	<link href="css/solid.min.css" rel="stylesheet">
+	<link th:href="@{css/bootstrap.min.css}" rel="stylesheet">
+	<link th:href="@{css/fontawesome.min.css}" rel="stylesheet">
+	<link th:href="@{css/solid.min.css}" rel="stylesheet">
 	
 	<title >Greencode</title>
 </head>
 
 <body>
-	<header>
+	<header th:fragment="header">
 		<nav class="navbar navbar-expand-lg navbar-light"
 			style="background-color: #4EB918">
 			<div class="container-fluid">
@@ -37,7 +37,7 @@
 					<div>
 						<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 							<li class="nav-item"><a class="nav-link active"
-								aria-current="page" href="#">Home</a></li>
+								aria-current="page" href="/home">Home</a></li>
 							<li class="nav-item"><a class="nav-link active" href="#">Requests</a>
 							</li>
 							<li class="nav-item"><a class="nav-link active" href="#">Orders</a>
@@ -53,7 +53,7 @@
 								</ul></li>
 							<li class="nav-item"><a class="nav-link active" href="#"
 								tabindex="-1">Recharge</a></li>
-							<li class="nav-item"><a class="nav-link active" href="#"
+							<li class="nav-item"><a class="nav-link active" href="/rewards"
 								tabindex="-1" aria-disabled="true">Rewards</a></li>
 							<li class="nav-item"><a class="nav-link active" href="#"
 								tabindex="-1" aria-disabled="true">Sign In</a></li>
@@ -85,17 +85,17 @@
 				</div>
 				<div class="col-3 d-flex align-items-center">
 					<ul class="p-3 ">
-						<div class="li m-3">Contribuye con el cuidado del medio ambiente</div>
-						<div class="li m-3">Genera ganancia mediante el reciclaje y obtén diversos beneficios</div>
-						<div class="li m-3">Crea un gran cambio en la cultura recicladora</div>
+						<div class="li m-3">Contribute to caring for the environment</div>
+						<div class="li m-3">Generate profit through recycling and obtain various benefits</div>
+						<div class="li m-3">Create a big change in recycling culture</div>
 					</ul>
 				</div>
 
 				<div class="col-5 d-flex align-items-center justify-content-center">
 					<div class="p-3 fw-bold" id="TextIntro">
 						<p class="fs-1 text-success text-center">GREENCODE</p>
-						<p class="text-center">Recicla ya!</p>
-						<p class="text-center">Empresa salvando el planeta junto a ti</p>
+						<p class="text-center">Recycle now!</p>
+						<p class="text-center">Company saving the planet with you</p>
 						<div class="d-flex justify-content-center">
 							<div>
 								<button type="button" class="btn btn-success m-3 d-block">Sign
@@ -111,15 +111,13 @@
 		</div>
 	</main>
 
-	<footer class="container-fluid" style="background-color: #707070">
+	<footer th:fragment="footer" class="container-fluid" style="background-color: #707070">
 		<div class="row">
-			<div class="col-4 p-1">
+			<div class="col-4 p-2">
 				<a href="#" class="navbar-brand d-flex justify-content-center"> <img class="d-inline-block" src="images/logo.png" width="30"
 					height="30"> <p class="fw-bold text-white text-center">Greencode</p>
 				</a>
-				<p class="text-white fw-bold text-break p-2">Forma parte de Greencode, junto a nosotros podrás contribuir
-					con el medio ambiente para vivir en un lugar libre de contaminación
-					y para el bienestar de las futuras generaciones</p>
+				<p class="text-white fw-bold text-break p-2">Be part of Greencode, together with us you can contribute to the environment to live in a place free of pollution and for the well-being of future generations</p>
 			</div>
 			<div class="col-4 p-3">
 				<p class="fw-bold text-white fw-bold text-center">Bussiness</p>
@@ -138,9 +136,10 @@
 				</ul>
 			</div>
 		</div>
-		<p class="text-white d-flex justify-content-center"><strong>&copy; All rights reserved by Greencode 2021</strong></p>
+		<p class="text-white d-flex justify-content-center p-3 m-1"><strong>&copy; All rights reserved by Greencode 2021</strong></p>
+	<script th:src="@{js/bootstrap.bundle.min.js}"></script>
 	</footer>
 
-	<script src="js/bootstrap.bundle.min.js"></script>
+	
 </body>
 </html>
