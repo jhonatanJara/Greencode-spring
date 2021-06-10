@@ -91,8 +91,4 @@ public class Coupon {
 	public void setRecycler(Recycler recycler) {
 		this.recycler = recycler;
 	}
-
-	
-	
-	
 }

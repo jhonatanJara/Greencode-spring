@@ -21,17 +21,6 @@ public class GathererOrderServiceImpl implements GathererOrderService{
 			return gathererorderRepository;
 	}
 	
-	@Transactional(readOnly=true)
-	@Override
-	public List<GathererOrder> findByAmountAndPrice(Integer amount,float price) throws Exception {
-		return gathererorderRepository.findByAmountAndPrice(amount, price);
-		}
-
-	@Transactional(readOnly=true)
-	@Override
-	public List<GathererOrder> finByAmountStartingWithAndPriceStartingWith(Integer amount,float price) throws Exception {
-		return gathererorderRepository.finByAmountStartingWithAndPriceStartingWith(amount, price);
-	}
 
 	@Transactional(readOnly=true)
 	@Override

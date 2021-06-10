@@ -13,7 +13,7 @@ public class FrontController {
 	
 	@GetMapping("home")
 	public String Home() {
-		return "layout/layout";
+		return "home";
 	}
 	
 	

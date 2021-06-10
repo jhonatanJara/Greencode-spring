@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head(~{::title})">
+	<title>Coupons </title>
+</head>
+<body>
+	<header th:replace="layout/layout :: header"></header>
+
+	<main>
+		<div class="d-flex justify-content-center m-3 p-2">
+			<div class="card" style="width: 25rem;">
+				<img src="images/cupon.jpg" class="card-img-top">
+				<div class="card-body">
+					<h5 class="card-title text-center" th:text="${coupon.nameCoupon}">Card
+						title</h5>
+					<div class="container">
+						<div class="row">
+							<div class="col-6">
+								<p class="card-text">Score</p>
+								<p class="card-text">Expiration's date</p>
+							</div>
+							<div class="col-6 text-center">
+
+								<p class="card-text" th:text="${coupon.score}">content</p>
+								<p class="card-text" th:text="${coupon.dateExpiration}">content</p>
+							</div>
+						</div>
+					</div>
+					<div class="d-flex justify-content-center p-2 m-1">
+						<a href="#" class="btn btn-success">Swap</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</main>
+
+	<footer th:replace="layout/layout :: footer"></footer>
+</body>
+</html>

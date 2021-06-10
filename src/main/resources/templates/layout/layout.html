@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:fragment="head">
+<head th:fragment="head(title)">
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -8,7 +8,8 @@
 	<link th:href="@{css/fontawesome.min.css}" rel="stylesheet">
 	<link th:href="@{css/solid.min.css}" rel="stylesheet">
 	
-	<title >Greencode</title>
+	<link rel="shortcut icon" href="images/logo.png">
+	<title th:replace="${title}">Greencode</title>
 </head>
 
 <body>
@@ -40,7 +41,7 @@
 								aria-current="page" href="/home">Home</a></li>
 							<li class="nav-item"><a class="nav-link active" href="#">Requests</a>
 							</li>
-							<li class="nav-item"><a class="nav-link active" href="#">Orders</a>
+							<li class="nav-item"><a class="nav-link active" href="/recycle">Recycle</a>
 							</li>
 							<li class="nav-item dropdown"><a
 								class="nav-link active dropdown-toggle" href="#"
@@ -77,39 +78,6 @@
 		</nav>
 	</header>
 
-	<main>
-		<div class="container p-3 d-block">
-			<div class="row">
-				<div class="col-4">
-					<img src="images/app.jpg" alt="">
-				</div>
-				<div class="col-3 d-flex align-items-center">
-					<ul class="p-3 ">
-						<div class="li m-3">Contribute to caring for the environment</div>
-						<div class="li m-3">Generate profit through recycling and obtain various benefits</div>
-						<div class="li m-3">Create a big change in recycling culture</div>
-					</ul>
-				</div>
-
-				<div class="col-5 d-flex align-items-center justify-content-center">
-					<div class="p-3 fw-bold" id="TextIntro">
-						<p class="fs-1 text-success text-center">GREENCODE</p>
-						<p class="text-center">Recycle now!</p>
-						<p class="text-center">Company saving the planet with you</p>
-						<div class="d-flex justify-content-center">
-							<div>
-								<button type="button" class="btn btn-success m-3 d-block">Sign
-									In</button>
-								<button type="button" class="btn btn-success m-3 d-block">Log
-									In</button>
-							</div>
-						</div>
-					</div>
-
-				</div>
-			</div>
-		</div>
-	</main>
 
 	<footer th:fragment="footer" class="container-fluid" style="background-color: #707070">
 		<div class="row">

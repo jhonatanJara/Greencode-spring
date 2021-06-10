@@ -18,8 +18,6 @@ public class GathererOrder {
 	@Column(name = "GathererOrder_id", nullable = false)
 	private Integer id;
 
-	@Column(name="amount", nullable=false)
-	private Integer amount;
 
 	@Column(name="price", nullable= true , columnDefinition = "DECIMAL(3,1)")
 	private float price;
@@ -40,13 +38,6 @@ public class GathererOrder {
 		this.id = id;
 	}
 
-	public Integer getAmount() {
-		return amount;
-	}
-
-	public void setAmount(Integer amount) {
-		this.amount = amount;
-	}
 
 	public float getPrice() {
 		return price;
