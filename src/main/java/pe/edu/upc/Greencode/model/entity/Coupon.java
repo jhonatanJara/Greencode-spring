@@ -16,7 +16,7 @@ import javax.persistence.TemporalType;
 
 @Entity
 @Table(name="Coupons", indexes= {@Index(columnList="name_coupon", name="coupons_index_name_coupon")})
-
+//HoLA GERALDO
 public class Coupon {
 	@Id
 	@GeneratedValue(strategy= GenerationType.IDENTITY)
