@@ -1,19 +1,16 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="layout/layout :: head(~{::title})">
-	<title>Coupon</title>
+<title>Coupon</title>
 </head>
 <body>
-	
-	<link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
 	<header th:replace="layout/layout :: header"></header>
 	<main>
 		<div class="d-flex justify-content-center m-3 p-2">
 			<div class="card" style="width: 25rem;">
 				<img th:src="${coupon.image}" class="card-img-top">
 				<div class="card-body">
-					<h5 class="card-title text-center" th:text="${coupon.nameCoupon}">Card
-						title</h5>
+					<h5 class="card-title text-center" th:text="${coupon.nameCoupon}"></h5>
 					<div class="container">
 						<div class="row">
 							<div class="col-6">

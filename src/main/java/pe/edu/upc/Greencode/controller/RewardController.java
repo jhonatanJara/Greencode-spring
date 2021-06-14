@@ -32,7 +32,7 @@ public class RewardController {
 		return "coupons/list";
 	}
 	
-	@GetMapping("{id}")
+	@GetMapping("{id}/view")
 	public String findById(Model model, @PathVariable("id") Integer id) {
 		try {
 			Optional<Coupon> optional = couponService.findById(id);

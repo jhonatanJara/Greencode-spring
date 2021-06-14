@@ -55,6 +55,9 @@ public class Recycler {
 	@Column(name="address", nullable=false, length=50)
 	private String address;
 	
+	@Column(name="image", nullable=true)
+	private String image;
+	
 	@Column(name="date_birth", nullable=false)
 	@Temporal(TemporalType.DATE)
 	private Date dateBirth;
@@ -160,6 +163,14 @@ public class Recycler {
 		this.address = address;
 	}
 
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
+	}
+
 	public Date getDateBirth() {
 		return dateBirth;
 	}
@@ -223,8 +234,5 @@ public class Recycler {
 	public void setOrders(List<Order> orders) {
 		this.orders = orders;
 	}
-
-	
-	
 	
 }

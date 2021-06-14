@@ -14,11 +14,11 @@
 					<hr>
 					<div class="card-body">
 					  <h5 class="card-title text-center" th:text="${waste.name}"></h5>
-					 
+						 
 					 <div class="button d-flex justify-content-center p-2">
-						<a href="#" class="btn btn-primary bg-success">Add</a>
+						<a th:href="@{'/recycle/' + ${waste.id} + '/new'}"  type="submit" class="btn btn-primary bg-success">Add</a>
 					 </div> 
-					  
+					 				  
 					</div>
 				</div>
 			  </div>
@@ -37,16 +37,19 @@
 						<th scope="col" style="width: 10rem"></th>
 					  </tr>
 					</thead>
-					<tbody class="p-2 m-3">
+					<tbody class="p-2 m-3" th:each="waste : ${wastess}">
 					  <tr>
-						<th scope="row"></th>
-						<td></td>
-						<td></td>
-						<td><i class="fas fa-trash-alt"></i></td>
+						<th th:text="${waste.name}" scope="row"></th>
+						<td th:text="${waste.category.name}"></td>
+						<td th:text="${waste.category.priceKilo}"></td>
+						<td><a th:href="@{'/recycle/' + ${waste.id} + '/del'}" class="btn btn-secondary"><i class="fas fa-trash-alt"></i></a></td>
 					  </tr>
 					</tbody>
 				  </table>
 			</div>
+		</div>
+		<div class="d-flex justify-content-center m-3 p-2">
+			<a th:href="@{'/recycle/gatherer'}"  type="submit" class="btn btn-primary bg-success">Request a gatherer</a>
 		</div>
 	</main>
 	

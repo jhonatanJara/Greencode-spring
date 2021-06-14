@@ -45,6 +45,9 @@ public class Gatherer {
 	@Column(name="dni", nullable=false, length=8)
 	private Integer dni;
 	
+	@Column(name="image", nullable=true)
+	private String image;
+	
 	@Column(name="mobile_number", nullable=false, length = 9)
 	private Integer mobileNumber;
 	
@@ -131,6 +134,14 @@ public class Gatherer {
 		this.dni = dni;
 	}
 
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
+	}
+
 	public Integer getMobileNumber() {
 		return mobileNumber;
 	}
@@ -210,6 +221,8 @@ public class Gatherer {
 	public void setGathererOrders(List<GathererOrder> gathererOrders) {
 		this.gathererOrders = gathererOrders;
 	}
+
+	
 
 
 	

@@ -29,7 +29,7 @@ public class Coupon {
 	@Temporal(TemporalType.DATE)
 	private Date dateExpiration;
 	
-	@Column(name="image", nullable=false)
+	@Column(name="image", nullable=true)
 	private String image;
 	
 	@Column(name="code", nullable=false, length=10)

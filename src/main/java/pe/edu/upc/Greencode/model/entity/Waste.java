@@ -24,7 +24,7 @@ public class Waste {
 	@Column(name="weight", nullable=true, columnDefinition = "DECIMAL(4,2)")
 	private Float weight;
 	
-	@Column(name="image", nullable=false)
+	@Column(name="image", nullable=true)
 	private String image;
 	
 	@ManyToOne
