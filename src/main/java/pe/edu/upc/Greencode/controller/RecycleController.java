@@ -12,8 +12,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import pe.edu.upc.Greencode.model.entity.Category;
 import pe.edu.upc.Greencode.model.entity.Recycler;
+import pe.edu.upc.Greencode.model.entity.Waste;
 import pe.edu.upc.Greencode.service.CategoryService;
 import pe.edu.upc.Greencode.service.RecyclerService;
+import pe.edu.upc.Greencode.service.WasteService;
 
 @Controller
 @RequestMapping("/recycle")
@@ -23,18 +25,31 @@ public class RecycleController {
 	private RecyclerService recyclerService;
 	
 	@Autowired
-	private CategoryService categoryService;
-	
+	private WasteService wasteService;
+	/*
 	@GetMapping
 	public String waste(Model model) {
 		try {
-			/*List<Recycler> recyclers = recyclerService.getAll();
+			List<Recycler> recyclers = recyclerService.getAll();
 			model.addAttribute("recyclers",recyclers);
-			*/
+			
 			List<Category> categories = categoryService.getAll();
 			model.addAttribute("categories",categories);
 			
 		}catch(Exception e){
+			e.printStackTrace();
+			System.err.println(e.getMessage());
+		}
+		return "recycle/register";
+	}*/
+	
+	
+	@GetMapping	
+	public String list(Model model) {
+		try {
+			List<Waste> wastes = wasteService.getAll();
+			model.addAttribute("wastes", wastes);
+		} catch (Exception e) {
 			e.printStackTrace();
 			System.err.println(e.getMessage());
 		}

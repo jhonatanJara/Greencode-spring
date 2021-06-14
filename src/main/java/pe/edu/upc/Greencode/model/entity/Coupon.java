@@ -29,6 +29,9 @@ public class Coupon {
 	@Temporal(TemporalType.DATE)
 	private Date dateExpiration;
 	
+	@Column(name="image", nullable=false)
+	private String image;
+	
 	@Column(name="code", nullable=false, length=10)
 	private String code;
 	
@@ -67,6 +70,14 @@ public class Coupon {
 		this.dateExpiration = dateExpiration;
 	}
 
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
+	}
+
 	public String getCode() {
 		return code;
 	}
@@ -90,4 +101,6 @@ public class Coupon {
 	public void setRecycler(Recycler recycler) {
 		this.recycler = recycler;
 	}
+
+	
 }

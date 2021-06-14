@@ -24,12 +24,15 @@ public class Waste {
 	@Column(name="weight", nullable=true, columnDefinition = "DECIMAL(4,1)")
 	private Float weight;
 	
+	@Column(name="image", nullable=false)
+	private String image;
+	
 	@ManyToOne
 	@JoinColumn(name = "category_id", nullable = false)
 	private Category category;
 	
 	@ManyToOne
-	@JoinColumn(name = "recycler_id", nullable = false)
+	@JoinColumn(name = "recycler_id", nullable = true)
 	private Recycler recycler;
 
 	public Waste() {
@@ -60,6 +63,14 @@ public class Waste {
 		this.weight = weight;
 	}
 
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
+	}
+
 	public Category getCategory() {
 		return category;
 	}
@@ -76,6 +87,7 @@ public class Waste {
 		this.recycler = recycler;
 	}
 
+	
 	
 	
 	

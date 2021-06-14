@@ -12,8 +12,8 @@ public class FrontController {
 	
 	
 	@GetMapping("home")
-	public String Home() {
-		return "home";
+	public String index() {
+		return "index";
 	}
 	
 	

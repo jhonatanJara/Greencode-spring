@@ -1,15 +1,16 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="layout/layout :: head(~{::title})">
-	<title>Coupons </title>
+	<title>Coupon</title>
 </head>
 <body>
+	
+	<link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
 	<header th:replace="layout/layout :: header"></header>
-
 	<main>
 		<div class="d-flex justify-content-center m-3 p-2">
 			<div class="card" style="width: 25rem;">
-				<img src="images/cupon.jpg" class="card-img-top">
+				<img th:src="${coupon.image}" class="card-img-top">
 				<div class="card-body">
 					<h5 class="card-title text-center" th:text="${coupon.nameCoupon}">Card
 						title</h5>
@@ -33,7 +34,6 @@
 			</div>
 		</div>
 	</main>
-
 	<footer th:replace="layout/layout :: footer"></footer>
 </body>
 </html>
