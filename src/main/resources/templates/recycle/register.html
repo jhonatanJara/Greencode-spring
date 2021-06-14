@@ -8,13 +8,14 @@
 	<main>
 		<div class="container p-2">
 			<div class="row">
-			  <div class="col-3" th:each="waste : ${wastes}">
+			  <div class="col-3 p-1" th:each="waste : ${wastes}">
 				<div class="card" style="width: 18rem;">
 					<img th:src="${waste.image}" class="img-fluid" >
+					<hr>
 					<div class="card-body">
 					  <h5 class="card-title text-center" th:text="${waste.name}"></h5>
 					 
-					 <div class="button d-flex justify-content-center ">
+					 <div class="button d-flex justify-content-center p-2">
 						<a href="#" class="btn btn-primary bg-success">Add</a>
 					 </div> 
 					  
