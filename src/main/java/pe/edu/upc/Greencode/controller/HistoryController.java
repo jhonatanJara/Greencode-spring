@@ -21,8 +21,7 @@ public class HistoryController {
 	@Autowired
 	private OrderService orderSevice;
 	
-	@Autowired
-	private RecyclerService recyclerService;
+
 	
 	@GetMapping("purchase")
 	public String listHistoryPurchase(Model model) {
