@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="layout/layout :: head(~{::title})">
-<title>Purchase History</title>
+<title>Purchase History Details</title>
 </head>
 <body>
 	<header th:replace="layout/layout :: header"></header>
@@ -12,18 +12,14 @@
 				<table class="table m-3 p-2 table-hover">
 					<thead style="background-color: #4EB918">
 						<tr class="text-center">
-							<th scope="col" >Date</th>
-							<th scope="col" >Recycler</th>
-							<th scope="col" style="width: 10rem"></th>
-							<th scope="col" style="width: 10rem"></th>
+							<th scope="col" >Waste</th>
+							<th scope="col" >Price/Kilo</th>
+							<th scope="col">Weight</th>
 						</tr>
 					</thead>
-					<tbody  th:each="order : ${orders}">
+					<tbody>
 						<tr>
-							<th th:text="${order.date}"></th>
-							<td th:text="${order.recycler.firstName}"></td>
-							<td><a th:href="@{'/history/purchase/' + ${order.id}+'/view'}" class="btn btn-success" >More details</a></td>
-							<td><a href="#" class="btn btn-success" >Qualify</a></td>
+							<th th:text="${order.recycler.wastes.name}"></th>
 						</tr>
 					</tbody>
 				</table>
