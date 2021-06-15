@@ -6,25 +6,27 @@
 <body>
 	<header th:replace="layout/layout :: header"></header>
 	<main>
-		<table id="table_id" class="table table-hover table-bordered" style="width: 50rem;" >
+	<div class="table-responsive">
+	<table class="table table-hover table-bordered" style="width: 50rem;" >
 				<thead style="background-color: #4EB918">
 					<tr class="text-center">
-						<th scope="col">id</th>
+						<th scope="col" style="width: 5rem;">id</th>
 						<th scope="col">Recycler</th>
 						<th scope="col">View Details</th>
 					</tr>
 				</thead>
 				<tbody >
 					<tr th:each="recycler : ${recyclers}">
-						<th th:text="${recycler.id}" scope="row"></th>
-						<td th:text="${recycler.firstName}+' '+ ${recycler.lastName}"></td>
+						<td class="text-center" th:text="${recycler.id}" ></td>
+						<td class="text-center" th:text="${recycler.firstName}+' '+ ${recycler.lastName}"></td>
 						<td class="text-center">
-						<a href="#" class="btn btn-success" style="width: 12rem;">Show details</a>
-						<span></span>
+						<a th:href="@{'request/' + ${recycler.id}}" class="btn btn-success" style="width: 12rem;">Show details</a>					
 						</td>
 					</tr>
 				</tbody>
 			</table>
+		</div>
+		
 	</main>
 
 	<footer th:replace="layout/layout :: footer"></footer>
