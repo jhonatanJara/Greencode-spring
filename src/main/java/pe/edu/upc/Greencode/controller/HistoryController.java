@@ -54,6 +54,7 @@ public class HistoryController {
 					waste1.add(waste.get(i));
 				}
 			}
+				model.addAttribute("optional", optional.get());
 				model.addAttribute("waste1", waste1);
 				return "history/viewPurchase";	
 		} catch (Exception e) {
