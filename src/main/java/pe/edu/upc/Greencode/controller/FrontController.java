@@ -13,7 +13,7 @@ public class FrontController {
 	
 	@GetMapping("home")
 	public String index() {
-		return  "/index";
+		return "index";
 	}
 	
 	
