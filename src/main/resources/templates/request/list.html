@@ -1,27 +1,32 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="layout/layout :: head(~{::title})">
-	<title>Requests </title>
+<title>Requests</title>
 </head>
 <body>
 	<header th:replace="layout/layout :: header"></header>
 	<main>
-		<div class="container mt-3">
-			<div class="card">
-			  <div class="card-body">
-			  	<table class="table table-bordered table-striped">
-			  		<tr>
-			  			<th> # </th>
-			  			<th>Name </th>
-			  			<th></th>
-			  		</tr>
-			  		
-			  	</table>
-			  </div>
-			</div>
-		</div>
+		<table id="table_id" class="table table-hover table-bordered" style="width: 50rem;" >
+				<thead style="background-color: #4EB918">
+					<tr class="text-center">
+						<th scope="col">id</th>
+						<th scope="col">Recycler</th>
+						<th scope="col">View Details</th>
+					</tr>
+				</thead>
+				<tbody >
+					<tr th:each="recycler : ${recyclers}">
+						<th th:text="${recycler.id}" scope="row"></th>
+						<td th:text="${recycler.firstName}+' '+ ${recycler.lastName}"></td>
+						<td class="text-center">
+						<a href="#" class="btn btn-success" style="width: 12rem;">Show details</a>
+						<span></span>
+						</td>
+					</tr>
+				</tbody>
+			</table>
 	</main>
-	
+
 	<footer th:replace="layout/layout :: footer"></footer>
 </body>
 </html>
