@@ -5,12 +5,30 @@
 </head>
 <body>
 	<header th:replace="layout/layout :: header"></header>
-	<p>Id:<span th:text="${recycler.id}"></span>,
-	 	Name:<span th:text="${recycler.firstName}"></span>	</p>
-	 <a href="#" class="btn btn-primary"><i class="fas fa-plus-square"></i>Aceppt</a>
-	 <a th:href="@{'/request'}" class="btn btn-primary"><i class="fas fa-plus-square"></i>Deny</a>
-	 
-	 
+	<main>
+		<div class="table-responsive">
+			<table class="table table-hover table-bordered" style="width: 50rem;">
+				<thead style="background-color: #4EB918">
+					<tr class="text-center">
+						<th scope="col" style="width: 5rem;">id</th>
+						<th scope="col">Waste</th>
+						<th scope="col">Price/Kilo</th>
+						<th scope="col">Weight</th>
+					</tr>
+				</thead>
+				<tbody th:each="waste : ${waste1}">
+					<tr>
+						<th th:text="${waste.name}"></th>
+						<td th:text="${waste.category.priceKilo}" class="text-center"></td>
+						<th th:text="${waste.weight}" class="text-center"></th>
+					</tr>
+				</tbody>
+			</table>
+			<a href="#" class="btn btn-success"><i
+				class="fas fa-plus-square"></i>Aceppt</a> <a th:href="@{'/request'}"
+				class="btn btn-success"><i class="fas fa-plus-square"></i>Deny</a>
+		</div>
+	</main>
 	<footer th:replace="layout/layout :: footer"></footer>
 </body>
 </html>
