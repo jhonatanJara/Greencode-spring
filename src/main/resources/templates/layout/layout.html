@@ -4,11 +4,11 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-	<link th:href="@{css/bootstrap.min.css}" rel="stylesheet">
-	<link th:href="@{css/fontawesome.min.css}" rel="stylesheet">
-	<link th:href="@{css/solid.min.css}" rel="stylesheet">
+	<link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+	<link th:href="@{/css/fontawesome.min.css}" rel="stylesheet">
+	<link th:href="@{/css/solid.min.css}" rel="stylesheet">
 	
-	<link rel="shortcut icon" href="images/logo.png">
+	<link rel="shortcut icon" href="/images/logo.png">
 	<title th:replace="${title}">Greencode</title>
 </head>
 
@@ -18,7 +18,7 @@
 			style="background-color: #4EB918">
 			<div class="container-fluid">
 				<a href="#" class="navbar-brand"> <img
-					class="d-inline-block align-middle" src="images/logo.png"
+					class="d-inline-block align-middle" src="/images/logo.png"
 					width="45" height="45"> <strong>Greencode</strong>
 				</a>
 				<button class="navbar-toggler" type="button"
@@ -39,7 +39,7 @@
 						<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 							<li class="nav-item"><a class="nav-link active"
 								aria-current="page" href="/home">Home</a></li>
-							<li class="nav-item"><a class="nav-link active" href="#">Requests</a>
+							<li class="nav-item"><a class="nav-link active" href="/request">Requests</a>
 							</li>
 							<li class="nav-item"><a class="nav-link active" href="/recycle">Recycle</a>
 							</li>
@@ -82,7 +82,7 @@
 	<footer th:fragment="footer" class="container-fluid" style="background-color: #707070">
 		<div class="row">
 			<div class="col-4 p-2">
-				<a href="#" class="navbar-brand d-flex justify-content-center"> <img class="d-inline-block" src="images/logo.png" width="30"
+				<a href="#" class="navbar-brand d-flex justify-content-center"> <img class="d-inline-block" src="/images/logo.png" width="30"
 					height="30"> <p class="fw-bold text-white text-center">Greencode</p>
 				</a>
 				<p class="text-white fw-bold text-break p-2">Be part of Greencode, together with us you can contribute to the environment to live in a place free of pollution and for the well-being of future generations</p>

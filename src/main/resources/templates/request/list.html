@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head(~{::title})">
+	<title>Requests </title>
+</head>
+<body>
+	<header th:replace="layout/layout :: header"></header>
+	<main>
+		<div class="container mt-3">
+			<div class="card">
+			  <div class="card-body">
+			  	<table class="table table-bordered table-striped">
+			  		<tr>
+			  			<th> # </th>
+			  			<th>Name </th>
+			  			<th></th>
+			  		</tr>
+			  		
+			  	</table>
+			  </div>
+			</div>
+		</div>
+	</main>
+	
+	<footer th:replace="layout/layout :: footer"></footer>
+</body>
+</html>
