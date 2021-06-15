@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head(~{::title})">
+<title>Purchase History</title>
+</head>
+<body>
+	<header th:replace="layout/layout :: header"></header>
+	<main>
+		<div class="d-flex justify-content-center m-3 p-2">
+			<table id="table_id" class="table table-hover table-bordered" style="width: 50rem;" >
+				<thead style="background-color: #4EB918">
+					<tr class="text-center">
+						<th scope="col">Fecha</th>
+						<th scope="col">Reciclador</th>
+						<th scope="col">Acciones</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>AAA</td>
+						<td>Thorntonfffffffffffffffffffffffffffff</td>
+						<td class="text-center">
+						<a href="#" class="btn btn-success" style="width: 7rem;">See details</a>
+						<span></span>
+						<a href="#" class="btn btn-success" style="width: 7rem;">Qualify</a>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</main>
+
+	<footer th:replace="layout/layout :: footer"></footer>
+</body>
+</html>
