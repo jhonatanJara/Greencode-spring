@@ -1,6 +1,8 @@
 package pe.edu.upc.Greencode.controller;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -92,7 +94,7 @@ public class RecycleController {
 		return "redirect:/recycle";
 	}
 	/* --------------GATHERE ----------     */
-	@GetMapping("/gatherer")
+	@GetMapping("/gatherers")
 	public String listGatherer(Model model) {
 		try {
 		
@@ -106,7 +108,7 @@ public class RecycleController {
 		return "recycle/gatherers";
 	}
 	
-	@GetMapping("/gatherer/{id}/view")
+	@GetMapping("/gatherers/{id}/view")
 	public String findById(Model model, @PathVariable("id") Integer id) {
 		try {
 			Optional<Gatherer> optional = gathererService.findById(id);
@@ -120,5 +122,29 @@ public class RecycleController {
 		}
 		return "redirect:/rewards";
 	}
+	
+	
+	@GetMapping("/gatherers/byDistrict")
+	public String byDistrict(Model model) {
+		try {
+			Optional<Recycler> recycler= recyclerService.findById(1);
+			
+			List<Gatherer> list = gathererService.getAll();				
+			List<Gatherer> newList = new ArrayList<Gatherer>();
+			
+			for(int i=0; i< list.size(); i++) {
+				if(recycler.get().getDistrict() == list.get(i).getDistrict()) {
+					newList.add(list.get(i));
+				}
+			}		
+			model.addAttribute("gatherers", newList);
+			return "recycle/gatherers";
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.err.println(e.getMessage());
+		}
+		return "recycle/gatherers";
+	}	
 	
 }

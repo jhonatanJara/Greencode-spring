@@ -10,14 +10,14 @@
 			<div class="card" style="width: 25rem;">
 				<img th:src="${coupon.image}" class="card-img-top">
 				<div class="card-body">
-					<h5 class="card-title text-center" th:text="${coupon.nameCoupon}"></h5>
+					<h5 class="card-title text-center m-2 p-2" th:text="${coupon.nameCoupon}"></h5>
 					<div class="container">
 						<div class="row">
-							<div class="col-6">
+							<div class="col-6 fw-bold">
 								<p class="card-text">Score</p>
 								<p class="card-text">Expiration's date</p>
 							</div>
-							<div class="col-6 text-center">
+							<div class="col-6">
 
 								<p class="card-text" th:text="${coupon.score}">content</p>
 								<p class="card-text" th:text="${coupon.dateExpiration}">content</p>
