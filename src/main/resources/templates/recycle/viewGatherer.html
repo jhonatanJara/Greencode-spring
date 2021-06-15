@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head(~{::title})">
+<title>Coupon</title>
+</head>
+<body>
+	<header th:replace="layout/layout :: header"></header>
+	<main>
+		<div class="d-flex justify-content-center m-3 p-2">
+			<div class="card" style="width: 25rem;">
+				<img th:src="${gatherer.image}" class="card-img-top img-circle">
+				<div class="card-body">
+					<div class="container">
+						<div class="row">
+							<div class="col-6 fw-bold">
+								<p class="card-text">First Name</p>
+								<p class="card-text">Last Name</p>
+								<p class="card-text">Calification</p>
+								<p class="card-text">Phone</p>
+								<p class="card-text">District</p>
+								<p class="card-text">Address</p>
+								
+							</div>
+							<div class="col-6">
+
+								<p class="card-text" th:text="${gatherer.firstName}"></p>
+								<p class="card-text" th:text="${gatherer.lastName}"></p>
+								<p class="card-text" th:text="${gatherer.calification}"></p>
+								<p class="card-text" th:text="${gatherer.mobileNumber}"></p>
+								<p class="card-text" th:text="${gatherer.district.name}"></p>
+								<p class="card-text" th:text="${gatherer.address}"></p>
+								
+							</div>
+						</div>
+					</div>
+					<div class="d-flex justify-content-center p-2 m-1">
+						<a th:href="@{'/rewards/' + ${gatherer.id} + '/swap'}" class="btn btn-success">Swap</a>
+					</div>
+
+
+				</div>
+			</div>
+		</div>
+	</main>
+	<footer th:replace="layout/layout :: footer"></footer>
+</body>
+</html>

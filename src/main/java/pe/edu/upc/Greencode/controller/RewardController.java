@@ -60,19 +60,23 @@ public class RewardController {
 			Optional<Recycler> recycler= recyclerService.findById(1);
 			Optional<Coupon> coupon = couponService.findById(id);
 			
-			if(coupon.isPresent() && coupon.get().getScore() <= recycler.get().getPoint() && coupon.get().getRecycler()==null) {
+			if(coupon.isPresent() && coupon.get().getScore() <= recycler.get().getPoint()) {
 				coupon.get().setRecycler(recycler.get());
+				recycler.get().setPoint(recycler.get().getPoint()-coupon.get().getScore());
 				
+				recyclerService.update(recycler.get());
 				couponService.update(coupon.get());
-				//JOptionPane.showMessageDialog(null, "aea");
+				return "redirect:/rewards";
+			}else {
+				return "redirect:/rewards/{id}/view";
 			}
-			return "coupons/list";
+		
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.err.println(e.getMessage());
 		}
-		//JOptionPane.showMessageDialog(null, "You don't have enough points to swap this coupon");
-		return "coupons/view";
+		return "";
 	}
+	
 	
 }

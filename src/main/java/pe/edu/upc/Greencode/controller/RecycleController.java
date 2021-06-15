@@ -38,8 +38,8 @@ public class RecycleController {
 	public String list(Model model) {
 		try {
 			Optional<Recycler> recycler= recyclerService.findById(1);
-			List<Waste> wastess = recycler.get().getWastes();
-							
+			
+			List<Waste> wastess = recycler.get().getWastes();				
 			List<Waste> wastes = wasteService.getAll();
 			List<Waste> wa = new ArrayList<Waste>();
 			
@@ -91,7 +91,7 @@ public class RecycleController {
 		}	
 		return "redirect:/recycle";
 	}
-	
+	/* --------------GATHERE ----------     */
 	@GetMapping("/gatherer")
 	public String listGatherer(Model model) {
 		try {
@@ -105,4 +105,20 @@ public class RecycleController {
 		}
 		return "recycle/gatherers";
 	}
+	
+	@GetMapping("/gatherer/{id}/view")
+	public String findById(Model model, @PathVariable("id") Integer id) {
+		try {
+			Optional<Gatherer> optional = gathererService.findById(id);
+			if (optional.isPresent()) {
+				model.addAttribute("gatherer", optional.get());
+				return "recycle/viewGatherer";
+			}	
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.err.println(e.getMessage());
+		}
+		return "redirect:/rewards";
+	}
+	
 }
