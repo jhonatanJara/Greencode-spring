@@ -17,9 +17,9 @@
 							<th scope="col">Weight</th>
 						</tr>
 					</thead>
-					<tbody>
+					<tbody th:each="waste : ${waste1}">
 						<tr>
-							<th th:text="${order.recycler.wastes.name}"></th>
+							<th th:text="${waste.name}"></th>
 						</tr>
 					</tbody>
 				</table>
