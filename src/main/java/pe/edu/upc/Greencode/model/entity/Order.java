@@ -33,9 +33,6 @@ public class Order {
 	@Column(name="total_amount", nullable=true, columnDefinition = "DECIMAL(5,2)")
 	private Float totalAmount;
 	
-	@Column(name="arrival_time", nullable=false)
-	private Integer arrivalTime;
-	
 	@Column(name="status", nullable = false, length = 20)
 	private String status;
 
@@ -44,11 +41,15 @@ public class Order {
 	private Recycler recycler;
 
 	@OneToMany(mappedBy = "order", fetch = FetchType.LAZY)
-	private List<GathererOrder> gathererOrders;
+	private List<WasteOrder> wasteOrders;
+	
+	@ManyToOne
+	@JoinColumn(name="gatherer_id", nullable = false)
+	private Gatherer gatherer;
 	
 	public Order() {
 		super();
-		gathererOrders= new ArrayList<GathererOrder>();
+		wasteOrders= new ArrayList<WasteOrder>();
 		
 	}
 
@@ -76,14 +77,6 @@ public class Order {
 		this.totalAmount = totalAmount;
 	}
 
-	public Integer getArrivalTime() {
-		return arrivalTime;
-	}
-
-	public void setArrivalTime(Integer arrivalTime) {
-		this.arrivalTime = arrivalTime;
-	}
-
 	public String getStatus() {
 		return status;
 	}
@@ -100,12 +93,20 @@ public class Order {
 		this.recycler = recycler;
 	}
 
-	public List<GathererOrder> getGathererOrders() {
-		return gathererOrders;
+	public List<WasteOrder> getWasteOrders() {
+		return wasteOrders;
 	}
 
-	public void setGathererOrders(List<GathererOrder> gathererOrders) {
-		this.gathererOrders = gathererOrders;
+	public void setWasteOrders(List<WasteOrder> wasteOrders) {
+		this.wasteOrders = wasteOrders;
+	}
+
+	public Gatherer getGatherer() {
+		return gatherer;
+	}
+
+	public void setGatherer(Gatherer gatherer) {
+		this.gatherer = gatherer;
 	}
 
 	
