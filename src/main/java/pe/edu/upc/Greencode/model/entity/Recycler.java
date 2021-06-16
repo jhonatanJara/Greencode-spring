@@ -62,8 +62,8 @@ public class Recycler {
 	@Temporal(TemporalType.DATE)
 	private Date dateBirth;
 	
-	@Column(name="calification", nullable=false, columnDefinition = "DECIMAL(3,1)")
-	private Float calification;
+	@Column(name="calification", nullable=false)
+	private Integer calification;
 	
 	@Column(name="points", nullable=false, columnDefinition = "DECIMAL(4,1)")
 	private Float point;
@@ -179,11 +179,11 @@ public class Recycler {
 		this.dateBirth = dateBirth;
 	}
 
-	public Float getCalification() {
+	public Integer getCalification() {
 		return calification;
 	}
 
-	public void setCalification(Float calification) {
+	public void setCalification(Integer calification) {
 		this.calification = calification;
 	}
 
