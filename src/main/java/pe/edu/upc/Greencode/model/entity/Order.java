@@ -33,7 +33,7 @@ public class Order {
 	@Column(name="total_amount", nullable=true, columnDefinition = "DECIMAL(5,2)")
 	private Float totalAmount;
 	
-	@Column(name="arrival_time", nullable=false)
+	@Column(name="arrival_time", nullable=true)
 	private Integer arrivalTime;
 	
 	@Column(name="status", nullable = false, length = 20)

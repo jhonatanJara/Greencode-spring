@@ -1,8 +1,6 @@
 package pe.edu.upc.Greencode.controller;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -15,9 +13,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import pe.edu.upc.Greencode.model.entity.Gatherer;
+import pe.edu.upc.Greencode.model.entity.Order;
 import pe.edu.upc.Greencode.model.entity.Recycler;
 import pe.edu.upc.Greencode.model.entity.Waste;
 import pe.edu.upc.Greencode.service.GathererService;
+import pe.edu.upc.Greencode.service.OrderService;
 import pe.edu.upc.Greencode.service.RecyclerService;
 import pe.edu.upc.Greencode.service.WasteService;
 
@@ -36,12 +36,16 @@ public class RecycleController {
 	@Autowired
 	private GathererService gathererService;
 	
+	@Autowired
+	private OrderService orderService;
+	
 	@GetMapping	
 	public String list(Model model) {
 		try {
 			Optional<Recycler> recycler= recyclerService.findById(1);
 			
-			List<Waste> wastess = recycler.get().getWastes();				
+			List<Waste> wastess = recycler.get().getWastes();	
+			
 			List<Waste> wastes = wasteService.getAll();
 			List<Waste> wa = new ArrayList<Waste>();
 			
@@ -93,14 +97,14 @@ public class RecycleController {
 		}	
 		return "redirect:/recycle";
 	}
-	/* --------------GATHERE ----------     */
+	/* --------------GATHERER -------------*/
 	@GetMapping("/gatherers")
 	public String listGatherer(Model model) {
 		try {
 		
 			List<Gatherer> gatherers = gathererService.getAll();
-		
 			model.addAttribute("gatherers", gatherers);
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.err.println(e.getMessage());
@@ -115,7 +119,7 @@ public class RecycleController {
 			if (optional.isPresent()) {
 				model.addAttribute("gatherer", optional.get());
 				return "recycle/viewGatherer";
-			}	
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.err.println(e.getMessage());
@@ -146,5 +150,50 @@ public class RecycleController {
 		}
 		return "recycle/gatherers";
 	}	
+	
+	
+	@GetMapping("/gatherers/best")
+	public String bestGatherers(Model model) {
+		try {
+			List<Gatherer> list = gathererService.getAll();				
+			List<Gatherer> newList = new ArrayList<Gatherer>();
+			
+			for(int i=0; i< list.size(); i++) {
+				if(list.get(i).getCalification()>=9 && list.get(i).getCalification()<=10 ) {
+					newList.add(list.get(i));
+				}
+			}		
+			model.addAttribute("gatherers", newList);
+			return "recycle/gatherers";
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.err.println(e.getMessage());
+		}
+		return "recycle/gatherers";
+	}	
+	
+	
+	/*
+	@GetMapping("/Order")
+	public String newOrder(@PathVariable("id") Integer id) {
+		try {
+			Optional<Recycler> recycler= recyclerService.findById(1);
+			Optional<Gatherer> gatherer= gathererService.findById(id);
+			Order order= new Order();
+			
+
+			if(gatherer.isPresent()) {
+			  
+				
+			  orderService.create(order);
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.err.println(e.getMessage());
+		}	
+		return "redirect:/recycle/gatherers";
+	}*/
 	
 }
