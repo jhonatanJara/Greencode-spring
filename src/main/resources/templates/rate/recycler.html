@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head(~{::title})">
+<title>Rate Recycler</title>
+</head>
+<body>
+	<header th:replace="layout/layout :: header"></header>
+	<main>
+		 <section style="padding: 30px;" al class="content-center">
+ 
+ 	<div class="card mb-5 justify-content-center "  style="max-width: 800px;">
+	  <div class="row g-0">
+	    <div class="col-md-5 justify-content-center p-2">
+	      <img th:src="${recycler.image}" class="img-fluid img-thumbnail rounded-circle border-success" width="400px;"  height="400px;">
+	    </div>
+	    <div class="col-md-7">
+	      <div class="card-body">
+	        <h5 class="card-title" th:text="${recycler.firstName + ' ' + recycler.lastName}">Card title</h5>
+	        <p class="card-text"><strong>First Name:</strong> <span th:text="${recycler.firstName}"></span>.</p>
+	        <p class="card-text"><strong>Last Name:</strong> <span th:text="${recycler.lastName}"></span>.</p>
+	        <p class="card-text"><strong>Qualification:</strong> <span th:text="${recycler.calification}"></span>
+							<div class="dropdown">
+								<a class="btn btn-secondary dropdown-toggle" href="#"
+									role="button" id="dropdownMenuLink" data-bs-toggle="dropdown"
+									aria-expanded="false"> Dropdown link </a>
+
+								<ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+									<li><a class="dropdown-item" href="#">Action</a></li>
+									<li><a class="dropdown-item" href="#">Another action</a></li>
+									<li><a class="dropdown-item" href="#">Something else
+											here</a></li>
+								</ul>
+							</div>
+							<p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+							</p>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+ 
+ </section>
+
+
+	</main>
+
+	<footer th:replace="layout/layout :: footer"></footer>
+</body>
+</html>
