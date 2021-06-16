@@ -9,13 +9,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-
-import pe.edu.upc.Greencode.model.entity.GathererOrder;
 import pe.edu.upc.Greencode.model.entity.Order;
 import pe.edu.upc.Greencode.model.entity.Recycler;
 import pe.edu.upc.Greencode.model.entity.Waste;
-import pe.edu.upc.Greencode.service.GathererOrderService;
 import pe.edu.upc.Greencode.service.OrderService;
 import pe.edu.upc.Greencode.service.RecyclerService;
 import pe.edu.upc.Greencode.service.WasteService;
@@ -23,8 +19,8 @@ import pe.edu.upc.Greencode.service.WasteService;
 @Controller
 @RequestMapping("/history")
 public class HistoryController {
-	@Autowired
-	private GathererOrderService gathererorderSevice;
+	/*@Autowired
+	private GathererOrderService gathererorderSevice;*/
 	
 	@Autowired
 	private OrderService orderSevice;
@@ -47,7 +43,7 @@ public class HistoryController {
 		return "history/purchase";
 	}
 	
-	@GetMapping("sale")
+	/*@GetMapping("sale")
 	public String listHistorySale(Model model) {
 		try {
 			List<GathererOrder> gathererorders = gathererorderSevice.getAll();
@@ -58,7 +54,7 @@ public class HistoryController {
 			System.err.println(e.getMessage());
 		}
 		return "history/sale";
-	}
+	}*/
 	
 	@GetMapping("purchase/{id}/view")
 	public String findHistoryPurchaseById(Model model, @PathVariable("id") Integer id) {

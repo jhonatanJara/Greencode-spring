@@ -1,12 +1,17 @@
 package pe.edu.upc.Greencode.model.entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -21,9 +26,6 @@ public class Waste {
 	@Column(name="name", nullable=false, length=30)
 	private String name;
 	
-	@Column(name="weight", nullable=true, columnDefinition = "DECIMAL(4,2)")
-	private Float weight;
-	
 	@Column(name="image", nullable=true)
 	private String image;
 	
@@ -34,9 +36,13 @@ public class Waste {
 	@ManyToOne
 	@JoinColumn(name = "recycler_id", nullable = true)
 	private Recycler recycler;
+	
+	@OneToMany(mappedBy = "waste", fetch = FetchType.LAZY)
+	private List<WasteOrder> wasteOrders;
 
 	public Waste() {
 		super();
+		wasteOrders=new ArrayList<WasteOrder>();
 	}
 
 	public Integer getId() {
@@ -53,14 +59,6 @@ public class Waste {
 
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	public Float getWeight() {
-		return weight;
-	}
-
-	public void setWeight(Float weight) {
-		this.weight = weight;
 	}
 
 	public String getImage() {
@@ -85,6 +83,14 @@ public class Waste {
 
 	public void setRecycler(Recycler recycler) {
 		this.recycler = recycler;
+	}
+
+	public List<WasteOrder> getWasteOrders() {
+		return wasteOrders;
+	}
+
+	public void setWasteOrders(List<WasteOrder> wasteOrders) {
+		this.wasteOrders = wasteOrders;
 	}
 
 	

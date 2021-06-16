@@ -78,12 +78,12 @@ public class Gatherer {
 	private List<Account> accounts;
 	
 	@OneToMany(mappedBy = "gatherer", fetch = FetchType.LAZY)
-	private List<GathererOrder> gathererOrders;
+	private List<Order> orders;
 
 	public Gatherer() {
 		super();
 		accounts=new ArrayList<Account>();
-		gathererOrders=new ArrayList<GathererOrder>();
+		orders=new ArrayList<Order>();
 	}
 
 	public Integer getId() {
@@ -214,14 +214,15 @@ public class Gatherer {
 		this.accounts = accounts;
 	}
 
-	public List<GathererOrder> getGathererOrders() {
-		return gathererOrders;
+	public List<Order> getOrders() {
+		return orders;
 	}
 
-	public void setGathererOrders(List<GathererOrder> gathererOrders) {
-		this.gathererOrders = gathererOrders;
+	public void setOrders(List<Order> orders) {
+		this.orders = orders;
 	}
 
+	
 	
 
 
