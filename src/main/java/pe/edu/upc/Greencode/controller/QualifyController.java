@@ -15,7 +15,7 @@ import pe.edu.upc.Greencode.service.OrderService;
 import pe.edu.upc.Greencode.service.RecyclerService;
 
 @Controller
-@RequestMapping("/rate")
+@RequestMapping("/qualify")
 public class QualifyController {
 	@Autowired
 	private OrderService orderSevice;
@@ -29,7 +29,7 @@ public class QualifyController {
 			Optional<Order> order = orderSevice.findById(id);
 			Optional<Recycler> recycler= recyclerService.findById(order.get().getRecycler().getId());
 				model.addAttribute("recycler", recycler.get());
-				return "rate/recycler";	
+				return "qualify/recycler";	
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.err.println(e.getMessage());
