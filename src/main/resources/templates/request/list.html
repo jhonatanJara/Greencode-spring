@@ -16,11 +16,11 @@
 					</tr>
 				</thead>
 				<tbody >
-					<tr th:each="recycler : ${recyclers}">
-						<td class="text-center" th:text="${recycler.id}" ></td>
-						<td class="text-center" th:text="${recycler.firstName}+' '+ ${recycler.lastName}"></td>
+					<tr th:each="order : ${ordersEmpty}">
+						<td class="text-center" th:text="${order.recycler.id}" ></td>
+						<td class="text-center" th:text="${order.recycler.firstName}+' '+ ${order.recycler.lastName}"></td>
 						<td class="text-center">
-						<a th:href="@{'request/' + ${recycler.id}}" class="btn btn-success" style="width: 12rem;">Show details</a>					
+						<a th:href="@{'request/' + ${order.id}}" class="btn btn-success" style="width: 12rem;">Show details</a>					
 						</td>
 					</tr>
 				</tbody>
