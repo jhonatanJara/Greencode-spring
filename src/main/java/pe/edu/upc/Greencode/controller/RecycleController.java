@@ -1,6 +1,8 @@
 package pe.edu.upc.Greencode.controller;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,9 +18,11 @@ import pe.edu.upc.Greencode.model.entity.Gatherer;
 import pe.edu.upc.Greencode.model.entity.Order;
 import pe.edu.upc.Greencode.model.entity.Recycler;
 import pe.edu.upc.Greencode.model.entity.Waste;
+import pe.edu.upc.Greencode.model.entity.WasteOrder;
 import pe.edu.upc.Greencode.service.GathererService;
 import pe.edu.upc.Greencode.service.OrderService;
 import pe.edu.upc.Greencode.service.RecyclerService;
+import pe.edu.upc.Greencode.service.WasteOrderService;
 import pe.edu.upc.Greencode.service.WasteService;
 
 @Controller
@@ -38,6 +42,9 @@ public class RecycleController {
 	
 	@Autowired
 	private OrderService orderService;
+	
+	@Autowired
+	private WasteOrderService wasteOrderService;
 	
 	@GetMapping	
 	public String list(Model model) {
@@ -174,19 +181,39 @@ public class RecycleController {
 	}	
 	
 	
-	/*
-	@GetMapping("/Order")
+	
+	@GetMapping("{id}/Request")
 	public String newOrder(@PathVariable("id") Integer id) {
 		try {
 			Optional<Recycler> recycler= recyclerService.findById(1);
 			Optional<Gatherer> gatherer= gathererService.findById(id);
+			List<Waste> wastes = recycler.get().getWastes();	
+			
 			Order order= new Order();
 			
-
+			
+			Date fecha = new Date();
+			
+			
 			if(gatherer.isPresent()) {
+			  order.setDate(fecha);
+			  order.setStatus("In progress");
+			  order.setRecycler(recycler.get());
+			  order.setGatherer(gatherer.get());
 			  
-				
 			  orderService.create(order);
+			  
+			  for(int i=0; i<= wastes.size(); i++) {
+				  WasteOrder wasteOrder = new WasteOrder();
+				  wasteOrder.setOrder(order);
+				  wasteOrder.setWaste(wastes.get(i));
+				  wasteOrder.setPrice(wastes.get(i).getCategory().getPriceKilo());
+				  
+				  wasteOrderService.create(wasteOrder);
+				  wasteOrder = null;
+			  }
+			  
+			  return "redirect:/recycle/gatherers";
 			}
 			
 		} catch (Exception e) {
@@ -194,6 +221,6 @@ public class RecycleController {
 			System.err.println(e.getMessage());
 		}	
 		return "redirect:/recycle/gatherers";
-	}*/
+	}
 	
 }

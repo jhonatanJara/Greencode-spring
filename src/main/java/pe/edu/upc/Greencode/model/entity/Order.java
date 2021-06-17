@@ -108,9 +108,6 @@ public class Order {
 	public void setGatherer(Gatherer gatherer) {
 		this.gatherer = gatherer;
 	}
-
-	
-	
 	
 }
 

@@ -93,8 +93,4 @@ public class Waste {
 		this.wasteOrders = wasteOrders;
 	}
 
-	
-	
-	
-	
 }
