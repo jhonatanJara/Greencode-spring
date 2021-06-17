@@ -190,8 +190,6 @@ public class RecycleController {
 			List<Waste> wastes = recycler.get().getWastes();	
 			
 			Order order= new Order();
-			
-			
 			Date fecha = new Date();
 			
 			
@@ -212,6 +210,7 @@ public class RecycleController {
 				  wasteOrderService.create(wasteOrder);
 				  wasteOrder = null;
 			  }
+			  order = null;
 			  
 			  return "redirect:/recycle/gatherers";
 			}

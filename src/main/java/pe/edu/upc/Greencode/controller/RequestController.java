@@ -68,7 +68,7 @@ public class RequestController {
 		}
 		return "request/list";
 	}
-
+/*PRIMERA PARTE*/
 	@GetMapping("{id}")
 	public String findById(Model model ,@PathVariable("id") Integer id) {
 		try {
@@ -91,6 +91,63 @@ public class RequestController {
 		return "redirect:/request";
 	}
 	
+	@GetMapping("{id}/update")
+	public String updateId(Model model ,@PathVariable("id") Integer id) {
+		try {
+			Optional<Order> order= orderService.findById(id);//Jorge Jara
+			//---------
+			List<WasteOrder> wasteOrders = wasteOrderService.getAll();
+			List<WasteOrder> wasteOrdersEmpty = new ArrayList<WasteOrder>();
+			for(int i=0; i< wasteOrders.size(); i++) {
+				if(wasteOrders.get(i).getOrder().getId()==id) {
+					wasteOrdersEmpty.add(wasteOrders.get(i));
+				}
+			}
+				model.addAttribute("wasteOrdersEmpty", wasteOrdersEmpty);
+				model.addAttribute("order", order.get());
+				return "request/purchase";
+		}catch(Exception e){
+			e.printStackTrace();
+			System.err.println(e.getMessage());
+		}
+		return "redirect:/request";
+	}
+	
+	
+	@PostMapping("/change")
+	public String updateOrder(Model model, @ModelAttribute("wasteOrdersEmpty") WasteOrder wasteOrder) {
+		try {
+			wasteOrderService.update(wasteOrder);
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.err.println(e.getMessage());
+		}
+		
+		return "redirect:/request";	
+	}
+	
+	
+	/*
+	@GetMapping("{id}/update")
+	public String editById(Model model, @PathVariable("id") Integer id) {
+		try {
+			Optional<Order> order = orderService.findById(id);
+			List<WasteOrder> wasteOrders=new  ArrayList<WasteOrder>();
+			wasteOrders=order.get().getWasteOrders();
+			for(int i=0; i<= wasteOrders.size(); i++) {
+				  model.addAttribute("wasteOrderEdit", wasteOrders.get(i));
+			  }
+			model.addAttribute("wasteOrders", wasteOrders);
+				return "request/purchase";
+				
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.err.println(e.getMessage());
+		}
+		return "redirect:/request/list";
+	}
+	
+	
 	@GetMapping("purchase")
 	public String requestPurchase(Model model) {
 		try {
@@ -109,26 +166,7 @@ public class RequestController {
 		}
 		return "request/list";
 	}
-
-	@GetMapping("{id}/update")	// GET: /region/{id}/edit
-	public String editById(Model model, @PathVariable("id") Integer id) {
-		try {
-			Optional<Order> order = orderService.findById(id);
-			List<WasteOrder> wasteOrders=new  ArrayList<WasteOrder>();
-			wasteOrders=order.get().getWasteOrders();
-			/*for(int i=0; i<= wasteOrders.size(); i++) {
-				  model.addAttribute("wasteOrderEdit", wasteOrders.get(i));
-			  }*/
-			model.addAttribute("wasteOrders", wasteOrders);
-				return "request/purchase";
-				
-		} catch (Exception e) {
-			e.printStackTrace();
-			System.err.println(e.getMessage());
-		}
-		return "redirect:/request/list";
-	}
-
+*/
 	
 	
 }
