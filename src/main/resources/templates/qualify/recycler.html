@@ -18,35 +18,40 @@
 	        
 	        <p class="card-text"><strong>First Name:</strong> <span th:text="${recycler.firstName}"></span>.</p>
 	        <p class="card-text"><strong>Last Name:</strong> <span th:text="${recycler.lastName}"></span>.</p>
-	      	<div class="dropdown">
-							<span><strong>Qualification:</strong></span>
-								<a class="btn btn-secondary dropdown-toggle" href="#"
-									role="button" id="dropdownMenuLink" data-bs-toggle="dropdown"
-									aria-expanded="false">Points</a>
-
-								<ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-									<li><a class="dropdown-item" href="#">1</a></li>
-									<li><a class="dropdown-item" href="#">2</a></li>
-									<li><a class="dropdown-item" href="#">3</a></li>
-									<li><a class="dropdown-item" href="#">4</a></li>
-									<li><a class="dropdown-item" href="#">5</a></li>
-								</ul>
+			<form th:action="@{/qualify/recycler/save}" th:object="${recycler}" method="post">
+								<input type="hidden" th:field="*{id}"> 
+								<input type="hidden" th:field="*{recyclerUser}">
+								<input type="hidden" th:field="*{recyclerPassword}"> 
+								<input type="hidden" th:field="*{FirstName}"> 
+								<input type="hidden" th:field="*{lastName}"> 
+								<input type="hidden" th:field="*{dni}"> 
+								<input type="hidden" th:field="*{mobileNumber}"> 
+								<input type="hidden" th:field="*{email}"> 
+								<input type="hidden" th:field="*{dateBirth}">  
+								<input type="hidden" th:field="*{point}">
+								<input type="hidden" th:field="*{type}">
+								<input type="hidden" th:field="*{district}">
+								<input type="hidden" th:field="*{coupons}">
+								<input type="hidden" th:field="*{wastes}">
+								<input type="hidden" th:field="*{orders}">
+								<input type="hidden" th:field="*{address}">
+								<input type="hidden" th:field="*{calification}">
+								<select th:field="*{points}">
+								<option th:each="point : ${lpoints}" th:value="${point}" th:text="${point}"></option>
 								
-			</div>
-			<br>
-			<a href="/history/purchase" class="btn btn-success" >Save</a>	
-			<a href="/history/purchase" class="btn btn-success" >Return</a>				
-				
-	      </div>
-	    </div>
-	   
+								</select>      
+								<div class="d-flex justify-content-center table-responsive my-4">
+									<button type="submit" class="btn btn-success">save</button>
+								</div>  
+	      						</form>
+	      						
+	    
+	   </div>
+	   </div>
 	    </div>
 	  </div>
-	</div>
  
  </section>
-
-
 	</main>
 
 	<footer th:replace="layout/layout :: footer"></footer>
