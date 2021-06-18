@@ -17,7 +17,10 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name="Recyclers",
@@ -58,6 +61,7 @@ public class Recycler {
 	@Column(name="image", nullable=true)
 	private String image;
 	
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@Column(name="date_birth", nullable=false)
 	@Temporal(TemporalType.DATE)
 	private Date dateBirth;
@@ -65,6 +69,18 @@ public class Recycler {
 	@Column(name="calification", nullable=false)
 	private Integer calification;
 	
+	@Transient
+	private Integer points;
+	
+	
+	public Integer getPoints() {
+		return points;
+	}
+
+	public void setPoints(Integer points) {
+		this.points = points;
+	}
+
 	@Column(name="points", nullable=false, columnDefinition = "DECIMAL(4,1)")
 	private Float point;
 	
