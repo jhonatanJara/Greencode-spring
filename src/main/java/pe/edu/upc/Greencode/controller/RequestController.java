@@ -27,7 +27,7 @@ import pe.edu.upc.Greencode.service.WasteService;
 
 @Controller
 @RequestMapping("/request")
-@SessionAttributes("wasteOrderEdit")
+@SessionAttributes("orderEdit")
 public class RequestController {
 	
 	
@@ -91,21 +91,27 @@ public class RequestController {
 		return "redirect:/request";
 	}
 	
+	/*Update*/
 	@GetMapping("{id}/update")
 	public String updateId(Model model ,@PathVariable("id") Integer id) {
 		try {
 			Optional<Order> order= orderService.findById(id);//Jorge Jara
-			//---------
-			List<WasteOrder> wasteOrders = wasteOrderService.getAll();
-			List<WasteOrder> wasteOrdersEmpty = new ArrayList<WasteOrder>();
-			for(int i=0; i< wasteOrders.size(); i++) {
-				if(wasteOrders.get(i).getOrder().getId()==id) {
-					wasteOrdersEmpty.add(wasteOrders.get(i));
+			List<WasteOrder> wasteOrders = new ArrayList<WasteOrder>(); 
+			wasteOrders=order.get().getWasteOrders();
+			System.out.println(order.get().getId());
+		
+				if(order.isPresent()) {
+					model.addAttribute("wasteOrders", wasteOrders);
+					model.addAttribute("orderEdit", order.get());
+					
 				}
-			}
-				model.addAttribute("wasteOrdersEmpty", wasteOrdersEmpty);
-				model.addAttribute("order", order.get());
 				return "request/purchase";
+				/*model.addAttribute("wasteOrders", wasteOrders);*/
+				
+				
+				
+				
+					
 		}catch(Exception e){
 			e.printStackTrace();
 			System.err.println(e.getMessage());
@@ -114,10 +120,17 @@ public class RequestController {
 	}
 	
 	
-	@PostMapping("/change")
-	public String updateOrder(Model model, @ModelAttribute("wasteOrdersEmpty") WasteOrder wasteOrder) {
+	@PostMapping("change")
+	public String updateOrder(Model model, @ModelAttribute("orderEdit") Order orderEdit) {
 		try {
-			wasteOrderService.update(wasteOrder);
+			System.out.println(orderEdit.getTotalAmount());
+			Order newOrder= new Order();
+			Optional<Order> updateOrder= orderService.findById(orderEdit.getId());	
+			if(updateOrder.isPresent()) {
+				newOrder.setTotalAmount(updateOrder.get().getTotalAmount());
+				orderService.update(newOrder);
+			}
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.err.println(e.getMessage());
@@ -125,48 +138,5 @@ public class RequestController {
 		
 		return "redirect:/request";	
 	}
-	
-	
-	/*
-	@GetMapping("{id}/update")
-	public String editById(Model model, @PathVariable("id") Integer id) {
-		try {
-			Optional<Order> order = orderService.findById(id);
-			List<WasteOrder> wasteOrders=new  ArrayList<WasteOrder>();
-			wasteOrders=order.get().getWasteOrders();
-			for(int i=0; i<= wasteOrders.size(); i++) {
-				  model.addAttribute("wasteOrderEdit", wasteOrders.get(i));
-			  }
-			model.addAttribute("wasteOrders", wasteOrders);
-				return "request/purchase";
-				
-		} catch (Exception e) {
-			e.printStackTrace();
-			System.err.println(e.getMessage());
-		}
-		return "redirect:/request/list";
-	}
-	
-	
-	@GetMapping("purchase")
-	public String requestPurchase(Model model) {
-		try {
-			Optional<Gatherer> gatherer= gathererService.findById(1);//Jorge Jara
-			List<Order> orders= orderService.getAll();
-			List<Order> ordersEmpty = new ArrayList<Order>();
-			for(int i=0; i< orders.size(); i++) {
-				if(gatherer.get().getId() == orders.get(i).getGatherer().getId()) {
-					ordersEmpty.add(orders.get(i));
-				}
-			}	
-			model.addAttribute("ordersEmpty", ordersEmpty);
-		} catch (Exception e) {
-			e.printStackTrace();
-			System.err.println(e.getMessage());
-		}
-		return "request/list";
-	}
-*/
-	
-	
+
 }
