@@ -6,65 +6,41 @@
 <body>
 	<header th:replace="layout/layout :: header"></header>
 	<main>
-		<form th:action="@{/request/change}" th:object="${wasteOrdersEmpty}"
+		<form th:action="@{/request/change}" th:object="${order.wasteOrders}"
 			method="post">
-			
-				<div class="d-flex justify-content-center table-responsive">
-
-					<div>
-						<div class="table-responsive">
-							<table class="table table-hover table-bordered"
-								style="width: 50rem;">
-								<thead style="background-color: #4EB918">
-									<tr class="text-center">
-										<th scope="col">Waste</th>
-										<th scope="col">Price/Kilo</th>
-										<th scope="col">Weight</th>
-
-									</tr>
-								</thead>
-
-								<tbody th:each="wasteOrder : ${wasteOrdersEmpty}">
-									<tr>
-										<th th:text="${wasteOrder.waste.name}"></th>
-										<td th:text="${wasteOrder.price}" class="text-center"></td>
-										<td><input type="text" th:field="*{wasteOrder.weight}"
-											class="form-control" aria-describedby="nameHelp"></td>
-									</tr>
-								</tbody>
-
-
-							</table>
-
-						</div>
-
-						<section style="padding: 30px;" class="content-center">
-
-							<div class="card mb-5 justify-content-center "
-								style="width: 600px;">
-
-								<div class="col-md-5 justify-content-center p-2">
-									<img th:src="${order.recycler.image}"
-										class="img-fluid img-thumbnail rounded-circle border-success"
-										width="400px;" height="400px;">
-								</div>
-
-								<div class="card-body">
-									<p class="card-text">
-										<strong>First Name:</strong> <span
-											th:text="${order.recycler.district.name}"></span>.
-									</p>
-
-								</div>
-							</div>
-						</section>
-
+			<div class="d-flex justify-content-center table-responsive">
+				<div>
+					<div class="table-responsive">
+						<table class="table table-hover table-bordered"
+							style="width: 50rem;">
+							<thead style="background-color: #4EB918">
+								<tr class="text-center">
+									<th scope="col">Waste</th>
+									<th scope="col">Price/Kilo</th>
+									<th scope="col">Weight</th>
+								</tr>
+							</thead>
+							<tbody th:each="wasteOrder : ${wasteOrders}">
+								<tr>
+									<th th:text="${wasteOrder.waste.name}"></th>
+									<td th:text="${wasteOrder.price}" class="text-center"></td>
+									<td><input type="number" th:text="${wasteOrder.weight}"
+										class="form-control" aria-describedby="nameHelp"></td>
+								</tr>
+							</tbody>
+						</table>
 					</div>
-					<section style="padding: 30px;" class="justify-content-center">
-						<button type="submit" class="btn btn-success">Update</button>
-					</section>
 				</div>
+				<section style="padding: 30px;" class="justify-content-center">
+
+				</section>
+			</div>
+			<div class="d-flex justify-content-center table-responsive my-4">
+			<button type="submit" class="btn btn-success">Update</button>
+		</div>
+			
 		</form>
+		
 	</main>
 	<footer th:replace="layout/layout :: footer"></footer>
 </body>

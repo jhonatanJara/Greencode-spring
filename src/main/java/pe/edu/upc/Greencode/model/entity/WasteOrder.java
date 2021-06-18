@@ -22,8 +22,6 @@ public class WasteOrder {
 	@Column(name="price", nullable= true , columnDefinition = "DECIMAL(3,1)")
 	private float price;
 	
-	@Column(name="weight", nullable=true, columnDefinition = "DECIMAL(3,1)")
-	private Float weight;
 
 	@ManyToOne
 	@JoinColumn(name="order_id", nullable = false)
@@ -56,13 +54,6 @@ public class WasteOrder {
 		this.price = price;
 	}
 
-	public Float getWeight() {
-		return weight;
-	}
-
-	public void setWeight(Float weight) {
-		this.weight = weight;
-	}
 
 	public Order getOrder() {
 		return order;
