@@ -18,10 +18,10 @@
 							<th scope="col" style="width: 10rem"></th>
 						</tr>
 					</thead>
-					<tbody  th:each="gathererorder : ${gathererorders}">
+					<tbody  th:each="order : ${orders}">
 						<tr>
-							<th th:text="${gathererorder.order.date}"></th>
-							<td th:text="${gathererorder.gatherer.firstName}"></td>
+							<th th:text="${order.date}"></th>
+							<td th:text="${order.gatherer.firstName}"></td>
 							<td><a th:href="@{'/history/sale/' + ${gathererorder.id}+'/view'}" class="btn btn-success" >More details</a></td>
 							<td><a href="#" class="btn btn-success" >Qualify</a></td>
 						</tr>

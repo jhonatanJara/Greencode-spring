@@ -43,18 +43,18 @@ public class HistoryController {
 		return "history/purchase";
 	}
 	
-	/*@GetMapping("sale")
+	@GetMapping("sale")
 	public String listHistorySale(Model model) {
 		try {
-			List<GathererOrder> gathererorders = gathererorderSevice.getAll();
+			List<Order> orders = orderSevice.getAll();
 			
-			model.addAttribute("gathererorders", gathererorders);
+			model.addAttribute("orders", orders);
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.err.println(e.getMessage());
 		}
 		return "history/sale";
-	}*/
+	}
 	
 	@GetMapping("purchase/{id}/view")
 	public String findHistoryPurchaseById(Model model, @PathVariable("id") Integer id) {
