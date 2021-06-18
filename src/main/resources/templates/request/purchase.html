@@ -31,15 +31,15 @@
 				</div>
 				</div>
 			<section>
-			<form th:action="@{/request/change}" th:object="${orderEdit}"
-				method="post">
-				<div class="mb-3">
-					<label for="name" class="form-label">Total Amount</label> <input
-						type="number" th:field="*{totalAmount}" class="form-control"
-						aria-describedby="nameHelp">
-				</div>
-				<button type="submit" class="btn btn-success">Update</button>
-			</form>
+			<form th:action="@{/request/change}" th:object="${orderEdit}" method="post">
+								<input type="hidden" th:field="*{id}"> 
+								<input type="hidden" th:field="*{date}">
+								<input type="hidden" th:field="*{status}">
+								<input th:field="*{totalAmount}">
+								<div class="d-flex justify-content-center table-responsive my-4">
+									<button type="submit" class="btn btn-success">save</button>
+								</div>  
+	      						</form>
 			</section>
 			</main>
 	<footer th:replace="layout/layout :: footer"></footer>
