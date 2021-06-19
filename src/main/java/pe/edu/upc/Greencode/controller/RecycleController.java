@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
@@ -47,12 +48,11 @@ public class RecycleController {
 	private WasteOrderService wasteOrderService;
 	
 	@GetMapping	
-	public String list(Model model) {
+	public String list(Model model, @ModelAttribute("wasteSearch") Waste wasteSearch) {
 		try {
 			Optional<Recycler> recycler= recyclerService.findById(1);
 			
-			List<Waste> wastess = recycler.get().getWastes();	
-			
+			List<Waste> wastess = recycler.get().getWastes();
 			List<Waste> wastes = wasteService.getAll();
 			List<Waste> wa = new ArrayList<Waste>();
 			
@@ -60,9 +60,13 @@ public class RecycleController {
 				if(wastes.get(i).getRecycler()==null) {
 					wa.add(wastes.get(i));
 				}
-			}				
+			}			
+			recycler.get().setWastes(wa);
+				
+			
 			model.addAttribute("wastes", wa);
-			model.addAttribute("wastess", wastess);
+			model.addAttribute("wastess",wastess );
+			model.addAttribute("wasteSearch", wasteSearch);
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.err.println(e.getMessage());
@@ -73,9 +77,12 @@ public class RecycleController {
 	@GetMapping("{id}/del")
 	public String delWaste(@PathVariable("id") Integer id) {
 		try {
+			Optional<Recycler> recycler= recyclerService.findById(1);
 			Optional<Waste> optional = wasteService.findById(id);
 			if(optional.isPresent()) {
+				
 				wasteService.deleteById(id);
+				return "redirect:/recycle";
 			}
 			
 		} catch (Exception e) {
@@ -106,12 +113,12 @@ public class RecycleController {
 	}
 	/* --------------GATHERER -------------*/
 	@GetMapping("/gatherers")
-	public String listGatherer(Model model) {
+	public String listGatherer(Model model, @ModelAttribute("wasteSearch") Waste wasteSearch) {
 		try {
 		
 			List<Gatherer> gatherers = gathererService.getAll();
 			model.addAttribute("gatherers", gatherers);
-			
+			model.addAttribute("wasteSearch", wasteSearch);
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.err.println(e.getMessage());
@@ -120,11 +127,12 @@ public class RecycleController {
 	}
 	
 	@GetMapping("/gatherers/{id}/view")
-	public String findById(Model model, @PathVariable("id") Integer id) {
+	public String findById(Model model, @PathVariable("id") Integer id, @ModelAttribute("wasteSearch") Waste wasteSearch) {
 		try {
 			Optional<Gatherer> optional = gathererService.findById(id);
 			if (optional.isPresent()) {
 				model.addAttribute("gatherer", optional.get());
+				model.addAttribute("wasteSearch", wasteSearch);
 				return "recycle/viewGatherer";
 			}
 		} catch (Exception e) {
@@ -136,7 +144,7 @@ public class RecycleController {
 	
 	
 	@GetMapping("/gatherers/byDistrict")
-	public String byDistrict(Model model) {
+	public String byDistrict(Model model, @ModelAttribute("wasteSearch") Waste wasteSearch) {
 		try {
 			Optional<Recycler> recycler= recyclerService.findById(1);
 			
@@ -149,6 +157,7 @@ public class RecycleController {
 				}
 			}		
 			model.addAttribute("gatherers", newList);
+			model.addAttribute("wasteSearch", wasteSearch);
 			return "recycle/gatherers";
 			
 		} catch (Exception e) {
@@ -160,7 +169,7 @@ public class RecycleController {
 	
 	
 	@GetMapping("/gatherers/best")
-	public String bestGatherers(Model model) {
+	public String bestGatherers(Model model, @ModelAttribute("wasteSearch") Waste wasteSearch) {
 		try {
 			List<Gatherer> list = gathererService.getAll();				
 			List<Gatherer> newList = new ArrayList<Gatherer>();
@@ -171,6 +180,7 @@ public class RecycleController {
 				}
 			}		
 			model.addAttribute("gatherers", newList);
+			model.addAttribute("wasteSearch", wasteSearch);
 			return "recycle/gatherers";
 			
 		} catch (Exception e) {
@@ -179,8 +189,6 @@ public class RecycleController {
 		}
 		return "recycle/gatherers";
 	}	
-	
-	
 	
 	@GetMapping("{id}/Request")
 	public String newOrder(@PathVariable("id") Integer id) {
