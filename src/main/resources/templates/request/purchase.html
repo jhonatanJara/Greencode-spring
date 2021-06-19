@@ -12,7 +12,7 @@
 					<div class="table-responsive">
 						<table class="table table-hover table-bordered"
 							style="width: 50rem;">
-							<thead style="background-color: #4EB918">
+							<thead class="bg-success text-white">
 								<tr class="text-center">
 									<th scope="col">Waste</th>
 									<th scope="col">Price/Kilo</th>
@@ -36,7 +36,8 @@
 								<input type="hidden" th:field="*{date}">
 								<input type="hidden" th:field="*{status}">
 								<div class="d-flex justify-content-center table-responsive my-4">
-								<input th:field="*{totalAmount}">
+									<span class="input-group-text">Total Amount</span>
+									<input th:field="*{totalAmount}">
 								</div>
 								<div class="d-flex justify-content-center table-responsive my-4">
 									<button type="submit" class="btn btn-success">save</button>

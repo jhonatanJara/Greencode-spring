@@ -16,14 +16,11 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import pe.edu.upc.Greencode.model.entity.Gatherer;
 import pe.edu.upc.Greencode.model.entity.Order;
-import pe.edu.upc.Greencode.model.entity.Recycler;
 import pe.edu.upc.Greencode.model.entity.Waste;
 import pe.edu.upc.Greencode.model.entity.WasteOrder;
 import pe.edu.upc.Greencode.service.GathererService;
 import pe.edu.upc.Greencode.service.OrderService;
-import pe.edu.upc.Greencode.service.RecyclerService;
 import pe.edu.upc.Greencode.service.WasteOrderService;
-import pe.edu.upc.Greencode.service.WasteService;
 
 @Controller
 @RequestMapping("/request")
@@ -37,12 +34,6 @@ public class RequestController {
 	
 	@Autowired
 	private GathererService gathererService;
-	
-	@Autowired
-	private RecyclerService recyclerService;
-	
-	@Autowired
-	private WasteService wasteService;
 	
 	@Autowired
 	private WasteOrderService wasteOrderService;
@@ -107,13 +98,7 @@ public class RequestController {
 					model.addAttribute("orderEdit", order.get());
 					model.addAttribute("wasteSearch", wasteSearch);
 				}
-				return "request/purchase";
-				/*model.addAttribute("wasteOrders", wasteOrders);*/
-				
-				
-				
-				
-					
+				return "request/purchase";					
 		}catch(Exception e){
 			e.printStackTrace();
 			System.err.println(e.getMessage());
@@ -125,16 +110,6 @@ public class RequestController {
 	@PostMapping("change")
 	public String updateOrder(Model model, @ModelAttribute("orderEdit") Order orderEdit,@ModelAttribute("wasteSearch") Waste wasteSearch) {
 		try {
-			/*
-			System.out.println(orderEdit.getTotalAmount());
-			Order newOrder= new Order();
-			Optional<Order> updateOrder= orderService.findById(orderEdit.getId());	
-			if(updateOrder.isPresent()) {
-				newOrder.setTotalAmount(updateOrder.get().getTotalAmount());
-				orderService.update(newOrder);
-				
-			
-			}*/
 			orderService.update(orderEdit);
 			model.addAttribute("wasteSearch", wasteSearch);
 		} catch (Exception e) {
