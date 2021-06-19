@@ -21,14 +21,14 @@
 									<tr class="text-center">
 										<th scope="col">Waste</th>
 										<th scope="col">Price/Kilo</th>
-										<th scope="col">Weight</th>
+										
 									</tr>
 								</thead>
 								<tbody th:each="waste : ${waste1}">
 									<tr>
 										<th th:text="${waste.name}"></th>
 										<td th:text="${waste.category.priceKilo}" class="text-center"></td>
-										<th th:text="${waste.weight}" class="text-center"></th>
+									
 									</tr>
 								</tbody>
 								
