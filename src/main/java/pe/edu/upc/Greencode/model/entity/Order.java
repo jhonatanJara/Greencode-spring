@@ -16,6 +16,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name="Orders")
@@ -26,12 +29,16 @@ public class Order {
 	@Column(name = "order_id", nullable = false)
 	private Integer id;
 	
+	
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@Column(name="date", nullable=false)
 	@Temporal(TemporalType.DATE)
 	private Date date;
 	
 	@Column(name="total_amount", nullable=true, columnDefinition = "DECIMAL(5,2)")
 	private Float totalAmount;
+	
+
 	
 	@Column(name="status", nullable = false, length = 20)
 	private String status;

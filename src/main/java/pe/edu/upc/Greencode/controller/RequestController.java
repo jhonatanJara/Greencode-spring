@@ -123,13 +123,17 @@ public class RequestController {
 	@PostMapping("change")
 	public String updateOrder(Model model, @ModelAttribute("orderEdit") Order orderEdit) {
 		try {
+			/*
 			System.out.println(orderEdit.getTotalAmount());
 			Order newOrder= new Order();
 			Optional<Order> updateOrder= orderService.findById(orderEdit.getId());	
 			if(updateOrder.isPresent()) {
 				newOrder.setTotalAmount(updateOrder.get().getTotalAmount());
 				orderService.update(newOrder);
-			}
+				
+			
+			}*/
+			orderService.update(orderEdit);
 			
 		} catch (Exception e) {
 			e.printStackTrace();
