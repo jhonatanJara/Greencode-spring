@@ -58,6 +58,7 @@ public class RecycleController {
 			
 			for(int i=0; i< wastes.size(); i++) {
 				if(wastes.get(i).getRecycler()==null) {
+					
 					wa.add(wastes.get(i));
 				}
 			}			
