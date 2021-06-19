@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import pe.edu.upc.Greencode.model.entity.Order;
@@ -32,10 +33,11 @@ public class HistoryController {
 	private WasteService wasteService;
 	
 	@GetMapping("purchase")
-	public String listHistoryPurchase(Model model) {
+	public String listHistoryPurchase(Model model , @ModelAttribute("wasteSearch") Waste wasteSearch) {
 		try {
 			List<Order> orders = orderSevice.getAll();
 			model.addAttribute("orders", orders);
+			model.addAttribute("wasteSearch", wasteSearch);
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.err.println(e.getMessage());
@@ -44,11 +46,12 @@ public class HistoryController {
 	}
 	
 	@GetMapping("sale")
-	public String listHistorySale(Model model) {
+	public String listHistorySale(Model model,@ModelAttribute("wasteSearch") Waste wasteSearch) {
 		try {
 			List<Order> orders = orderSevice.getAll();
 			
 			model.addAttribute("orders", orders);
+			model.addAttribute("wasteSearch", wasteSearch);
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.err.println(e.getMessage());
@@ -57,7 +60,7 @@ public class HistoryController {
 	}
 	
 	@GetMapping("purchase/{id}/view")
-	public String findHistoryPurchaseById(Model model, @PathVariable("id") Integer id) {
+	public String findHistoryPurchaseById(Model model, @PathVariable("id") Integer id, @ModelAttribute("wasteSearch") Waste wasteSearch) {
 		try {
 			Optional<Order> optional = orderSevice.findById(id);
 			Optional<Recycler> recycler= recyclerService.findById(optional.get().getRecycler().getId());
@@ -70,6 +73,7 @@ public class HistoryController {
 			}
 				model.addAttribute("optional", optional.get());
 				model.addAttribute("waste1", waste1);
+				model.addAttribute("wasteSearch", wasteSearch);
 				return "history/viewPurchase";	
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -79,7 +83,7 @@ public class HistoryController {
 	}
 	
 	@GetMapping("sale/{id}/view")
-	public String findHistorySaleById(Model model, @PathVariable("id") Integer id) {
+	public String findHistorySaleById(Model model, @PathVariable("id") Integer id, @ModelAttribute("wasteSearch") Waste wasteSearch) {
 		try {
 			Optional<Order> optional = orderSevice.findById(id);
 			Optional<Recycler> recycler= recyclerService.findById(optional.get().getRecycler().getId());
@@ -92,6 +96,7 @@ public class HistoryController {
 			}
 				model.addAttribute("optional", optional.get());
 				model.addAttribute("waste1", waste1);
+				model.addAttribute("wasteSearch", wasteSearch);
 				return "history/viewSale";	
 		} catch (Exception e) {
 			e.printStackTrace();
