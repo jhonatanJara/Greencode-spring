@@ -64,13 +64,8 @@ public class HistoryController {
 		try {
 			Optional<Order> optional = orderSevice.findById(id);
 			Optional<Recycler> recycler= recyclerService.findById(optional.get().getRecycler().getId());
-			List<Waste> waste= wasteService.getAll();
-			List<Waste> waste1 = new ArrayList<Waste>();
-			for(int i=0; i< waste.size(); i++) {
-				if(waste.get(i).getRecycler().getId()==recycler.get().getId()) {
-					waste1.add(waste.get(i));
-				}
-			}
+			List<Waste> waste1= recycler.get().getWastes();
+			
 				model.addAttribute("optional", optional.get());
 				model.addAttribute("waste1", waste1);
 				model.addAttribute("wasteSearch", wasteSearch);
