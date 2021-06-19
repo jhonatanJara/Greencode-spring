@@ -1,5 +1,6 @@
 package pe.edu.upc.Greencode.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -34,8 +35,16 @@ public class RewardController {
 		try {
 			Optional<Recycler> recycler= recyclerService.findById(1);
 			List<Coupon> coupons = couponService.getAll();
+			List<Coupon> recyclerCoupons = recycler.get().getCoupons();
+			List<Coupon> newCoupons= new ArrayList<Coupon>();
 			
-			model.addAttribute("coupons", coupons);
+			for(int i=0; i<coupons.size(); i++) {
+				if(coupons.get(i).getRecycler() == null)
+					newCoupons.add(coupons.get(i));
+			}
+			
+			model.addAttribute("recyclerCoupons", recyclerCoupons);
+			model.addAttribute("coupons", newCoupons);
 			model.addAttribute("recycler", recycler.get());
 			model.addAttribute("wasteSearch", wasteSearch);
 		} catch (Exception e) {

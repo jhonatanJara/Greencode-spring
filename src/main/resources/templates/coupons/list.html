@@ -24,6 +24,29 @@
 			</div>
 			
 		</div>
+		
+		<div class="d-flex justify-content-center m-3">
+			<div>
+				<table class="table m-3 p-2 table-hover" >
+					<thead  class="text-white bg-success">
+					  <tr>
+						<th scope="col" style="width: 20rem">Name</th>
+						<th scope="col" style="width: 20rem">Date Expiration</th>
+						<th scope="col" style="width: 20rem">Code</th>
+						
+					  </tr>
+					</thead>
+					<tbody class="p-2 m-3" th:each="coupon : ${recyclerCoupons}">
+					  <tr>
+						<th th:text="${coupon.nameCoupon}" scope="row"></th>
+						<td th:text="${coupon.dateExpiration}"></td>
+						<td th:text="${coupon.code}"></td>
+					  </tr>
+					</tbody>
+				  </table>
+			</div>
+		</div>
+		
 	</main>
 	
 	<footer th:replace="layout/layout :: footer"></footer>
