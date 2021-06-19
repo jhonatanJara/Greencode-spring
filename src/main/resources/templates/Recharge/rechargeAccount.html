@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head(~{::title})">
+<title>Recharge</title>
+</head>
+<body>
+	<header th:replace="layout/layout :: header"></header>
+	<main>
+
+		<!-- 
+				<section>
+			<form th:action="@{/request/change}" th:object="${orderEdit}" method="post">
+								<input type="hidden" th:field="*{id}"> 
+								<input type="hidden" th:field="*{date}">
+								<input type="hidden" th:field="*{status}">
+								<input th:field="*{totalAmount}">
+								<div class="d-flex justify-content-center table-responsive my-4">
+									<button type="submit" class="btn btn-success">save</button>
+								</div>  
+	      						</form>
+			</section>
+			 -->
+
+		<div class="container p-3">
+			<div class="d-flex justify-content-center">
+				<div class="row m-2 p-1  d-flex justify-content-center">
+					
+						<div class="d-flex justify-content-center">
+							<strong>Recharge online</strong>
+						</div>
+
+
+						<div class="card mb-5" style="max-width: 740px;">
+							<form th:action="@{/recharge/save}" method="post" th:object="${transaction}">
+								<!-- th:object="${recycler}" -->
+								<p class="card-text">Titular: GreenCode S.A</p>
+								<p class="card-text">Banco: Banco Interbank</p>
+								<p class="card-text">CCI Soles: 003-293-003001330643-83</p>
+								<p class="card-text">RUC: 20602082891</p>
+								<p class="card-text">Cuenta en soles: 293-003001330643</p>
+								<p class="card-text">Tipo de cuenta: Cuenta Corriente</p>
+								<p class="card-text">Email: comprobantes@greencode.com</p>
+								<p class="card-text">
+									Monto: <input type="text" name="monto" th:field="*{amount}">
+								</p>
+								<input type="submit" value="Enviar" class="btn btn-success">
+							</form>
+						</div>
+				
+
+
+				</div>
+			</div>
+
+		</div>
+
+
+	</main>
+	<footer th:replace="layout/layout :: footer"></footer>
+</body>
+</html>
