@@ -97,6 +97,6 @@ public class HistoryController {
 			e.printStackTrace();
 			System.err.println(e.getMessage());
 		}
-		return "redirect:/history/purchase";
+		return "redirect:/history/sale";
 	}
 }

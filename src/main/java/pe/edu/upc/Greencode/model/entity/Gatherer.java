@@ -17,6 +17,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
 
 @Entity
@@ -79,6 +80,21 @@ public class Gatherer {
 	
 	@OneToMany(mappedBy = "gatherer", fetch = FetchType.LAZY)
 	private List<Order> orders;
+	
+	
+	@Transient
+	private Integer points;
+	
+	public Integer getPoints() {
+		return points;
+	}
+
+	public void setPoints(Integer points) {
+		this.points = points;
+	}
+	
+	@Column(name="points", nullable=false, columnDefinition = "DECIMAL(4,1)")
+	private Float point;
 
 	public Gatherer() {
 		super();
