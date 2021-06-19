@@ -37,7 +37,7 @@
 						<th scope="col" style="width: 10rem"></th>
 					  </tr>
 					</thead>
-					<tbody class="p-2 m-3" th:each="waste : ${wastess}">
+					<tbody class="p-2 m-3" th:each="waste : ${recyclerWastes}">
 					  <tr>
 						<th th:text="${waste.name}" scope="row"></th>
 						<td th:text="${waste.category.name}"></td>

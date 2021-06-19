@@ -51,14 +51,13 @@ public class RecycleController {
 	public String list(Model model, @ModelAttribute("wasteSearch") Waste wasteSearch) {
 		try {
 			Optional<Recycler> recycler= recyclerService.findById(1);
+			List<Waste> recyclerWastes = recycler.get().getWastes();
 			
-			List<Waste> wastess = recycler.get().getWastes();
+			
 			List<Waste> wastes = wasteService.getAll();
 			List<Waste> wa = new ArrayList<Waste>();
-			
 			for(int i=0; i< wastes.size(); i++) {
 				if(wastes.get(i).getRecycler()==null) {
-					
 					wa.add(wastes.get(i));
 				}
 			}			
@@ -66,7 +65,7 @@ public class RecycleController {
 				
 			
 			model.addAttribute("wastes", wa);
-			model.addAttribute("wastess",wastess );
+			model.addAttribute("recyclerWastes",recyclerWastes);
 			model.addAttribute("wasteSearch", wasteSearch);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -75,30 +74,13 @@ public class RecycleController {
 		return "recycle/wastes";
 	}	
 	
-	@GetMapping("{id}/del")
-	public String delWaste(@PathVariable("id") Integer id) {
-		try {
-			Optional<Recycler> recycler= recyclerService.findById(1);
-			Optional<Waste> optional = wasteService.findById(id);
-			if(optional.isPresent()) {
-				
-				wasteService.deleteById(id);
-				return "redirect:/recycle";
-			}
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-			System.err.println(e.getMessage());
-		}	
-		return "redirect:/recycle";
-	}
-	
 	@GetMapping("{id}/new")
 	public String newWaste(@PathVariable("id") Integer id) {
 		try {
 			Optional<Recycler> recycler= recyclerService.findById(1);
-			Waste w= new Waste();
 			Optional<Waste> optional = wasteService.findById(id);
+			Waste w= new Waste();
+			
 			if(optional.isPresent()) {
 				w.setName(optional.get().getName());
 				w.setCategory(optional.get().getCategory());
@@ -112,12 +94,31 @@ public class RecycleController {
 		}	
 		return "redirect:/recycle";
 	}
+	
+	@GetMapping("{id}/del")
+	public String delWaste(@PathVariable("id") Integer id) {
+		try {
+			Optional<Waste> optional = wasteService.findById(id);
+			
+			if(optional.isPresent()) {
+				wasteService.deleteById(id);
+				return "redirect:/recycle";
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.err.println(e.getMessage());
+		}	
+		return "redirect:/recycle";
+	}
+	
 	/* --------------GATHERER -------------*/
 	@GetMapping("/gatherers")
-	public String listGatherer(Model model, @ModelAttribute("wasteSearch") Waste wasteSearch) {
+	public String listGatherers(Model model, @ModelAttribute("wasteSearch") Waste wasteSearch) {
 		try {
-		
+			
 			List<Gatherer> gatherers = gathererService.getAll();
+			
 			model.addAttribute("gatherers", gatherers);
 			model.addAttribute("wasteSearch", wasteSearch);
 		} catch (Exception e) {
@@ -130,8 +131,11 @@ public class RecycleController {
 	@GetMapping("/gatherers/{id}/view")
 	public String findById(Model model, @PathVariable("id") Integer id, @ModelAttribute("wasteSearch") Waste wasteSearch) {
 		try {
+			
 			Optional<Gatherer> optional = gathererService.findById(id);
+			
 			if (optional.isPresent()) {
+				
 				model.addAttribute("gatherer", optional.get());
 				model.addAttribute("wasteSearch", wasteSearch);
 				return "recycle/viewGatherer";
@@ -140,7 +144,7 @@ public class RecycleController {
 			e.printStackTrace();
 			System.err.println(e.getMessage());
 		}
-		return "redirect:/rewards";
+		return "redirect:/recycle/gatherers";
 	}
 	
 	
@@ -149,12 +153,12 @@ public class RecycleController {
 		try {
 			Optional<Recycler> recycler= recyclerService.findById(1);
 			
-			List<Gatherer> list = gathererService.getAll();				
+			List<Gatherer> gatherers = gathererService.getAll();				
 			List<Gatherer> newList = new ArrayList<Gatherer>();
 			
-			for(int i=0; i< list.size(); i++) {
-				if(recycler.get().getDistrict() == list.get(i).getDistrict()) {
-					newList.add(list.get(i));
+			for(int i=0; i< gatherers.size(); i++) {
+				if(recycler.get().getDistrict() == gatherers.get(i).getDistrict()) {
+					newList.add(gatherers.get(i));
 				}
 			}		
 			model.addAttribute("gatherers", newList);
@@ -172,12 +176,12 @@ public class RecycleController {
 	@GetMapping("/gatherers/best")
 	public String bestGatherers(Model model, @ModelAttribute("wasteSearch") Waste wasteSearch) {
 		try {
-			List<Gatherer> list = gathererService.getAll();				
+			List<Gatherer> gatherers = gathererService.getAll();				
 			List<Gatherer> newList = new ArrayList<Gatherer>();
 			
-			for(int i=0; i< list.size(); i++) {
-				if(list.get(i).getCalification()>=9 && list.get(i).getCalification()<=10 ) {
-					newList.add(list.get(i));
+			for(int i=0; i< gatherers.size(); i++) {
+				if(gatherers.get(i).getCalification()>=8 && gatherers.get(i).getCalification()<=10 ) {
+					newList.add(gatherers.get(i));
 				}
 			}		
 			model.addAttribute("gatherers", newList);
