@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import pe.edu.upc.Greencode.model.entity.Order;
 import pe.edu.upc.Greencode.model.entity.Recycler;
+import pe.edu.upc.Greencode.model.entity.Waste;
 import pe.edu.upc.Greencode.service.OrderService;
 import pe.edu.upc.Greencode.service.RecyclerService;
 
@@ -28,7 +29,7 @@ public class QualifyController {
 	private RecyclerService recyclerService;
 	
 	@GetMapping("recycler/{id}")
-	public String rateRecycler(Model model, @PathVariable("id") Integer id) {
+	public String rateRecycler(Model model, @PathVariable("id") Integer id, @ModelAttribute("wasteSearch") Waste wasteSearch) {
 		try {
 			Optional<Order> order = orderSevice.findById(id);
 			Optional<Recycler> recycler= recyclerService.findById(order.get().getRecycler().getId());
@@ -40,6 +41,7 @@ public class QualifyController {
 			points.add(4);
 			points.add(5);
 			model.addAttribute("lpoints",points);
+			model.addAttribute("wasteSearch", wasteSearch);
 				return "qualify/recycler";	
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -50,10 +52,11 @@ public class QualifyController {
 	
 
 	@PostMapping("recycler/save")
-	public String saveQualifyRecycler(Model model, @ModelAttribute("recycler") Recycler recycler) {
+	public String saveQualifyRecycler(Model model, @ModelAttribute("recycler") Recycler recycler,@ModelAttribute("wasteSearch") Waste wasteSearch) {
 		try {
 				recycler.setCalification(recycler.getPoints()+recycler.getCalification());
 				recyclerService.update(recycler);
+				model.addAttribute("wasteSearch", wasteSearch);
 				
 		} catch (Exception e) {
 			e.printStackTrace();
