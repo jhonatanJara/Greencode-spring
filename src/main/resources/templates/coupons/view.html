@@ -18,7 +18,6 @@
 								<p class="card-text">Expiration's date</p>
 							</div>
 							<div class="col-6">
-
 								<p class="card-text" th:text="${coupon.score}">content</p>
 								<p class="card-text" th:text="${coupon.dateExpiration}">content</p>
 							</div>
@@ -26,6 +25,7 @@
 					</div>
 					<div class="d-flex justify-content-evenly p-2 m-1">
 						<a th:href="@{'/rewards/' + ${coupon.id} + '/swap'}" class="btn btn-success">Swap</a>
+						
 						<a th:href="@{'/rewards'}" class="btn btn-success">Cancel</a>
 					</div>
 					

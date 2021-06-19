@@ -16,14 +16,11 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import pe.edu.upc.Greencode.model.entity.Gatherer;
 import pe.edu.upc.Greencode.model.entity.Order;
-import pe.edu.upc.Greencode.model.entity.Recycler;
 import pe.edu.upc.Greencode.model.entity.Waste;
 import pe.edu.upc.Greencode.model.entity.WasteOrder;
 import pe.edu.upc.Greencode.service.GathererService;
 import pe.edu.upc.Greencode.service.OrderService;
-import pe.edu.upc.Greencode.service.RecyclerService;
 import pe.edu.upc.Greencode.service.WasteOrderService;
-import pe.edu.upc.Greencode.service.WasteService;
 
 @Controller
 @RequestMapping("/request")
@@ -39,19 +36,13 @@ public class RequestController {
 	private GathererService gathererService;
 	
 	@Autowired
-	private RecyclerService recyclerService;
-	
-	@Autowired
-	private WasteService wasteService;
-	
-	@Autowired
 	private WasteOrderService wasteOrderService;
 	
 
 	
 	
 	@GetMapping
-	public String list(Model model) {
+	public String list(Model model,@ModelAttribute("wasteSearch") Waste wasteSearch) {
 		try {
 			Optional<Gatherer> gatherer= gathererService.findById(1);//Jorge Jara
 			List<Order> orders= orderService.getAll();
@@ -62,6 +53,7 @@ public class RequestController {
 				}
 			}	
 			model.addAttribute("ordersEmpty", ordersEmpty);
+			model.addAttribute("wasteSearch", wasteSearch);
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.err.println(e.getMessage());
@@ -70,7 +62,7 @@ public class RequestController {
 	}
 /*PRIMERA PARTE*/
 	@GetMapping("{id}")
-	public String findById(Model model ,@PathVariable("id") Integer id) {
+	public String findById(Model model ,@PathVariable("id") Integer id,@ModelAttribute("wasteSearch") Waste wasteSearch) {
 		try {
 			Optional<Order> order= orderService.findById(id);//Jorge Jara
 			//---------
@@ -83,6 +75,7 @@ public class RequestController {
 			}
 				model.addAttribute("wasteOrdersEmpty", wasteOrdersEmpty);
 				model.addAttribute("order", order.get());
+				model.addAttribute("wasteSearch", wasteSearch);
 				return "request/view";
 		}catch(Exception e){
 			e.printStackTrace();
@@ -93,7 +86,7 @@ public class RequestController {
 	
 	/*Update*/
 	@GetMapping("{id}/update")
-	public String updateId(Model model ,@PathVariable("id") Integer id) {
+	public String updateId(Model model ,@PathVariable("id") Integer id,@ModelAttribute("wasteSearch") Waste wasteSearch) {
 		try {
 			Optional<Order> order= orderService.findById(id);//Jorge Jara
 			List<WasteOrder> wasteOrders = new ArrayList<WasteOrder>(); 
@@ -103,15 +96,9 @@ public class RequestController {
 				if(order.isPresent()) {
 					model.addAttribute("wasteOrders", wasteOrders);
 					model.addAttribute("orderEdit", order.get());
-					
+					model.addAttribute("wasteSearch", wasteSearch);
 				}
-				return "request/purchase";
-				/*model.addAttribute("wasteOrders", wasteOrders);*/
-				
-				
-				
-				
-					
+				return "request/purchase";					
 		}catch(Exception e){
 			e.printStackTrace();
 			System.err.println(e.getMessage());
@@ -121,20 +108,10 @@ public class RequestController {
 	
 	
 	@PostMapping("change")
-	public String updateOrder(Model model, @ModelAttribute("orderEdit") Order orderEdit) {
+	public String updateOrder(Model model, @ModelAttribute("orderEdit") Order orderEdit,@ModelAttribute("wasteSearch") Waste wasteSearch) {
 		try {
-			/*
-			System.out.println(orderEdit.getTotalAmount());
-			Order newOrder= new Order();
-			Optional<Order> updateOrder= orderService.findById(orderEdit.getId());	
-			if(updateOrder.isPresent()) {
-				newOrder.setTotalAmount(updateOrder.get().getTotalAmount());
-				orderService.update(newOrder);
-				
-			
-			}*/
 			orderService.update(orderEdit);
-			
+			model.addAttribute("wasteSearch", wasteSearch);
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.err.println(e.getMessage());

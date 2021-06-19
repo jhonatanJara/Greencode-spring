@@ -7,7 +7,6 @@
 	<link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
 	<link th:href="@{/css/fontawesome.min.css}" rel="stylesheet">
 	<link th:href="@{/css/solid.min.css}" rel="stylesheet">
-	
 	<link rel="shortcut icon" href="/images/logo.png">
 	<title th:replace="${title}">Greencode</title>
 </head>
@@ -28,17 +27,21 @@
 					<span class="navbar-toggler-icon"></span>
 				</button>
 				<div class="collapse navbar-collapse" id="navbarSupportedContent">
-					<form class="d-flex p-1" style="width: 600px">
-						<input class="form-control" type="search"
-							placeholder="What do you want to search?" aria-label="Search">
+					
+					
+					<form class="d-flex p-1" style="width: 600px" th:action="@{/search/wastes}" th:object="${wasteSearch}" method="get">
+						<input class="form-control" type="search" placeholder="What do you want to recycle?" th:field="*{name}" aria-label="Search">
 						<button type="button" class="btn btn-success m-2">
 							<i class="fas fa-search"></i>
 						</button>
 					</form>
+					
+					
+					
 					<div>
 						<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 							<li class="nav-item"><a class="nav-link active"
-								aria-current="page" href="/home">Home</a></li>
+								aria-current="page" href="/">Home</a></li>
 							<li class="nav-item"><a class="nav-link active" href="/request">Requests</a>
 							</li>
 							<li class="nav-item"><a class="nav-link active" href="/recycle">Recycle</a>
