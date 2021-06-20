@@ -226,6 +226,7 @@ public class RecycleController {
 			  order = null;
 			  
 			  return "redirect:/recycle/gatherers";
+			  
 			}
 			
 		} catch (Exception e) {
