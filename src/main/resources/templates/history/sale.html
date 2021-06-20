@@ -14,6 +14,10 @@
 						<tr class="text-center">
 							<th scope="col" >Date</th>
 							<th scope="col" >Gatherer</th>
+							<th scope="col" >Name</th>
+							<th scope="col" >Last Name</th>
+							<th scope="col" >Status</th>
+							
 							<th scope="col" style="width: 10rem"></th>
 							<th scope="col" style="width: 10rem"></th>
 						</tr>
@@ -21,7 +25,10 @@
 					<tbody  th:each="order : ${orders}">
 						<tr>
 							<th th:text="${order.date}"></th>
+							<th th:text="${order.id}"></th>
 							<td th:text="${order.gatherer.firstName}"></td>
+							<th th:text="${order.gatherer.lastName}"></th>
+							<th th:text="${order.status}"></th>
 							<td><a th:href="@{'/history/sale/' + ${order.id}+'/view'}" class="btn btn-success" >More details</a></td>
 							<td><a th:href="@{'/qualify/gatherer/' + ${order.id}}" class="btn btn-success" >Qualify</a></td>
 						</tr>
