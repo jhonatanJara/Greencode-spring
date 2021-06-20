@@ -112,7 +112,7 @@ public class RecycleController {
 		return "redirect:/recycle";
 	}
 	
-	/* --------------GATHERER -------------*/
+
 	@GetMapping("/gatherers")
 	public String listGatherers(Model model, @ModelAttribute("wasteSearch") Waste wasteSearch) {
 		try {

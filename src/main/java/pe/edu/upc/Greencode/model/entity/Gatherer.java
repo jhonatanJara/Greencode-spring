@@ -93,7 +93,7 @@ public class Gatherer {
 		this.points = points;
 	}
 	
-	@Column(name="points", nullable=false, columnDefinition = "DECIMAL(4,1)")
+	@Column(name="points", nullable=true, columnDefinition = "DECIMAL(4,1)")
 	private Float point;
 
 	public Gatherer() {

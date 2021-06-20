@@ -34,8 +34,8 @@ public class RewardController {
 	public String list(Model model, @ModelAttribute("wasteSearch") Waste wasteSearch) {
 		try {
 			Optional<Recycler> recycler= recyclerService.findById(1);
-			List<Coupon> coupons = couponService.getAll();
 			List<Coupon> recyclerCoupons = recycler.get().getCoupons();
+			List<Coupon> coupons = couponService.getAll();
 			List<Coupon> newCoupons= new ArrayList<Coupon>();
 			
 			for(int i=0; i<coupons.size(); i++) {
