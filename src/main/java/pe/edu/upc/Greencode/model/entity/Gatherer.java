@@ -14,6 +14,7 @@ import javax.persistence.Index;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -85,6 +86,7 @@ public class Gatherer {
 	@Transient
 	private Integer points;
 	
+	
 	public Integer getPoints() {
 		return points;
 	}
@@ -93,6 +95,20 @@ public class Gatherer {
 		this.points = points;
 	}
 	
+	@OneToOne(mappedBy = "gatherer")
+	private User user1;	
+	
+	
+	
+
+	public User getUser1() {
+		return user1;
+	}
+
+	public void setUser1(User user1) {
+		this.user1 = user1;
+	}
+
 	@Column(name="points", nullable=true, columnDefinition = "DECIMAL(4,1)")
 	private Float point;
 
