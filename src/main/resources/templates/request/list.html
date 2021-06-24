@@ -5,9 +5,9 @@
 </head>
 <body>
 	<header th:replace="layout/layout :: header"></header>
-	<main>
-	<div class="table-responsive">
-	<table class="table table-hover table-bordered" style="width: 50rem;" >
+	<main class="d-flex justify-content-center align-items-center" style="height: 500px">
+		<div class="table-responsive">
+			<table class="table table-hover table-bordered" style="width: 50rem;">
 				<thead class="bg-success text-white">
 					<tr class="text-center">
 						<th scope="col" style="width: 5rem;">id</th>
@@ -15,18 +15,19 @@
 						<th scope="col">View Details</th>
 					</tr>
 				</thead>
-				<tbody >
+				<tbody>
 					<tr th:each="order : ${ordersEmpty}">
-						<td class="text-center" th:text="${order.recycler.id}" ></td>
-						<td class="text-center" th:text="${order.recycler.firstName}+' '+ ${order.recycler.lastName}"></td>
-						<td class="text-center">
-						<a th:href="@{'request/' + ${order.id}}" class="btn btn-success" style="width: 12rem;">Show details</a>					
-						</td>
+						<td class="text-center" th:text="${order.recycler.id}"></td>
+						<td class="text-center"
+							th:text="${order.recycler.firstName}+' '+ ${order.recycler.lastName}"></td>
+						<td class="text-center"><a
+							th:href="@{'request/' + ${order.id}}" class="btn btn-success"
+							style="width: 12rem;">Show details</a></td>
 					</tr>
 				</tbody>
 			</table>
 		</div>
-		
+
 	</main>
 
 	<footer th:replace="layout/layout :: footer"></footer>

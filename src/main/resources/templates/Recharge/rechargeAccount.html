@@ -25,12 +25,12 @@
 			<div class="d-flex justify-content-center">
 				<div class="row m-2 p-1  d-flex justify-content-center">
 					
-						<div class="d-flex justify-content-center">
+						<div class="d-flex justify-content-center p-2">
 							<strong>Recharge online</strong>
 						</div>
 
 
-						<div class="card mb-5" style="max-width: 740px;">
+						<div class="card mb-5 p-3 m-2" style="max-width: 740px;">
 							<form th:action="@{/recharge/save}" method="post" th:object="${transaction}">
 								<!-- th:object="${recycler}" -->
 								<p class="card-text">Titular: GreenCode S.A</p>
@@ -43,7 +43,10 @@
 								<p class="card-text">
 									Monto: <input type="text" name="monto" th:field="*{amount}">
 								</p>
-								<input type="submit" value="Enviar" class="btn btn-success">
+								<div class="d-flex justify-content-center m-3 p-2">
+									 <input type="submit" value="Enviar" class="btn btn-success">
+								</div>
+								
 							</form>
 						</div>
 				
