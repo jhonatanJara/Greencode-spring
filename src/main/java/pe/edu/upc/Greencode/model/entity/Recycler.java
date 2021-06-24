@@ -95,16 +95,13 @@ public class Recycler {
 	private List<Coupon> coupons;
 	
 	@OneToMany(mappedBy = "recycler", fetch = FetchType.LAZY)
-	private List<Waste> wastes;
-	
-	@OneToMany(mappedBy = "recycler", fetch = FetchType.LAZY)
 	private List<Order> orders;
 
 	public Recycler() {
 		super();
 		coupons= new ArrayList<Coupon>();
 		orders= new ArrayList<Order>();
-		wastes= new ArrayList<Waste>();
+		
 	}
 
 	public Integer getId() {
@@ -233,14 +230,6 @@ public class Recycler {
 
 	public void setCoupons(List<Coupon> coupons) {
 		this.coupons = coupons;
-	}
-
-	public List<Waste> getWastes() {
-		return wastes;
-	}
-
-	public void setWastes(List<Waste> wastes) {
-		this.wastes = wastes;
 	}
 
 	public List<Order> getOrders() {

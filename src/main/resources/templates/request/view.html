@@ -7,13 +7,13 @@
 	<header th:replace="layout/layout :: header"></header>
 	<main>
 
-		<div class="d-flex justify-content-center table-responsive">
+		<div class="d-flex justify-content-center table-responsive p-3">
 
 			<div>
 				<div class="table-responsive">
 					<table class="table table-hover table-bordered"
 						style="width: 50rem;">
-						<thead class="bg-success text-white" >
+						<thead class="bg-success text-white">
 							<tr class="text-center">
 								<th scope="col">Waste</th>
 								<th scope="col">Price/Kilo</th>
@@ -29,52 +29,48 @@
 					</table>
 
 				</div>
-				
-				<section style="padding: 30px;" class="content-center">
-					
-					<div class="card mb-5 justify-content-center "
-						style="width: 600px;">
-					
-						<div class="col-md-5 d-flex justify-content-center p-2">
-							
-							<img th:src="${order.recycler.image}"
-								class="img-fluid img-thumbnail rounded-circle border-success"
-								width="400px;" height="400px;">
-					
-						</div>
-
-						<div class="card-body">
-							<p class="card-text">
-								<strong>First Name:</strong> <span
-									th:text="${order.recycler.firstName}"></span>.
-							</p>
-							<p class="card-text">
-								<strong>LastName:</strong> <span
-									th:text="${order.recycler.lastName}"></span>.
-							</p>
-							<p class="card-text">
-								<strong>District:</strong> <span
-									th:text="${order.recycler.district.name}"></span>.
-							</p>
-							<p class="card-text">
-								<strong>Direction:</strong> <span
-									th:text="${order.recycler.address}"></span>.
-							</p>
-						</div>
-					</div>
-					
-				</section>
-
 			</div>
-			<section style="padding: 30px;" class="justify-content-center">
-				<div>
-					<a th:href="@{'/request/' + ${order.id} +'/update'}" class="btn btn-success"><i
-						class="fas fa-plus-square"></i>Acept</a> <a th:href="@{'/request'}"
-						class="btn btn-success"><i class="fas fa-plus-square"></i>Deny</a>
+		</div>
+		
+		<section  class="d-flex justify-content-center p-3">
 
+			<div class="card mb-5" style="width: 600px;">
+				<div class="col-md-5 d-flex justify-content-center">
+					<img th:src="${order.recycler.image}"
+						class="img-fluid img-thumbnail rounded-circle border-success d-flex justify-content-end">
+				</div>
+			</div>
+
+
+			<div class="card-body ">
+				<p class="card-text">
+					<strong>First Name:</strong> <span
+						th:text="${order.recycler.firstName}"></span>.
+				</p>
+				<p class="card-text">
+					<strong>LastName:</strong> <span
+						th:text="${order.recycler.lastName}"></span>.
+				</p>
+				<p class="card-text">
+					<strong>District:</strong> <span
+						th:text="${order.recycler.district.name}"></span>.
+				</p>
+				<p class="card-text">
+					<strong>Direction:</strong> <span
+						th:text="${order.recycler.address}"></span>.
+				</p>
+			</div>
+
+		</section>
+
+		<section style="padding: 30px;" class="d-flex justify-content-center">
+				<div>
+					<a th:href="@{'/request/' + ${order.id} +'/update'}"
+						class="btn btn-success m-3">Acept</a>
+					<a th:href="@{'/request'}" class="btn btn-success m-2">Deny</a>
 				</div>
 			</section>
-		</div>
+		
 
 
 	</main>

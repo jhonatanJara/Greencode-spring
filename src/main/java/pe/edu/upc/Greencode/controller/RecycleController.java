@@ -47,25 +47,27 @@ public class RecycleController {
 	@Autowired
 	private WasteOrderService wasteOrderService;
 	
+	public List<Waste> listWastes=new ArrayList<Waste>();
+	
 	@GetMapping	
 	public String list(Model model, @ModelAttribute("wasteSearch") Waste wasteSearch) {
 		try {
 			Optional<Recycler> recycler= recyclerService.findById(1);
-			List<Waste> recyclerWastes = recycler.get().getWastes();
+			//List<Waste> recyclerWastes = recycler.get().getWastes();
 			
 			
 			List<Waste> wastes = wasteService.getAll();
 			List<Waste> wa = new ArrayList<Waste>();
 			for(int i=0; i< wastes.size(); i++) {
-				if(wastes.get(i).getRecycler()==null) {
+				if(wastes.get(i).getImage()!=null) {
 					wa.add(wastes.get(i));
 				}
 			}			
-			recycler.get().setWastes(wa);
+			//recycler.get().setWastes(wa);
 				
 			
 			model.addAttribute("wastes", wa);
-			model.addAttribute("recyclerWastes",recyclerWastes);
+			model.addAttribute("recyclerWastes",listWastes);
 			model.addAttribute("wasteSearch", wasteSearch);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -84,7 +86,8 @@ public class RecycleController {
 			if(optional.isPresent()) {
 				w.setName(optional.get().getName());
 				w.setCategory(optional.get().getCategory());
-				w.setRecycler(recycler.get());
+				//w.setRecycler(recycler.get());
+				listWastes.add(w);
 				wasteService.create(w);
 			}
 			
@@ -101,7 +104,14 @@ public class RecycleController {
 			Optional<Waste> optional = wasteService.findById(id);
 			
 			if(optional.isPresent()) {
-				wasteService.deleteById(id);
+				//wasteService.deleteById(id);
+				
+				for(int i=0; i<listWastes.size(); i++) {
+					if(listWastes.get(i).getId()==optional.get().getId()) {
+						listWastes.remove(listWastes.get(i));
+					}
+				}
+				
 				return "redirect:/recycle";
 			}
 			
@@ -200,7 +210,7 @@ public class RecycleController {
 		try {
 			Optional<Recycler> recycler= recyclerService.findById(1);
 			Optional<Gatherer> gatherer= gathererService.findById(id);
-			List<Waste> wastes = recycler.get().getWastes();	
+			//List<Waste> wastes = recycler.get().getWastes();	
 			
 			Order order= new Order();
 			Date fecha = new Date();
@@ -213,18 +223,18 @@ public class RecycleController {
 			  order.setGatherer(gatherer.get());
 			  
 			  orderService.create(order);
-			  
-			  for(int i=0; i<= wastes.size(); i++) {
+			 
+			  for(int i=0; i<= listWastes.size(); i++) {
 				  WasteOrder wasteOrder = new WasteOrder();
 				  wasteOrder.setOrder(order);
-				  wasteOrder.setWaste(wastes.get(i));
-				  wasteOrder.setPrice(wastes.get(i).getCategory().getPriceKilo());
+				  wasteOrder.setWaste(listWastes.get(i));
+				  wasteOrder.setPrice(listWastes.get(i).getCategory().getPriceKilo());
 				  
 				  wasteOrderService.create(wasteOrder);
 				  wasteOrder = null;
 			  }
 			  order = null;
-			  
+			  listWastes.clear();
 			  return "redirect:/recycle/gatherers";
 			  
 			}

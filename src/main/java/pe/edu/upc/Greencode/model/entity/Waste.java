@@ -36,10 +36,6 @@ public class Waste {
 	@JoinColumn(name = "category_id", nullable = false)
 	private Category category;
 	
-	@ManyToOne
-	@JoinColumn(name = "recycler_id", nullable = true)
-	private Recycler recycler;
-	
 	@OneToMany(mappedBy = "waste", fetch = FetchType.LAZY)
 	private List<WasteOrder> wasteOrders;
 
@@ -78,14 +74,6 @@ public class Waste {
 
 	public void setCategory(Category category) {
 		this.category = category;
-	}
-
-	public Recycler getRecycler() {
-		return recycler;
-	}
-
-	public void setRecycler(Recycler recycler) {
-		this.recycler = recycler;
 	}
 
 	public List<WasteOrder> getWasteOrders() {
