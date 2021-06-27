@@ -9,6 +9,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import pe.edu.upc.Greencode.model.entity.User;
+import pe.edu.upc.Greencode.utils.Segmento;
 
 public class MyUserDetails implements UserDetails {
 
@@ -62,6 +63,18 @@ public class MyUserDetails implements UserDetails {
 		// TODO Auto-generated method stub
 		return this.user.isEnable();
 	}
+	
+	// Agregando nuevos get para obtener el cliente o proveedor vinculado a la cuenta
+	
+		public Segmento getSegmento() {
+			return this.user.getSegmento();
+		}
+		public Integer getIdSegmento() {
+			return this.user.getIdSegmento();
+		}
+	
+	
+	/*
 	// Add new gets for get data from user or recycler
 	public String getLastName() {
 		return this.user.getRecycler().getLastName();
@@ -69,14 +82,8 @@ public class MyUserDetails implements UserDetails {
 	public String getFirstName() {
 		return this.user.getRecycler().getFirstName();
 	}
+	*/
 	
 	
-	// Add new gets for get data from user or gatherer
-	public String getLastName1() {
-		return this.user.getGatherer().getLastName();
-	}
-	public String getFirstName1() {
-		return this.user.getGatherer().getFirstName();
-	}
 
 }

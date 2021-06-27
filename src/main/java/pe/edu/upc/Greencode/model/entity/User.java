@@ -1,4 +1,5 @@
 package pe.edu.upc.Greencode.model.entity;
+import pe.edu.upc.Greencode.utils.Segmento;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,15 +32,11 @@ public class User {
 	@Column(name = "enable")
 	private boolean enable;
 	
-	@OneToOne(cascade = CascadeType.ALL)
-	@MapsId
-	@JoinColumn(name = "id")
-	private Recycler recycler;
+	@Column(name = "segmento", nullable = false)
+	private Segmento segmento;
 	
-	@OneToOne(cascade = CascadeType.ALL)
-	@MapsId
-	@JoinColumn(name = "id")
-	private Gatherer gatherer;
+	@Column(name = "id_segmento", nullable = false)
+	private Integer idSegmento;
 	
 	
 	@OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
@@ -64,6 +61,7 @@ public class User {
 	}
 	
 	//RECYCLER
+	/*
 	public User( String username, String password, Recycler recycler ) {
 		this.id = recycler.getId();
 		this.username = username;
@@ -73,17 +71,9 @@ public class User {
 		this.authorities = new ArrayList<>();
 		recycler.setUser(this);
 	}
-	
+	*/
 	//GATHERER
-	public User( String username, String password, Gatherer gatherer ) {
-		this.id = gatherer.getId();
-		this.username = username;
-		this.password = password;
-		this.enable = true;
-		this.gatherer = gatherer;		
-		this.authorities = new ArrayList<>();
-		gatherer.setUser1(this);
-	}
+	
 	
 	// Add ROLE or ACCESS to user
 	public void addAuthority( String auth ) {
@@ -94,18 +84,8 @@ public class User {
 		this.authorities.add( authority );
 	}
 
-	public Gatherer getGatherer() {
-		return gatherer;
-	}
-	public void setGatherer(Gatherer gatherer) {
-		this.gatherer = gatherer;
-	}
-	public Recycler getRecycler() {
-		return recycler;
-	}
-	public void setRecycler(Recycler recycler) {
-		this.recycler = recycler;
-	}
+	
+	
 	public Integer getId() {
 		return id;
 	}
@@ -126,6 +106,18 @@ public class User {
 		return password;
 	}
 
+	public Segmento getSegmento() {
+		return segmento;
+	}
+	public void setSegmento(Segmento segmento) {
+		this.segmento = segmento;
+	}
+	public Integer getIdSegmento() {
+		return idSegmento;
+	}
+	public void setIdSegmento(Integer idSegmento) {
+		this.idSegmento = idSegmento;
+	}
 	public void setPassword(String password) {
 		this.password = password;
 	}

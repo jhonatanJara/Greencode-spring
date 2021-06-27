@@ -71,19 +71,9 @@ public class Recycler {
 	private Integer calification;
 	
 	@Transient
-	private Integer points;
-	
-	@OneToOne(mappedBy = "recycler")
-	private User user;
+	private Integer points;	
 	
 	
-	public User getUser() {
-		return user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
-	}
 
 	public Integer getPoints() {
 		return points;

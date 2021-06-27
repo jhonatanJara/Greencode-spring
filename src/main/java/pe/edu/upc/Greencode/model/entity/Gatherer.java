@@ -95,20 +95,7 @@ public class Gatherer {
 		this.points = points;
 	}
 	
-	@OneToOne(mappedBy = "gatherer")
-	private User user1;	
 	
-	
-	
-
-	public User getUser1() {
-		return user1;
-	}
-
-	public void setUser1(User user1) {
-		this.user1 = user1;
-	}
-
 	@Column(name="points", nullable=true, columnDefinition = "DECIMAL(4,1)")
 	private Float point;
 

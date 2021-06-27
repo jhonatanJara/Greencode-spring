@@ -13,6 +13,7 @@ import pe.edu.upc.Greencode.model.entity.User;
 import pe.edu.upc.Greencode.model.repository.GathererRepository;
 import pe.edu.upc.Greencode.model.repository.RecyclerRepository;
 import pe.edu.upc.Greencode.model.repository.UserRepository;
+import pe.edu.upc.Greencode.utils.Segmento;
 
 @Service
 public class InitDB implements CommandLineRunner{
@@ -33,18 +34,36 @@ public class InitDB implements CommandLineRunner{
 		
 		BCryptPasswordEncoder bcpe = new BCryptPasswordEncoder();
 		
-		/*
-		Optional <Recycler> optional = recyclerRepository.findById(1);
-		if(optional.isPresent()) {
-			Recycler sergio = optional.get();
-			User sercas = new User("sercas", bcpe.encode("castaneda"), sergio);
-			//ROLE segmentos obejtivos
-			sercas.addAuthority("ROLE_RECYCLER");
-			//ACCESS
-			sercas.addAuthority("ACCESS_RECYCLE");
-			userRepository.save(sercas);
-		}
-		*/
+		
+		
+		User recycler1 = new User();
+		recycler1.setUsername("recycler1");
+		recycler1.setPassword(bcpe.encode("recycler"));
+		recycler1.setEnable(true);
+		recycler1.setSegmento(Segmento.RECYCLER);
+		recycler1.setIdSegmento(1);
+		
+		User gatherer1 = new User();
+		gatherer1.setUsername("gatherer1");
+		gatherer1.setPassword(bcpe.encode("gatherer"));
+		gatherer1.setEnable(true);
+		gatherer1.setSegmento(Segmento.GATHERER);
+		gatherer1.setIdSegmento(1);
+		
+		//ROLE_RECYCLER, ROLE_GATHERER, ROLE_ADMIN
+		recycler1.addAuthority("ROLE_RECYCLER");
+		gatherer1.addAuthority("ROLE_GATHERER");
+		
+		//ACCESS
+		
+		//recycler1.addAuthority("ACCESS_DESC");
+		
+		userRepository.save(recycler1);
+		userRepository.save(gatherer1);
+		
+		
+		
+		
 		
 		/*
 		Optional <Gatherer> optional2 = gathererRepository.findById(1);
