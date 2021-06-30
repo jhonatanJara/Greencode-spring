@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head(~{::title})">
+	<title>Recycle </title>
+</head>
+<body>
+	<header th:replace="layout/layout :: header"></header>
+	<main>
+		<div class="container p-2">
+			<div class="row">
+			  <div class="col-3 p-1" th:each="waste : ${wastes}">
+				<div class="card" style="width: 18rem;">
+					<img th:src="${waste.image}" class="img-fluid" >
+					<hr>
+					<div class="card-body">
+					  <h5 class="card-title text-center" th:text="${waste.name}"></h5>
+						 
+					 <div class="button d-flex justify-content-center p-2">
+						<a th:href="@{'/recycle/' + ${waste.id} + '/new'}"  type="submit" class="btn btn-primary bg-success">Add</a>
+					 </div> 
+					 				  
+					</div>
+				</div>
+			  </div>
+			  
+			</div>	
+		</div>
+
+		<div class="d-flex justify-content-center m-3">
+			<div>
+				<table class="table m-3 p-2 table-hover" >
+					<thead  class="text-white bg-success">
+					  <tr>
+						<th scope="col" style="width: 20rem">Name</th>
+						<th scope="col" style="width: 20rem">Category</th>
+						<th scope="col" style="width: 20rem">Price/Kilo</th>
+						<th scope="col" style="width: 10rem"></th>
+					  </tr>
+					</thead>
+					<tbody class="p-2 m-3" th:each="waste : ${recyclerWastes}">
+					  <tr>
+						<th th:text="${waste.name}" scope="row"></th>
+						<td th:text="${waste.category.name}"></td>
+						<td th:text="${waste.category.priceKilo}"></td>
+						<td><a th:href="@{'/recycle/' + ${waste.id} + '/del'}" class="btn btn-secondary"><i class="fas fa-trash-alt"></i></a></td>
+					  </tr>
+					</tbody>
+				  </table>
+			</div>
+		</div>
+		<div class="d-flex justify-content-center m-3 p-2">
+			<a th:href="@{'/recycle/gatherers'}"  type="submit" class="btn btn-primary bg-success">Request a gatherer</a>
+		</div>
+	</main>
+	
+	<footer th:replace="layout/layout :: footer"></footer>
+</body>
+</html>

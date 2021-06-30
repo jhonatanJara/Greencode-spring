@@ -44,9 +44,9 @@ public class InitDB implements CommandLineRunner{
 			sercas.addAuthority("ACCESS_RECYCLE");
 			userRepository.save(sercas);
 		}
-		*/
 		
-		/*
+		
+		
 		Optional <Gatherer> optional2 = gathererRepository.findById(1);
 		if(optional2.isPresent()) {
 			Gatherer jorge = optional2.get();
@@ -57,8 +57,8 @@ public class InitDB implements CommandLineRunner{
 			jorja.addAuthority("ACCESS_VIEW_REQUEST");
 			userRepository.save(jorja);
 		}
-		*/
 		
+		*/
 	}
 	
 
