@@ -76,12 +76,15 @@ public class Gatherer {
 	@JoinColumn(name="district_id", nullable = false)
 	private District district;
 	
+	@ManyToOne
+	@JoinColumn(name="user_id", nullable = true)
+	private User user1;
+	
 	@OneToMany(mappedBy = "gatherer", fetch = FetchType.LAZY)
 	private List<Account> accounts;
 	
 	@OneToMany(mappedBy = "gatherer", fetch = FetchType.LAZY)
 	private List<Order> orders;
-	
 	
 	@Transient
 	private Integer points;
@@ -94,12 +97,6 @@ public class Gatherer {
 	public void setPoints(Integer points) {
 		this.points = points;
 	}
-	
-	@OneToOne(mappedBy = "gatherer")
-	private User user1;	
-	
-	
-	
 
 	public User getUser1() {
 		return user1;

@@ -1,5 +1,6 @@
 <!doctype html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+				xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:replace="layout/layout :: head(~{::title})">
 	<title>Greencode </title>
 </head>
@@ -28,8 +29,9 @@
 						<p class="text-center">Company saving the planet with you</p>
 						<div class="d-flex justify-content-center">
 							<div>
-								<button type="button" class="btn btn-success m-3 d-block">Sign
-									In</button>
+								<button type="button" class="btn btn-success m-3 d-block" >
+								<a class="text-white text-decoration-none" th:href="@{/login}">Sign In</a>
+								</button>
 								<button type="button" class="btn btn-success m-3 d-block">Log
 									In</button>
 							</div>
@@ -42,7 +44,5 @@
 	</main>
 
 	<footer th:replace="layout/layout :: footer"></footer>
-
-	
 </body>
 </html>
