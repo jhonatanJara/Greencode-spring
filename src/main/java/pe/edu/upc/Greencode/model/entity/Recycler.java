@@ -1,4 +1,4 @@
-package pe.edu.upc.Greencode.model.entity;
+	package pe.edu.upc.Greencode.model.entity;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -73,26 +73,6 @@ public class Recycler {
 	@Transient
 	private Integer points;
 	
-	@OneToOne(mappedBy = "recycler")
-	private User user;
-	
-	
-	public User getUser() {
-		return user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
-	}
-
-	public Integer getPoints() {
-		return points;
-	}
-
-	public void setPoints(Integer points) {
-		this.points = points;
-	}
-
 	@Column(name="points", nullable=false, columnDefinition = "DECIMAL(4,1)")
 	private Float point;
 	
@@ -102,6 +82,11 @@ public class Recycler {
 	@ManyToOne
 	@JoinColumn(name="district_id", nullable = false)
 	private District district;
+		
+	@ManyToOne
+	@JoinColumn(name="user_id", nullable = true)
+	private User user;
+	
 	
 	@OneToMany(mappedBy = "recycler", fetch = FetchType.LAZY)
 	private List<Coupon> coupons;
@@ -250,6 +235,22 @@ public class Recycler {
 
 	public void setOrders(List<Order> orders) {
 		this.orders = orders;
+	}
+	
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public Integer getPoints() {
+		return points;
+	}
+
+	public void setPoints(Integer points) {
+		this.points = points;
 	}
 	
 }

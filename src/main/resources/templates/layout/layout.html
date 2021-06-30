@@ -29,7 +29,8 @@
 				<div class="collapse navbar-collapse" id="navbarSupportedContent">
 					
 					
-					<form class="d-flex p-1" style="width: 600px" th:action="@{/search/wastes}" th:object="${wasteSearch}" method="get">
+					<form class="d-flex p-1" style="width: 600px" th:action="@{/search/wastes}" th:object="${wasteSearch}" method="get"
+						sec:authorize="hasRole('ROLE_RECYCLER')">
 						<input class="form-control" type="search" placeholder="What do you want to recycle?" th:field="*{name}" aria-label="Search">
 						<button type="button" class="btn btn-success m-2">
 							<i class="fas fa-search"></i>
@@ -37,43 +38,48 @@
 					</form>
 					
 					
-					
 					<div>
 						<ul class="navbar-nav me-auto mb-2 mb-lg-0">
-							<li class="nav-item"><a class="nav-link active"
+							<li sec:authorize="isAnonymous()" class="nav-item"><a class="nav-link active"
 								aria-current="page" href="/">Home</a></li>
-							<li class="nav-item"><a class="nav-link active" href="/request">Requests</a>
+							<li sec:authorize="hasRole('ROLE_GATHERER')" class="nav-item"><a class="nav-link active" href="/request">Requests</a>
 							</li>
-							<li class="nav-item"><a class="nav-link active" href="/recycle">Recycle</a>
+							<li sec:authorize="hasRole('ROLE_RECYCLER')" class="nav-item">
+								<a class="nav-link active" href="/recycle">Recycle</a>
 							</li>
-							<li class="nav-item dropdown"><a
+							<li sec:authorize="isAuthenticated()" class="nav-item dropdown"><a
 								class="nav-link active dropdown-toggle" href="#"
 								id="navbarDropdown" role="button" data-bs-toggle="dropdown"
 								aria-expanded="false"> Movements History </a>
 								<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-									<li><a class="dropdown-item" href="/history/sale">Sale History</a></li>
-									<li><a class="dropdown-item" href="/history/purchase">Purchase History</a></li>
-									<li><a class="dropdown-item" href="#">Requests History</a></li>
-								</ul></li>
-							<li class="nav-item"><a class="nav-link active" href="/recharge"
+									<li sec:authorize="hasRole('ROLE_GATHERER')"><a class="dropdown-item" href="/history/sale">Sale History</a></li>
+									<li sec:authorize="hasRole('ROLE_RECYCLER')"><a class="dropdown-item" href="/history/purchase">Purchase History</a></li>
+									<li sec:authorize="hasRole('ROLE_GATHERER')"><a class="dropdown-item" href="#">Requests History</a></li>
+								</ul>
+							</li>
+							
+							<li sec:authorize="hasRole('ROLE_GATHERER')" class="nav-item"><a class="nav-link active" href="/recharge"
 								tabindex="-1">Recharge</a></li>
-							<li class="nav-item"><a class="nav-link active" href="/rewards"
+								
+							<li sec:authorize="hasRole('ROLE_RECYCLER')" class="nav-item"><a class="nav-link active" href="/rewards"
 								tabindex="-1" aria-disabled="true">Rewards</a></li>
-							<li class="nav-item"><a class="nav-link active" href="#"
+								
+							<li class="nav-item" sec:authorize="isAnonymous()"><a class="nav-link active" th:href="@{/login}" 
 								tabindex="-1" aria-disabled="true">Sign In</a></li>
-							<li class="nav-item"><a class="nav-link active" href="#"
+								
+							<li class="nav-item" sec:authorize="isAnonymous()"><a class="nav-link active" href="#"
 								tabindex="-1" aria-disabled="true">Log In</a></li>
-							<li class="nav-item"><a class="nav-link active" href="#"
-								tabindex="-1" aria-disabled="true"><i
-									class="fas fa-user-circle"></i></a></li>
-							<li class="nav-item dropdown"><a
-								class="nav-link active dropdown-toggle" href="#"
+								
+							
+							<li sec:authorize="isAuthenticated()" class="nav-item dropdown" >
+								<a  class="nav-link dropdown-toggle btn btn-outline-success" href="#"
 								id="navbarDropdown" role="button" data-bs-toggle="dropdown"
-								aria-expanded="false"> </a>
+								aria-expanded="false" ><i class="fas fa-user-circle"></i> <span class ="text-white"sec:authentication="name">Username</span></a>
 								<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
 									<li><a class="dropdown-item" href="#">Profile</a></li>
-									<li><a class="dropdown-item" href="#">Sign Off</a></li>
-								</ul></li>
+									<li><a class="dropdown-item" th:href="@{/logout}">Log out</a></li>
+								</ul>
+							</li>
 						</ul>
 					</div>
 				</div>

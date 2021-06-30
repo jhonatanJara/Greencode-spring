@@ -7,6 +7,8 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Index;
 import javax.persistence.JoinColumn;
@@ -18,7 +20,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "users", indexes = {@Index(columnList = "username", name = "user_index_username")})
 public class User {
-	// EmbeddedId primary key
+	
 	@Id
 	private Integer id;
 	
@@ -31,21 +33,20 @@ public class User {
 	@Column(name = "enable")
 	private boolean enable;
 	
-	@OneToOne(cascade = CascadeType.ALL)
-	@MapsId
-	@JoinColumn(name = "id")
-	private Recycler recycler;
+	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+	private List<Recycler> recyclers;
 	
-	@OneToOne(cascade = CascadeType.ALL)
-	@MapsId
-	@JoinColumn(name = "id")
-	private Gatherer gatherer;
+	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+	private List<Gatherer> gatherers;
 	
 	
 	@OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private List<Authority> authorities;
 	
 	public User() {
+		
+		recyclers= new ArrayList<Recycler>();
+		gatherers= new ArrayList<Gatherer>();
 		this.enable = true;
 		this.authorities = new ArrayList<>();
 	}
@@ -62,7 +63,7 @@ public class User {
 	public void setAuthorities(List<Authority> authorities) {
 		this.authorities = authorities;
 	}
-	
+	/*
 	//RECYCLER
 	public User( String username, String password, Recycler recycler ) {
 		this.id = recycler.getId();
@@ -83,7 +84,7 @@ public class User {
 		this.gatherer = gatherer;		
 		this.authorities = new ArrayList<>();
 		gatherer.setUser1(this);
-	}
+	}*/
 	
 	// Add ROLE or ACCESS to user
 	public void addAuthority( String auth ) {
@@ -94,18 +95,7 @@ public class User {
 		this.authorities.add( authority );
 	}
 
-	public Gatherer getGatherer() {
-		return gatherer;
-	}
-	public void setGatherer(Gatherer gatherer) {
-		this.gatherer = gatherer;
-	}
-	public Recycler getRecycler() {
-		return recycler;
-	}
-	public void setRecycler(Recycler recycler) {
-		this.recycler = recycler;
-	}
+	
 	public Integer getId() {
 		return id;
 	}
@@ -136,6 +126,18 @@ public class User {
 
 	public void setEnable(boolean enable) {
 		this.enable = enable;
+	}
+	public List<Recycler> getRecyclers() {
+		return recyclers;
+	}
+	public void setRecyclers(List<Recycler> recyclers) {
+		this.recyclers = recyclers;
+	}
+	public List<Gatherer> getGatherers() {
+		return gatherers;
+	}
+	public void setGatherers(List<Gatherer> gatherers) {
+		this.gatherers = gatherers;
 	}
 
 	

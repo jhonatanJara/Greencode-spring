@@ -29,8 +29,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		http
 			.authorizeRequests()
 				.antMatchers("/").permitAll()
+				.antMatchers("/search/**").hasRole("RECYCLER")
 				.antMatchers("/history/purchase").hasRole("RECYCLER")
+				.antMatchers("/recycle/**").hasRole("RECYCLER")
+				.antMatchers("/rewards/**").hasRole("RECYCLER")
 				.antMatchers("/history/sale").hasRole("GATHERER")
+				.antMatchers("/request/**").hasRole("GATHERER")
+				.antMatchers("/recharge/**").hasRole("GATHERER")
 			.and()
 			.formLogin()
 				.loginProcessingUrl("/signin")

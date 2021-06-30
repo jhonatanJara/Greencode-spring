@@ -16,6 +16,8 @@ import pe.edu.upc.Greencode.business.OrderGathererService;
 import pe.edu.upc.Greencode.model.entity.Gatherer;
 import pe.edu.upc.Greencode.model.entity.Order;
 import pe.edu.upc.Greencode.model.entity.Waste;
+import pe.edu.upc.Greencode.security.MyUserDetails;
+import pe.edu.upc.Greencode.security.MyUserDetailsService;
 import pe.edu.upc.Greencode.service.GathererService;
 import pe.edu.upc.Greencode.service.WasteService;
 
@@ -23,6 +25,9 @@ import pe.edu.upc.Greencode.service.WasteService;
 @RequestMapping("/recycle")
 
 public class RecycleController {
+	
+	@Autowired
+	private MyUserDetailsService user;
 	
 	@Autowired
 	private WasteService wasteService;
@@ -65,6 +70,7 @@ public class RecycleController {
 		}	
 		return "redirect:/recycle";
 	}
+	
 	
 	@GetMapping("{id}/del")
 	public String delWaste(@PathVariable("id") Integer id) {

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import pe.edu.upc.Greencode.business.RecyclerCouponService;
 import pe.edu.upc.Greencode.model.entity.Coupon;
 import pe.edu.upc.Greencode.model.entity.Recycler;
 import pe.edu.upc.Greencode.model.entity.Waste;
@@ -25,6 +26,9 @@ import pe.edu.upc.Greencode.service.RecyclerService;
 public class RewardController {
 
 	@Autowired
+	private RecyclerCouponService recyclerCouponService;
+	
+	@Autowired
 	private CouponService couponService;
 	
 	@Autowired
@@ -35,24 +39,24 @@ public class RewardController {
 		try {
 			Optional<Recycler> recycler= recyclerService.findById(1);
 			List<Coupon> recyclerCoupons = recycler.get().getCoupons();
-			List<Coupon> coupons = couponService.getAll();
-			List<Coupon> newCoupons= new ArrayList<Coupon>();
 			
-			for(int i=0; i<coupons.size(); i++) {
-				if(coupons.get(i).getRecycler() == null)
-					newCoupons.add(coupons.get(i));
+			if(recycler.isPresent()) {
+				
+				List<Coupon> availableCoupons = recyclerCouponService.availableCoupons();
+					
+				model.addAttribute("recyclerCoupons", recyclerCoupons);
+				model.addAttribute("coupons", availableCoupons);
+				model.addAttribute("recycler", recycler.get());
+				model.addAttribute("wasteSearch", wasteSearch);
 			}
 			
-			model.addAttribute("recyclerCoupons", recyclerCoupons);
-			model.addAttribute("coupons", newCoupons);
-			model.addAttribute("recycler", recycler.get());
-			model.addAttribute("wasteSearch", wasteSearch);
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.err.println(e.getMessage());
 		}
 		return "coupons/list";
 	}
+	
 	
 	@GetMapping("{id}/view")
 	public String findById(Model model, @PathVariable("id") Integer id, @ModelAttribute("wasteSearch") Waste wasteSearch) {
@@ -70,6 +74,7 @@ public class RewardController {
 		return "redirect:/rewards";
 	}
 	
+	
 	@GetMapping("{id}/swap")
 	public String swapPoints(Model model, @PathVariable("id") Integer id) {
 		try {
@@ -77,12 +82,10 @@ public class RewardController {
 			Optional<Coupon> coupon = couponService.findById(id);
 			
 			if(coupon.isPresent() && coupon.get().getScore() <= recycler.get().getPoint()) {
-				coupon.get().setRecycler(recycler.get());
-				recycler.get().setPoint(recycler.get().getPoint()-coupon.get().getScore());
-				
-				recyclerService.update(recycler.get());
-				couponService.update(coupon.get());
+		
+				recyclerCouponService.successfulCoupon(recycler.get(), coupon.get());
 				return "redirect:/rewards";
+				
 			}else {
 				return "redirect:/rewards/{id}/view";
 			}
@@ -93,6 +96,5 @@ public class RewardController {
 		}
 		return "";
 	}
-	
-	
+		
 }

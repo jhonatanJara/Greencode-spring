@@ -23,7 +23,6 @@ public class InitDB implements CommandLineRunner{
 	@Autowired
 	private GathererRepository gathererRepository;
 	
-	
 	@Autowired
 	private UserRepository userRepository;
 	
@@ -37,28 +36,45 @@ public class InitDB implements CommandLineRunner{
 		Optional <Recycler> optional = recyclerRepository.findById(1);
 		if(optional.isPresent()) {
 			Recycler sergio = optional.get();
-			User sercas = new User("sercas", bcpe.encode("castaneda"), sergio);
+			//User sercas = new User("sercas", bcpe.encode("castaneda"), sergio);
+			User user = new User();
+			user.setId(sergio.getId());
+			user.setUsername("sercas");
+			user.setPassword(bcpe.encode("castaneda"));
+			user.setEnable(true);
+			//user.setAuthorities(null);
+			sergio.setUser(user);
+			
 			//ROLE segmentos obejtivos
-			sercas.addAuthority("ROLE_RECYCLER");
+			user.addAuthority("ROLE_RECYCLER");
 			//ACCESS
-			sercas.addAuthority("ACCESS_RECYCLE");
-			userRepository.save(sercas);
-		}
-		
-		
-		
-		Optional <Gatherer> optional2 = gathererRepository.findById(1);
-		if(optional2.isPresent()) {
-			Gatherer jorge = optional2.get();
-			User jorja = new User("jorja", bcpe.encode("jara"), jorge);
-			//ROLE segmentos obejtivos
-			jorja.addAuthority("ROLE_GATHERER");
-			//ACCESS
-			jorja.addAuthority("ACCESS_VIEW_REQUEST");
-			userRepository.save(jorja);
+			user.addAuthority("ACCESS_RECYCLE");
+			userRepository.save(user);
 		}
 		
 		*/
+		/*
+		Optional <Gatherer> optional2 = gathererRepository.findById(2);
+		if(optional2.isPresent()) {
+			Gatherer jorge = optional2.get();
+			//User jorja = new User("jorja", bcpe.encode("jara"), jorge);
+			User user = new User();
+			user.setId(jorge.getId());
+			user.setUsername("jorja");
+			user.setPassword(bcpe.encode("jara"));
+			user.setEnable(true);
+			//user.setAuthorities(null);
+			jorge.setUser1(user);
+			
+			
+			//ROLE segmentos obejtivos
+			user.addAuthority("ROLE_GATHERER");
+			//ACCESS
+			user.addAuthority("ACCESS_VIEW_REQUEST");
+			userRepository.save(user);
+		}
+		*/
+		
 	}
 	
 
