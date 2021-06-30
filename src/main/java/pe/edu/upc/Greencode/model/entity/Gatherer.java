@@ -21,6 +21,8 @@ import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 @Entity
 @Table(name="Gatherers",
 indexes= {@Index(columnList="last_name,first_name",name = "gatherers_index_last_first_name"),
@@ -59,6 +61,7 @@ public class Gatherer {
 	@Column(name="address", nullable=false, length=50)
 	private String address;
 	
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@Column(name="date_birth", nullable=false)
 	@Temporal(TemporalType.DATE)
 	private Date dateBirth;
