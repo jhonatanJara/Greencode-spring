@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head(~{::title})">
+<title>Rate Gatherer</title>
+</head>
+<body>
+	<header th:replace="layout/layout :: header"></header>
+	<main>
+		 <section style="padding: 30px;" class="content-center">
+ 
+ 	<div class="card mb-5 justify-content-center "  style="width: 600px;" >
+	  <div class="row g-0">
+	    <div class="col-md-5 justify-content-center p-2">
+	      <img th:src="${gatherer.image}" class="img-fluid img-thumbnail rounded-circle border-success" width="400px;"  height="400px;">
+	    </div>
+	    <div class="col-md-7">
+	      <div class="card-body">
+	        
+	        <p class="card-text"><strong>First Name:</strong> <span th:text="${gatherer.firstName}"></span>.</p>
+	        <p class="card-text"><strong>Last Name:</strong> <span th:text="${gatherer.lastName}"></span>.</p>
+			<form th:action="@{/qualify/gatherer/save}" th:object="${gatherer}" method="post">
+								<input type="hidden" th:field="*{id}"> 
+								<input type="hidden" th:field="*{user}">
+								<input type="hidden" th:field="*{password}"> 
+								<input type="hidden" th:field="*{firstName}"> 
+								<input type="hidden" th:field="*{lastName}"> 
+								<input type="hidden" th:field="*{dni}"> 
+								<input type="hidden" th:field="*{mobileNumber}"> 
+								<input type="hidden" th:field="*{email}"> 
+								<input type="hidden" th:field="*{dateBirth}">  
+								<input type="hidden" th:field="*{point}">
+								<input type="hidden" th:field="*{type}">
+								<input type="hidden" th:field="*{district}">
+								<input type="hidden" th:field="*{accounts}">								
+								<input type="hidden" th:field="*{orders}">
+								<input type="hidden" th:field="*{address}">
+								<input type="hidden" th:field="*{calification}">
+								<select th:field="*{points}">
+								<option th:each="point : ${lpoints}" th:value="${point}" th:text="${point}"></option>
+								
+								</select>      
+								<div class="d-flex justify-content-center table-responsive my-4">
+									<button type="submit" class="btn btn-success">save</button>
+								</div>  
+	      						</form>
+	      						
+	    
+	   </div>
+	   </div>
+	    </div>
+	  </div>
+ 
+ </section>
+	</main>
+
+	<footer th:replace="layout/layout :: footer"></footer>
+</body>
+</html>

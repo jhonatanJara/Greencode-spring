@@ -29,4 +29,10 @@ public class WasteServiceImpl implements WasteService {
 		return wasteRepository.findByName(name);
 	}
 
+	@Transactional(readOnly = true)
+	@Override
+	public List<Waste> availableWastes() throws Exception {
+		return wasteRepository.availableWastes();
+	}
+
 }

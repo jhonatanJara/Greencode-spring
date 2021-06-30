@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head(~{::title})">
+<title>Purchase History</title>
+</head>
+<body>
+	<header th:replace="layout/layout :: header"></header>
+	<main>
+
+		<div class="d-flex justify-content-center table-responsive">
+			<div>
+				<table class="table m-3 p-2 table-hover">
+					<thead class="bg-success text-white">
+						<tr class="text-center">
+							<th scope="col" >Date</th>
+							<th scope="col" >Recycler</th>
+							<th scope="col" style="width: 10rem"></th>
+							<th scope="col" style="width: 10rem"></th>
+						</tr>
+					</thead>
+					<tbody  th:each="order : ${orders}">
+						<tr>
+							<th th:text="${order.date}"></th>
+							<td th:text="${order.recycler.firstName}"></td>
+							<td><a th:href="@{'/history/purchase/' + ${order.id}+'/view'}" class="btn btn-success" >More details</a></td>
+							<td><a th:href="@{'/qualify/recycler/' + ${order.id}}" class="btn btn-success" >Qualify</a></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</main>
+
+	<footer th:replace="layout/layout :: footer"></footer>
+</body>
+</html>

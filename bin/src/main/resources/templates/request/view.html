@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head(~{::title})">
+<title>Recycler Garbage</title>
+</head>
+<body>
+	<header th:replace="layout/layout :: header"></header>
+	<main>
+
+		<div class="d-flex justify-content-center table-responsive p-3">
+
+			<div>
+				<div class="table-responsive">
+					<table class="table table-hover table-bordered"
+						style="width: 50rem;">
+						<thead class="bg-success text-white">
+							<tr class="text-center">
+								<th scope="col">Waste</th>
+								<th scope="col">Price/Kilo</th>
+
+							</tr>
+						</thead>
+						<tbody th:each="wasteOrder : ${wasteOrdersEmpty}">
+							<tr>
+								<th th:text="${wasteOrder.waste.name}"></th>
+								<td th:text="${wasteOrder.price}" class="text-center"></td>
+							</tr>
+						</tbody>
+					</table>
+
+				</div>
+			</div>
+		</div>
+		
+		<section  class="d-flex justify-content-center p-3">
+
+			<div class="card mb-5" style="width: 600px;">
+				<div class="col-md-5 d-flex justify-content-center">
+					<img th:src="${order.recycler.image}"
+						class="img-fluid img-thumbnail rounded-circle border-success d-flex justify-content-end">
+				</div>
+			</div>
+
+
+			<div class="card-body ">
+				<p class="card-text">
+					<strong>First Name:</strong> <span
+						th:text="${order.recycler.firstName}"></span>.
+				</p>
+				<p class="card-text">
+					<strong>LastName:</strong> <span
+						th:text="${order.recycler.lastName}"></span>.
+				</p>
+				<p class="card-text">
+					<strong>District:</strong> <span
+						th:text="${order.recycler.district.name}"></span>.
+				</p>
+				<p class="card-text">
+					<strong>Direction:</strong> <span
+						th:text="${order.recycler.address}"></span>.
+				</p>
+			</div>
+
+		</section>
+
+		<section style="padding: 30px;" class="d-flex justify-content-center">
+				<div>
+					<a th:href="@{'/request/' + ${order.id} +'/update'}"
+						class="btn btn-success m-3">Acept</a>
+					<a th:href="@{'/request'}" class="btn btn-success m-2">Deny</a>
+				</div>
+			</section>
+		
+
+
+	</main>
+	<footer th:replace="layout/layout :: footer"></footer>
+</body>
+</html>
