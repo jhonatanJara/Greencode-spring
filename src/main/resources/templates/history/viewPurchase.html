@@ -24,15 +24,17 @@
 										
 									</tr>
 								</thead>
-								<tbody th:each="waste : ${waste1}">
+								<tbody th:each="listWasteOrder : ${listWasteOrders}">
 									<tr>
-										<th th:text="${waste.name}"></th>
-										<td th:text="${waste.category.priceKilo}" class="text-center"></td>
+										<th th:text="${listWasteOrder.waste.name}"></th>
+										<td th:text="${listWasteOrder.waste.category.priceKilo}" class="text-center"></td>
 									
 									</tr>
 								</tbody>
 								
 							</table>
+							
+							
 							<div>
 								<h5 class="text-center">
 									Total Price: <span

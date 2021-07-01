@@ -31,9 +31,9 @@ public class InitDB implements CommandLineRunner{
 		// TODO Auto-generated method stub
 		
 		BCryptPasswordEncoder bcpe = new BCryptPasswordEncoder();
-		
 		/*
-		Optional <Recycler> optional = recyclerRepository.findById(1);
+		
+		Optional <Recycler> optional = recyclerRepository.findById(3);
 		if(optional.isPresent()) {
 			Recycler sergio = optional.get();
 			//User sercas = new User("sercas", bcpe.encode("castaneda"), sergio);
@@ -52,20 +52,21 @@ public class InitDB implements CommandLineRunner{
 			userRepository.save(user);
 		}
 		
-		*/
-		/*
+		
 		Optional <Gatherer> optional2 = gathererRepository.findById(2);
 		if(optional2.isPresent()) {
 			Gatherer jorge = optional2.get();
+			System.out.println(jorge);
 			//User jorja = new User("jorja", bcpe.encode("jara"), jorge);
 			User user = new User();
 			user.setId(jorge.getId());
-			user.setUsername("jorja");
+			user.setUsername("jorje");
 			user.setPassword(bcpe.encode("jara"));
 			user.setEnable(true);
 			//user.setAuthorities(null);
 			jorge.setUser1(user);
 			
+		
 			
 			//ROLE segmentos obejtivos
 			user.addAuthority("ROLE_GATHERER");

@@ -20,10 +20,11 @@ import pe.edu.upc.Greencode.model.entity.Waste;
 import pe.edu.upc.Greencode.service.GathererService;
 import pe.edu.upc.Greencode.service.OrderService;
 import pe.edu.upc.Greencode.service.RecyclerService;
-
+/*
 @Controller
-@RequestMapping("/qualify")
+@RequestMapping("/qualify")*/
 public class QualifyController {
+	/*
 	@Autowired
 	private OrderService orderSevice;
 	
@@ -105,5 +106,5 @@ public class QualifyController {
 		}
 		return "redirect:/history/sale";
 	}
-
+*/
 }

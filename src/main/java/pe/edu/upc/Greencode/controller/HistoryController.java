@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import pe.edu.upc.Greencode.model.entity.Gatherer;
+
 import pe.edu.upc.Greencode.model.entity.Order;
 import pe.edu.upc.Greencode.model.entity.Recycler;
 import pe.edu.upc.Greencode.model.entity.Waste;
@@ -21,12 +21,12 @@ import pe.edu.upc.Greencode.service.OrderService;
 import pe.edu.upc.Greencode.service.RecyclerService;
 import pe.edu.upc.Greencode.service.WasteOrderService;
 import pe.edu.upc.Greencode.service.WasteService;
-
+/*
 @Controller
-@RequestMapping("/history")
+@RequestMapping("/history")*/
 public class HistoryController {
 	/*@Autowired
-	private GathererOrderService gathererorderSevice;*/
+	private GathererOrderService gathererorderSevice;
 	
 	@Autowired
 	private OrderService orderSevice;
@@ -72,6 +72,7 @@ public class HistoryController {
 	
 	@GetMapping("purchase/{id}/view")
 	public String findHistoryPurchaseById(Model model, @PathVariable("id") Integer id, @ModelAttribute("wasteSearch") Waste wasteSearch) {
+		
 		try {
 			Optional<Order> optional = orderSevice.findById(id);
 			List<WasteOrder> listWasteOrder = wasteOrderService.getAll();
@@ -116,5 +117,5 @@ public class HistoryController {
 			System.err.println(e.getMessage());
 		}
 		return "redirect:/history/sale";
-	}
+	}*/
 }
