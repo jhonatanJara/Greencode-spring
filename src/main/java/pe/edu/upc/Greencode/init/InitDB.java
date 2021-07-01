@@ -32,8 +32,8 @@ public class InitDB implements CommandLineRunner{
 		
 		BCryptPasswordEncoder bcpe = new BCryptPasswordEncoder();
 	
-		/*
-		Optional <Recycler> optional = recyclerRepository.findById(1);
+		
+		/*Optional <Recycler> optional = recyclerRepository.findById(1);
 		if(optional.isPresent()) {
 			Recycler sergio = optional.get();
 			//User sercas = new User("sercas", bcpe.encode("castaneda"), sergio);

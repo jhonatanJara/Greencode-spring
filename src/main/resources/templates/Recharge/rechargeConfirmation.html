@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head(~{::title})">
+<title>Recharge</title>
+</head>
+<body>
+	<header th:replace="layout/layout :: header"></header>
+	<main>
+
+		<div class="container p-3">
+			<div class="d-flex justify-content-center">
+				<div class="row m-2 p-1  d-flex justify-content-center">
+					
+						<div class="d-flex justify-content-center p-2">
+							<strong>Recharge online</strong>
+						</div>
+
+
+						<div class="card mb-5 p-3 m-2" style="max-width: 740px;">
+							<form th:action="@{/recharge/history}" method="post" th:object="${transaction}">
+								
+							
+								<p class="card-text">
+									Monto a Recargar: <input type="text" name="monto" th:field="*{amount}">
+								</p>
+								
+								<div class="d-flex justify-content-center m-3 p-2">
+									 <input type="submit" value="Recargar" class="btn btn-success">
+								</div>
+								
+							</form>
+						</div>
+				
+
+
+				</div>
+			</div>
+
+		</div>
+
+
+	</main>
+	<footer th:replace="layout/layout :: footer"></footer>
+</body>
+</html>

@@ -18,6 +18,7 @@ import pe.edu.upc.Greencode.model.entity.Account;
 import pe.edu.upc.Greencode.model.entity.Gatherer;
 import pe.edu.upc.Greencode.model.entity.Recycler;
 import pe.edu.upc.Greencode.model.entity.Transaction;
+import pe.edu.upc.Greencode.model.entity.User;
 import pe.edu.upc.Greencode.model.entity.Waste;
 import pe.edu.upc.Greencode.service.AccountService;
 import pe.edu.upc.Greencode.service.GathererService;
@@ -38,6 +39,7 @@ public class RechargeController {
 	
 	@Autowired
 	private AccountService accountService;
+	
 
 	@GetMapping
 	public String list(Model model, @ModelAttribute("wasteSearch") Waste wasteSearch) {
@@ -80,6 +82,7 @@ public class RechargeController {
 		try {
 				int idAccountLogeado = 1;
 				Optional<Account> account = accountService.findById(idAccountLogeado);
+				//User user = new User();
 				
 				if(account.isPresent()) {
 					transaction.setAccount(account.get());
@@ -95,6 +98,31 @@ public class RechargeController {
 			e.printStackTrace();
 			System.err.println(e.getMessage());
 		}
-		return "redirect:/";
+		return "Recharge/rechargeConfirmation";
 	}
+
+	@PostMapping("/history")
+	public String saveHistory(Model model, @ModelAttribute("transaction") Transaction transaction,
+			@ModelAttribute("wasteSearch") Waste wasteSearch) {
+		try {
+				int idAccountLogeado = 1;
+				Optional<Account> account = accountService.findById(idAccountLogeado);
+				
+				if(account.isPresent()) {
+					transaction.setAccount(account.get());
+					transaction.setDate(new Date());
+			     	transaction.setTypePayment("Online");
+			     	transaction.setTypeTransaction("Recharge");
+			     	transaction.setName("");
+					transactionService.create(transaction);
+					System.out.println(transaction.toString());
+				}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.err.println(e.getMessage());
+		}
+		return "history/viewRecharge";
+	}
+
 }
