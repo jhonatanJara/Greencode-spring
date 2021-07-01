@@ -20,7 +20,7 @@
 
 							</tr>
 						</thead>
-						<tbody th:each="wasteOrder : ${wasteOrdersEmpty}">
+						<tbody th:each="wasteOrder : ${wasteOrders}">
 							<tr>
 								<th th:text="${wasteOrder.waste.name}"></th>
 								<td th:text="${wasteOrder.price}" class="text-center"></td>

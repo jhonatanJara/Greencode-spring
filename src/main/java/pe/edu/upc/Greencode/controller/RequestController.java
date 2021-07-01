@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import pe.edu.upc.Greencode.business.OrderGathererService;
+import pe.edu.upc.Greencode.business.RequestRecyclersService;
 import pe.edu.upc.Greencode.model.entity.Gatherer;
 import pe.edu.upc.Greencode.model.entity.Order;
 import pe.edu.upc.Greencode.model.entity.Waste;
@@ -36,44 +38,34 @@ public class RequestController {
 	private GathererService gathererService;
 	
 	@Autowired
-	private WasteOrderService wasteOrderService;
+	private RequestRecyclersService requestRecyclersService;
 	
-
+	@Autowired
+	private WasteOrderService wasteOrderService;
 	
 	
 	@GetMapping
 	public String list(Model model,@ModelAttribute("wasteSearch") Waste wasteSearch) {
 		try {
-			Optional<Gatherer> gatherer= gathererService.findById(1);//Jorge Jara
-			List<Order> orders= orderService.getAll();
-			List<Order> ordersEmpty = new ArrayList<Order>();
-			for(int i=0; i< orders.size(); i++) {
-				if(gatherer.get().getId() == orders.get(i).getGatherer().getId()) {
-					ordersEmpty.add(orders.get(i));
-				}
-			}	
-			model.addAttribute("ordersEmpty", ordersEmpty);
+			List<Order> orders= requestRecyclersService.ordersbystatus(1);
+			System.out.println(orders);
+			model.addAttribute("orders", orders);
 			model.addAttribute("wasteSearch", wasteSearch);
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.err.println(e.getMessage());
 		}
 		return "request/list";
+	
 	}
+	
 /*PRIMERA PARTE*/
 	@GetMapping("{id}")
 	public String findById(Model model ,@PathVariable("id") Integer id,@ModelAttribute("wasteSearch") Waste wasteSearch) {
 		try {
 			Optional<Order> order= orderService.findById(id);//Jorge Jara
-			//---------
-			List<WasteOrder> wasteOrders = wasteOrderService.getAll();
-			List<WasteOrder> wasteOrdersEmpty = new ArrayList<WasteOrder>();
-			for(int i=0; i< wasteOrders.size(); i++) {
-				if(wasteOrders.get(i).getOrder().getId()==id) {
-					wasteOrdersEmpty.add(wasteOrders.get(i));
-				}
-			}
-				model.addAttribute("wasteOrdersEmpty", wasteOrdersEmpty);
+			List<WasteOrder> wasteOrders= order.get().getWasteOrders();
+				model.addAttribute("wasteOrders", wasteOrders);
 				model.addAttribute("order", order.get());
 				model.addAttribute("wasteSearch", wasteSearch);
 				return "request/view";
@@ -89,13 +81,11 @@ public class RequestController {
 	public String updateId(Model model ,@PathVariable("id") Integer id,@ModelAttribute("wasteSearch") Waste wasteSearch) {
 		try {
 			Optional<Order> order= orderService.findById(id);//Jorge Jara
-			List<WasteOrder> wasteOrders = new ArrayList<WasteOrder>(); 
-			wasteOrders=order.get().getWasteOrders();
-			System.out.println(order.get().getId());
-		
+			Order order1= requestRecyclersService.updateStatusOrder(id);//Jorge Jara
+			List<WasteOrder> wasteOrders = order.get().getWasteOrders(); 
 				if(order.isPresent()) {
 					model.addAttribute("wasteOrders", wasteOrders);
-					model.addAttribute("orderEdit", order.get());
+					model.addAttribute("orderEdit", order1);
 					model.addAttribute("wasteSearch", wasteSearch);
 				}
 				return "request/purchase";					
