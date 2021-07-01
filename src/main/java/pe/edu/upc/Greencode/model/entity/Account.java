@@ -17,7 +17,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name="Accounts")
 public class Account {
- 
+  //new account
 	@Id
 	@GeneratedValue(strategy= GenerationType.IDENTITY)
 	@Column(name = "account_id", nullable = false)
