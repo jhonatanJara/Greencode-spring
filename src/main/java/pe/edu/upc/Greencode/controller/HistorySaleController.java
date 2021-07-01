@@ -21,13 +21,11 @@ import pe.edu.upc.Greencode.service.OrderService;
 import pe.edu.upc.Greencode.service.RecyclerService;
 import pe.edu.upc.Greencode.service.WasteOrderService;
 import pe.edu.upc.Greencode.service.WasteService;
-/*
+
 @Controller
-@RequestMapping("/history")*/
-public class HistoryController {
-	/*@Autowired
-	private GathererOrderService gathererorderSevice;
-	
+@RequestMapping("/history")
+public class HistorySaleController {
+		
 	@Autowired
 	private OrderService orderSevice;
 	
@@ -42,19 +40,7 @@ public class HistoryController {
 	
 	@Autowired
 	private WasteOrderService wasteOrderService;
-	
-	@GetMapping("purchase")
-	public String listHistoryPurchase(Model model , @ModelAttribute("wasteSearch") Waste wasteSearch) {
-		try {
-			List<Order> orders = orderSevice.getAll();
-			model.addAttribute("orders", orders);
-			model.addAttribute("wasteSearch", wasteSearch);
-		} catch (Exception e) {
-			e.printStackTrace();
-			System.err.println(e.getMessage());
-		}
-		return "history/purchase";
-	}
+		
 	
 	@GetMapping("sale")
 	public String listHistorySale(Model model,@ModelAttribute("wasteSearch") Waste wasteSearch) {
@@ -70,30 +56,7 @@ public class HistoryController {
 		return "history/sale";
 	}
 	
-	@GetMapping("purchase/{id}/view")
-	public String findHistoryPurchaseById(Model model, @PathVariable("id") Integer id, @ModelAttribute("wasteSearch") Waste wasteSearch) {
-		
-		try {
-			Optional<Order> optional = orderSevice.findById(id);
-			List<WasteOrder> listWasteOrder = wasteOrderService.getAll();
-			List<Waste> waste1= new ArrayList<Waste>();
-			
-				for(int i=0; i<listWasteOrder.size(); i++) {
-					if(listWasteOrder.get(i).getOrder().getId()==optional.get().getId()) {
-						waste1.add(listWasteOrder.get(i).getWaste());
-					}
-				}
-					
-				model.addAttribute("optional", optional.get());
-				model.addAttribute("waste1", waste1);
-				model.addAttribute("wasteSearch", wasteSearch);
-				return "history/viewPurchase";	
-		} catch (Exception e) {
-			e.printStackTrace();
-			System.err.println(e.getMessage());
-		}
-		return "redirect:/history/purchase";
-	}
+	
 	
 	@GetMapping("sale/{id}/view")
 	public String findHistorySaleById(Model model, @PathVariable("id") Integer id, @ModelAttribute("wasteSearch") Waste wasteSearch) {
@@ -117,5 +80,5 @@ public class HistoryController {
 			System.err.println(e.getMessage());
 		}
 		return "redirect:/history/sale";
-	}*/
+	}
 }
