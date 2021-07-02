@@ -29,7 +29,7 @@ public class InitDB implements CommandLineRunner{
 	@Override
 	public void run(String... args) throws Exception {
 		// TODO Auto-generated method stub
-		
+		/*
 		BCryptPasswordEncoder bcpe = new BCryptPasswordEncoder();
 	
 		Optional<Recycler> optional = recyclerRepository.findById(1);
@@ -38,7 +38,7 @@ public class InitDB implements CommandLineRunner{
 			Recycler user1 = optional.get();
 			User user = new User();
 			user.setUsername("sergio");
-			user.setPassword(bcpe.encode("castaneda"));
+			user.setPassword(bcpe.encode("castañeda"));
 			user.setEnable(true);
 			user.setSegment(Segment.RECYCLER);
 			user.setIdSegment(user1.getId());
@@ -96,7 +96,7 @@ public class InitDB implements CommandLineRunner{
 			
 			userRepository.save(user);
 		}
-		
+	*/
 	}
 	
 

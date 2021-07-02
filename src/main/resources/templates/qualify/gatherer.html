@@ -20,8 +20,6 @@
 	        <p class="card-text"><strong>Last Name:</strong> <span th:text="${gatherer.lastName}"></span>.</p>
 			<form th:action="@{/qualify/gatherer/save}" th:object="${gatherer}" method="post">
 								<input type="hidden" th:field="*{id}"> 
-								<input type="hidden" th:field="*{user}">
-								<input type="hidden" th:field="*{password}"> 
 								<input type="hidden" th:field="*{firstName}"> 
 								<input type="hidden" th:field="*{lastName}"> 
 								<input type="hidden" th:field="*{dni}"> 
