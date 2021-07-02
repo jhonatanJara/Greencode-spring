@@ -51,6 +51,16 @@ public class Transaction {
 	public Transaction() {
 		super();	
 	}
+	
+	
+
+	@Override
+	public String toString() {
+		return "Transaction [id=" + id + ", name=" + name + ", date=" + date + ", typePayment=" + typePayment
+				+ ", typeTransaction=" + typeTransaction + ", amount=" + amount + ", account=" + account + "]";
+	}
+
+
 
 	public Integer getId() {
 		return id;

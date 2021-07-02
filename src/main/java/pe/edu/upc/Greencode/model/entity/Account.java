@@ -40,6 +40,16 @@ public class Account {
 		super();
 		Transactions = new  ArrayList<Transaction>();
 	}
+	
+	
+
+	@Override
+	public String toString() {
+		return "Account [id=" + id + ", numberAccount=" + numberAccount + ", passwordAccount=" + passwordAccount
+				+ ", gatherer=" + gatherer + ", Transactions=" + Transactions + "]";
+	}
+
+
 
 	public Integer getId() {
 		return id;

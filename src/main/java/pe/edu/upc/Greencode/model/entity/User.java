@@ -86,6 +86,9 @@ public class User {
 		gatherer.setUser1(this);
 	}*/
 	
+	
+	
+	
 	// Add ROLE or ACCESS to user
 	public void addAuthority( String auth ) {
 		Authority authority = new Authority();
@@ -96,6 +99,11 @@ public class User {
 	}
 
 	
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", username=" + username + ", password=" + password + ", enable=" + enable
+				+ ", recyclers=" + recyclers + ", gatherers=" + gatherers + ", authorities=" + authorities + "]";
+	}
 	public Integer getId() {
 		return id;
 	}
