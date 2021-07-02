@@ -30,7 +30,6 @@ public class User {
 	@Column(name = "password", length = 60, nullable = false)
 	private String password;
 	
-	
 	private boolean enable;
 	
 	@Column(name = "segment", nullable = false)
@@ -95,18 +94,23 @@ public class User {
 	public List<Authority> getAuthorities() {
 		return authorities;
 	}
+	
 	public void setAuthorities(List<Authority> authorities) {
 		this.authorities = authorities;
 	}
+	
 	public Segment getSegment() {
 		return segment;
 	}
+	
 	public void setSegment(Segment segment) {
 		this.segment = segment;
 	}
+	
 	public Integer getIdSegment() {
 		return idSegment;
 	}
+	
 	public void setIdSegment(Integer idSegment) {
 		this.idSegment = idSegment;
 	}
