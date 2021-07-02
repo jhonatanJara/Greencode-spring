@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -41,10 +42,12 @@ public class RecycleController {
 	public List<Waste> listWastes = new ArrayList<Waste>();
 	
 	@GetMapping	
-	public String list(Model model, @ModelAttribute("wasteSearch") Waste wasteSearch) {
+	public String list(Model model, @ModelAttribute("wasteSearch") Waste wasteSearch,Authentication auth) {
 		try {
 			List<Waste> wastes = wasteService.availableWastes();
 			
+			MyUserDetails user = (MyUserDetails) auth.getPrincipal();
+			System.out.print(user.getId());
 			model.addAttribute("wastes", wastes);
 			model.addAttribute("recyclerWastes",listWastes);
 			model.addAttribute("wasteSearch", wasteSearch);

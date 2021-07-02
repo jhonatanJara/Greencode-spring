@@ -42,11 +42,6 @@ public class MyUserDetails implements UserDetails {
 		return this.user.getUsername();
 	}
 	
-	/*
-	public int getId() {
-		return this.user.getId();
-	}
-*/
 	@Override
 	public boolean isAccountNonExpired() {
 		return true;
@@ -69,22 +64,9 @@ public class MyUserDetails implements UserDetails {
 		// TODO Auto-generated method stub
 		return this.user.isEnable();
 	}
-	// Add new gets for get data from user or recycler
-	/*
-	public String getLastName() {
-		return this.user.getRecyclers().getLastName();
-	}
-	public String getFirstName() {
-		return this.user.getRecyclers().getFirstName();
+	
+	public Integer getId() {
+		return this.user.getIdSegmento();
 	}
 	
-	
-	// Add new gets for get data from user or gatherer
-	public String getLastName1() {
-		return this.user.getGatherers().getLastName();
-	}
-	public String getFirstName1() {
-		return this.user.getGatherers().getFirstName();
-	}
-*/
 }

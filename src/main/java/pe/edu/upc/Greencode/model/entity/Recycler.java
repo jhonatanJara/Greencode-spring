@@ -27,19 +27,13 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Table(name="Recyclers",
 indexes = { @Index(columnList = "last_name, first_name", name = "recyclers_index_last_first_name"),
 			@Index(columnList = "district_id", name="recyclers_index_district_id")},
-uniqueConstraints = {@UniqueConstraint(columnNames = {"email", "dni", "recycler_user", "mobile_number"}) })
+uniqueConstraints = {@UniqueConstraint(columnNames = {"email", "dni", "mobile_number"}) })
 
 public class Recycler {
 	@Id
 	@GeneratedValue(strategy= GenerationType.IDENTITY)
 	@Column(name = "recycler_id", nullable = false)
 	private Integer id;
-	
-	@Column(name="recycler_user", nullable=false, length=30)
-	private String recyclerUser;
-	
-	@Column(name="recycler_password", nullable=false, length=60)
-	private String recyclerPassword;
 	
 	@Column(name="first_name", nullable=false, length=20)
 	private String firstName;
@@ -107,22 +101,6 @@ public class Recycler {
 
 	public void setId(Integer id) {
 		this.id = id;
-	}
-
-	public String getRecyclerUser() {
-		return recyclerUser;
-	}
-
-	public void setRecyclerUser(String recyclerUser) {
-		this.recyclerUser = recyclerUser;
-	}
-
-	public String getRecyclerPassword() {
-		return recyclerPassword;
-	}
-
-	public void setRecyclerPassword(String recyclerPassword) {
-		this.recyclerPassword = recyclerPassword;
 	}
 
 	public String getFirstName() {
