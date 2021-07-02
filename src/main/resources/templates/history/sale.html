@@ -6,11 +6,11 @@
 <body>
 	<header th:replace="layout/layout :: header"></header>
 	<main class="d-flex justify-content-center align-items-center"
-		style="height: 550px">
+		>
 
 
 		<div class="row" style="margin: 20px">
-			<div th:each="order : ${orders}" class="col-sm-1">
+			<div th:each="order : ${orders}" class="col-sm-3">
 				<div class="card" style="width: 18rem;">
 					
 					<div class="card-body">
