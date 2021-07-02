@@ -29,9 +29,9 @@
 							Status : <span th:text="${order.status}"> </span>
 						</p>
 						<a th:href="@{'/history/sale/' + ${order.id}+'/view'}"
-							class="btn btn-primary">More details</a> <a
+							class="btn btn-success">More details</a> <a
 							th:href="@{'/qualify/gatherer/' + ${order.id}}"
-							class="btn btn-warning">Qualify</a>
+							class="btn btn-secondary">Qualify</a>
 					</div>
 				</div>
 	</main>
