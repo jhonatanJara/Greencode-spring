@@ -5,39 +5,35 @@
 </head>
 <body>
 	<header th:replace="layout/layout :: header"></header>
-	<main  class="d-flex justify-content-center align-items-center" style="height: 550px">
+	<main class="d-flex justify-content-center align-items-center"
+		style="height: 550px">
 
-		<div class="d-flex justify-content-center table-responsive">
-			<div>
-				<table class="table m-3 p-2 table-hover">
-					<thead class="bg-success text-white">
-						<tr class="text-center">
-							<th scope="col">Date</th>
-							<th scope="col">Gatherer</th>
-							<th scope="col">Name</th>
-							<th scope="col">Last Name</th>
-							<th scope="col">Status</th>
 
-							<th scope="col" style="width: 10rem"></th>
-							<th scope="col" style="width: 10rem"></th>
-						</tr>
-					</thead>
-					<tbody th:each="order : ${orders}">
-						<tr>
-							<th th:text="${order.date}"></th>
-							<th th:text="${order.id}"></th>
-							<td th:text="${order.gatherer.firstName}"></td>
-							<th th:text="${order.gatherer.lastName}"></th>
-							<th th:text="${order.status}"></th>
-							<td><a th:href="@{'/history/sale/' + ${order.id}+'/view'}"
-								class="btn btn-success">More details</a></td>
-							<td><a th:href="@{'/qualify/gatherer/' + ${order.id}}"
-								class="btn btn-success">Qualify</a></td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-		</div>
+		<div class="row" style="margin: 20px">
+			<div th:each="order : ${orders}" class="col-sm-1">
+				<div class="card" style="width: 18rem;">
+					
+					<div class="card-body">
+
+						<h5 class="card-title-success"
+							th:text="${order.gatherer.firstName + ' ' + order.gatherer.lastName }">
+						</h5>
+
+						<p class="card-text">
+							Order # : <span th:text="${order.id}"> </span>
+						</p>
+						<p class="card-text">
+							Date : <span th:text="${order.date}"> </span>
+						</p>
+						<p class="card-text">
+							Status : <span th:text="${order.status}"> </span>
+						</p>
+						<a th:href="@{'/history/sale/' + ${order.id}+'/view'}"
+							class="btn btn-primary">More details</a> <a
+							th:href="@{'/qualify/gatherer/' + ${order.id}}"
+							class="btn btn-warning">Qualify</a>
+					</div>
+				</div>
 	</main>
 
 	<footer th:replace="layout/layout :: footer"></footer>
