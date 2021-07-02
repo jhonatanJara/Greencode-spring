@@ -76,7 +76,7 @@
 								id="navbarDropdown" role="button" data-bs-toggle="dropdown"
 								aria-expanded="false" ><i class="fas fa-user-circle"></i> <span class ="text-white"sec:authentication="name">Username</span></a>
 								<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-									<li><a class="dropdown-item" href="#">Profile</a></li>
+									<li><a class="dropdown-item" th:href="@{/profile}">Profile</a></li>
 									<li><a class="dropdown-item" th:href="@{/logout}">Log out</a></li>
 								</ul>
 							</li>

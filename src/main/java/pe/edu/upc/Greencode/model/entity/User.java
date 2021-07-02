@@ -11,18 +11,18 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Index;
-import javax.persistence.JoinColumn;
-import javax.persistence.MapsId;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import pe.edu.upc.Greencode.utils.Segment;
 
 @Entity
 @Table(name = "users", indexes = {@Index(columnList = "username", name = "user_index_username")})
 public class User {
 	
 	@Id
-	private Integer id;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private long id;
 	
 	@Column(name = "username", length = 30, nullable = false)
 	private String username;
@@ -30,23 +30,19 @@ public class User {
 	@Column(name = "password", length = 60, nullable = false)
 	private String password;
 	
-	@Column(name = "enable")
+	
 	private boolean enable;
 	
-	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
-	private List<Recycler> recyclers;
+	@Column(name = "segment", nullable = false)
+	private Segment segment; 
 	
-	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
-	private List<Gatherer> gatherers;
-	
+	@Column(name = "id_segment", nullable = false)
+	private Integer idSegment;
 	
 	@OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private List<Authority> authorities;
 	
 	public User() {
-		
-		recyclers= new ArrayList<Recycler>();
-		gatherers= new ArrayList<Gatherer>();
 		this.enable = true;
 		this.authorities = new ArrayList<>();
 	}
@@ -56,37 +52,6 @@ public class User {
 		this.enable = true;
 		this.authorities = new ArrayList<>();
 	}
-	
-	public List<Authority> getAuthorities() {
-		return authorities;
-	}
-	public void setAuthorities(List<Authority> authorities) {
-		this.authorities = authorities;
-	}
-	/*
-	//RECYCLER
-	public User( String username, String password, Recycler recycler ) {
-		this.id = recycler.getId();
-		this.username = username;
-		this.password = password;
-		this.enable = true;
-		this.recycler = recycler;		
-		this.authorities = new ArrayList<>();
-		recycler.setUser(this);
-	}
-	
-	//GATHERER
-	public User( String username, String password, Gatherer gatherer ) {
-		this.id = gatherer.getId();
-		this.username = username;
-		this.password = password;
-		this.enable = true;
-		this.gatherer = gatherer;		
-		this.authorities = new ArrayList<>();
-		gatherer.setUser1(this);
-	}*/
-	
-	// Add ROLE or ACCESS to user
 	public void addAuthority( String auth ) {
 		Authority authority = new Authority();
 		authority.setAuthority( auth ) ;
@@ -94,13 +59,12 @@ public class User {
 		
 		this.authorities.add( authority );
 	}
-
 	
-	public Integer getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 
@@ -127,19 +91,24 @@ public class User {
 	public void setEnable(boolean enable) {
 		this.enable = enable;
 	}
-	public List<Recycler> getRecyclers() {
-		return recyclers;
-	}
-	public void setRecyclers(List<Recycler> recyclers) {
-		this.recyclers = recyclers;
-	}
-	public List<Gatherer> getGatherers() {
-		return gatherers;
-	}
-	public void setGatherers(List<Gatherer> gatherers) {
-		this.gatherers = gatherers;
-	}
 
-	
+	public List<Authority> getAuthorities() {
+		return authorities;
+	}
+	public void setAuthorities(List<Authority> authorities) {
+		this.authorities = authorities;
+	}
+	public Segment getSegment() {
+		return segment;
+	}
+	public void setSegment(Segment segment) {
+		this.segment = segment;
+	}
+	public Integer getIdSegment() {
+		return idSegment;
+	}
+	public void setIdSegment(Integer idSegment) {
+		this.idSegment = idSegment;
+	}
 	
 }

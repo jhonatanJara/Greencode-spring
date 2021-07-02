@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+				xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="layout/layout :: head(~{::title})">
+	<title>Profile </title>
+</head>
+<header th:replace="layout/layout :: header"></header>
+<main>
+	<section class="container">
+		
+		<div class="card mt-5" >
+			<div class="card-header "><h5> <i class="fas fa-address-card"></i> Profile</h5></div>
+			<div class="card-body ">
+				<h5 class="card-title">User Detail (Frontend: sec:authentication): </h5>
+				<p class="card-text">Username: <span sec:authentication="name"></span> </p>
+				<p class="card-text">Authorities: <span sec:authentication="principal.authorities"></span> </p>
+				<h5 class="card-title">Principal Details (Frontend: authentication.getPrincipal()): </h5>
+				<p class="card-text">
+					Segmento: <span th:text="${#authentication.getPrincipal().getSegment()}"></span> 
+				</p>
+				<p class="card-text">
+					Id del Segmento: <span th:text="${#authentication.getPrincipal().getIdSegment()}"></span> 
+				</p>
+				
+				<div th:switch="${segment}">					
+					<div th:case="'GATHERER'">
+						<h5 class="card-title">Gatherer Details (Backend: Model): </h5>
+						<p class="card-text">
+							Full name: 
+							<span th:text="${gatherer.lastName}"></span>, <span th:text="${gatherer.firstName}"></span>
+						</p>
+						<p class="card-text">
+							DNI: 
+							<span th:text="${gatherer.dni}"></span>
+						</p>
+						<p class="card-text">
+							Mobile Number: 
+							<span th:text="${gatherer.mobileNumber}"></span>
+						</p>
+						<p class="card-text">
+							Email: 
+							<span th:text="${gatherer.email}"></span>
+						</p><p class="card-text">
+							Address: 
+							<span th:text="${gatherer.address}"></span>
+						</p>
+						<p class="card-text">
+							DateBirth: 
+							<span th:text="${gatherer.dateBirth}"></span>
+						</p>
+					</div>
+					<div th:case="'RECYCLER'">
+						<h5 class="card-title">Recycler Details (Backend: Model): </h5>
+						<p class="card-text">
+							Full Name: 
+							<span th:text="${recycler.lastName}"></span>, <span th:text="${recycler.firstName}"></span>
+						</p>
+						<p class="card-text">
+							DNI: 
+							<span th:text="${recycler.dni}"></span>
+						</p>
+						<p class="card-text">
+							Mobile Number: 
+							<span th:text="${recycler.mobileNumber}"></span>
+						</p>
+						<p class="card-text">
+							Email: 
+							<span th:text="${recycler.email}"></span>
+						</p><p class="card-text">
+							Address: 
+							<span th:text="${recycler.address}"></span>
+						</p>
+						<p class="card-text">
+							DateBirth: 
+							<span th:text="${recycler.dateBirth}"></span>
+						</p>
+					</div>
+				</div>
+				
+			</div>
+		</div>
+		
+	</section>
+	</main>
+
+
+<footer th:replace="layout/layout :: footer"></footer>
+<body>
+
+</body>
+</html>

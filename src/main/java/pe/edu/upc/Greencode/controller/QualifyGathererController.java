@@ -54,10 +54,6 @@ public class QualifyGathererController {
 		}
 		return "redirect:/history/sale";
 	}
-	
-
-	
-	
 	@PostMapping("gatherer/save")
 	public String saveQualifyGatherer(Model model, @ModelAttribute("gatherer") Gatherer gatherer,@ModelAttribute("wasteSearch") Waste wasteSearch) {
 		try {
