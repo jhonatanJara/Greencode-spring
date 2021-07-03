@@ -85,11 +85,40 @@ public class ProfileController {
 		}
 		return "redirect:/profile";
 	}
+	@GetMapping("recyclerEdit")	// GET: /recycler/{id}/edit
+	public String recyclerEdit(Model model,@ModelAttribute("wasteSearch") Waste wasteSearch) {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		MyUserDetails myUserDetails = (MyUserDetails)authentication.getPrincipal();
+		
+		try {
+			Optional<Recycler> optional = recyclerService.findById(myUserDetails.getIdSegment());
+			if (optional.isPresent()) {
+				model.addAttribute("recycler", optional.get());
+				return "profile/recyclerEdit";
+			}
+		model.addAttribute("wasteSearch", wasteSearch);
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.err.println(e.getMessage());
+		}
+		return "redirect:/profile";
+	}
 	
-	@PostMapping("saveGathererEdit")	// POST: /region/saveedit
+	@PostMapping("saveGathererEdit")	// POST: /region/saveGathererEdit
 	public String saveUserEdit(Model model, @ModelAttribute("gatherer") Gatherer gatherer,@ModelAttribute("wasteSearch") Waste wasteSearch) {		
 		try {
 			gathererService.update(gatherer);
+			model.addAttribute("wasteSearch", wasteSearch);
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.err.println(e.getMessage());
+		}		
+		return "redirect:/profile";
+	}	
+	@PostMapping("saveRecyclerEdit")	// POST: /recycler/saveRecyclerEdit
+	public String saveUserEdit(Model model, @ModelAttribute("recycler") Recycler recycler,@ModelAttribute("wasteSearch") Waste wasteSearch) {		
+		try {
+			recyclerService.update(recycler);
 			model.addAttribute("wasteSearch", wasteSearch);
 		} catch (Exception e) {
 			e.printStackTrace();

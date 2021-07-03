@@ -47,7 +47,7 @@
 					<div class="d-flex justify-content-center">
 					 	<a th:href="@{'/profile/gathererEdit'}" class="btn btn-success">Edit Profile</a>
 					</div>
-
+					<br>
 				</div>
 					<div th:case="'RECYCLER'">
 						
@@ -84,8 +84,9 @@
 						</div>
 						
 					<div class="d-flex justify-content-center">
-						 <a th:href="@{'/profile/' + ${recycler.user.id} + '/edit'}" class="btn btn-success"> Edit Profile</a>
+						 <a th:href="@{'/profile/recyclerEdit'}" class="btn btn-success">Edit Profile</a>
 					</div>
+					<br>
 
 				</div>
 					

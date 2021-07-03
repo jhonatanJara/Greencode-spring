@@ -8,91 +8,69 @@
 <main>
 	<section class="d-flex justify-content-center m-4">
 		<div class="card" style="width: 25rem;">
-		
-				<div th:switch="${segment}">
-					<div th:case="'GATHERER'">
-					
-						<div class="text-center"> 
-						<img th:src="${gatherer.image}" class="img-thumbnail rounded-circle mx-3 my-2"
-							width="200px;" height="200px;">
-						</div>
-						
-	      				<div class="card-body">
-	      				
-	      					<div class="row gx-1" >
-	      						<div class="col-md-5">
-									<p class="card-text"> 
-										<strong> Full name:</strong><br>
-										<strong> DNI:</strong><br>
-										<strong> Mobile Number:</strong><br>
-										<strong> Email:</strong><br>
-										<strong> Address:</strong><br>
-										<strong> DateBirth:</strong>
-										<strong> Qualification:</strong>
-									</p >
-								</div>
-								<div class="col-md-7">
-									<p class="card-text">
-										<span th:text="${gatherer.lastName}"></span>, <span th:text="${gatherer.firstName}"></span><br>
-										<span th:text="${gatherer.dni}"></span><br>
-										<span th:text="${gatherer.mobileNumber}"></span><br>
-										<span th:text="${gatherer.email}"></span><br>
-										<span th:text="${gatherer.address}"></span><br>
-										<span th:text="${gatherer.dateBirth}"></span><br>
-										<span th:text="${gatherer.calification}"></span>
-									</p>
-								</div>
-							</div>
-						</div>
-					<div class="d-flex justify-content-center">
-					 	<a th:href="@{'/profile/' + ${gatherer.user.id} + '/edit'}" class="btn btn-success">Edit Profile</a>
-					</div>
-
-				</div>
-					<div th:case="'RECYCLER'">
-						
 						<div class="text-center"> 
 						<img th:src="${recycler.image}" class="img-thumbnail rounded-circle mx-3 my-2"
 							width="200px;" height="200px;">
 						</div>
+						
 	      				<div class="card-body">
-	      				
 	      					<div class="row gx-1" >
-	      						<div class="col-md-5">
+	      						<div class="col-md-5"><br>
 									<p class="card-text"> 
-										<strong> Full name:</strong><br>
-										<strong> DNI:</strong><br>
+										<strong> First Name:</strong><br>
+									</p>
+									<p class="card-text">
+										<strong> Last Name:</strong><br>
+									</p>
+									<p class="card-text">
+										<strong> DNI:</strong>
+									</p>
+									<p class="card-text">
 										<strong> Mobile Number:</strong><br>
+									</p>
+									<p class="card-text">
 										<strong> Email:</strong><br>
+									</p>
+									<p class="card-text">
 										<strong> Address:</strong><br>
+									</p>
 										<strong> DateBirth:</strong>
-										<strong> Qualification:</strong>
-									</p >
 								</div>
 								<div class="col-md-7">
-									<p class="card-text">
-										<span th:text="${recycler.lastName}"></span>, <span th:text="${recycler.firstName}"></span><br>
-										<span th:text="${recycler.dni}"></span><br>
-										<span th:text="${recycler.mobileNumber}"></span><br>
-										<span th:text="${recycler.email}"></span><br>
-										<span th:text="${recycler.address}"></span><br>
-										<span th:text="${recycler.dateBirth}"></span><br>
-										<span th:text="${recycler.calification}"></span>
-									</p>
+							<p class="card-text">
+							
+								<form th:action="@{/profile/saveRecyclerEdit}" th:object="${recycler}" method="post">
+									<div class="mb-3">
+								    <input type="hidden" class="form-control" th:field="*{id}" aria-describedby="nameHelp">			    
+								    <input type="text" class="form-control" th:field="*{firstName}" aria-describedby="nameHelp">	
+								    <input type="text" class="form-control" th:field="*{lastName}" aria-describedby="nameHelp">
+								    <input type="text" class="form-control" th:field="*{dni}" aria-describedby="nameHelp">	
+								    <input type="text" class="form-control" th:field="*{mobileNumber}" aria-describedby="nameHelp">
+								    <input type="text" class="form-control" th:field="*{email}" aria-describedby="nameHelp">	
+								    <input type="text" class="form-control" th:field="*{address}" aria-describedby="nameHelp">	
+								    <input type="date" class="form-control" th:field="*{dateBirth}" aria-describedby="nameHelp">	
+								    <input type="hidden" class="form-control" th:field="*{calification}" aria-describedby="nameHelp">
+								    <input type="hidden" class="form-control" th:field="*{points}" aria-describedby="nameHelp">	
+								    <input type="hidden" class="form-control" th:field="*{point}" aria-describedby="nameHelp">	
+								    <input type="hidden" class="form-control" th:field="*{image}" aria-describedby="nameHelp">
+								    <input type="hidden" class="form-control" th:field="*{type}" aria-describedby="nameHelp">
+								    <input type="hidden" class="form-control" th:field="*{district}" aria-describedby="nameHelp">
+								    <input type="hidden" class="form-control" th:field="*{coupons}" aria-describedby="nameHelp">	
+								   <input type="hidden" class="form-control" th:field="*{orders}" aria-describedby="nameHelp">  
+								  </div>
+								  <button type="submit" class="btn btn-success">Update</button>
+								</form>
+								
+							</p>
+						
 								</div>
 							</div>
 						</div>
-						
-					<div class="d-flex justify-content-center">
-						 <a th:href="@{'/profile/' + ${recycler.user.id} + '/edit'}" class="btn btn-success"> Edit Profile</a>
-					</div>
-
-				</div>
 					
-				</div>
-			</div>
+		</div>
+
 	</section>
-	</main>
+</main>
 
 
 <footer th:replace="layout/layout :: footer"></footer>
