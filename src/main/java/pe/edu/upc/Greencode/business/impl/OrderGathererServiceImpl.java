@@ -110,6 +110,8 @@ public class OrderGathererServiceImpl implements OrderGathererService {
 		if(optional.isPresent()) {
 			w.setName(optional.get().getName());
 			w.setCategory(optional.get().getCategory());
+			w.setImage(optional.get().getImage());
+			w.setAvailable(false);
 			wasteRepository.save(w);
 		}
 		return w;

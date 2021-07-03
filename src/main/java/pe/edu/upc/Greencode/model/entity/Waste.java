@@ -32,6 +32,8 @@ public class Waste {
 	@Column(name="image", nullable=true)
 	private String image;
 	
+	private boolean available;
+	
 	@ManyToOne
 	@JoinColumn(name = "category_id", nullable = false)
 	private Category category;
@@ -84,4 +86,11 @@ public class Waste {
 		this.wasteOrders = wasteOrders;
 	}
 
+	public boolean isAvailable() {
+		return available;
+	}
+
+	public void setAvailable(boolean available) {
+		this.available = available;
+	}
 }
