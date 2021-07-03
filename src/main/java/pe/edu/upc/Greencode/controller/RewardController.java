@@ -7,17 +7,20 @@ import java.util.Optional;
 import javax.swing.JOptionPane;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import pe.edu.upc.Greencode.business.RecyclerCouponService;
 import pe.edu.upc.Greencode.model.entity.Coupon;
 import pe.edu.upc.Greencode.model.entity.Recycler;
 import pe.edu.upc.Greencode.model.entity.Waste;
+import pe.edu.upc.Greencode.security.MyUserDetails;
 import pe.edu.upc.Greencode.service.CouponService;
 import pe.edu.upc.Greencode.service.RecyclerService;
 
@@ -35,9 +38,11 @@ public class RewardController {
 	private RecyclerService recyclerService;
 	
 	@GetMapping	
-	public String list(Model model, @ModelAttribute("wasteSearch") Waste wasteSearch) {
+	public String list(Model model, @ModelAttribute("wasteSearch") Waste wasteSearch, Authentication authentication) {
 		try {
-			Optional<Recycler> recycler= recyclerService.findById(1);
+			MyUserDetails user = (MyUserDetails) authentication.getPrincipal();
+			
+			Optional<Recycler> recycler= recyclerService.findById(user.getIdSegment());
 			List<Coupon> recyclerCoupons = recycler.get().getCoupons();
 			
 			if(recycler.isPresent()) {
@@ -76,17 +81,20 @@ public class RewardController {
 	
 	
 	@GetMapping("{id}/swap")
-	public String swapPoints(Model model, @PathVariable("id") Integer id) {
+	public String swapPoints(Model model, @PathVariable("id") Integer id, RedirectAttributes attribute,Authentication authentication) {
 		try {
-			Optional<Recycler> recycler= recyclerService.findById(1);
+			MyUserDetails user = (MyUserDetails) authentication.getPrincipal();
+			
+			Optional<Recycler> recycler= recyclerService.findById(user.getIdSegment());
 			Optional<Coupon> coupon = couponService.findById(id);
 			
 			if(coupon.isPresent() && coupon.get().getScore() <= recycler.get().getPoint()) {
-		
+				attribute.addFlashAttribute("message",  "Congratulations! enjoy your coupon");
 				recyclerCouponService.successfulCoupon(recycler.get(), coupon.get());
 				return "redirect:/rewards";
 				
 			}else {
+				attribute.addFlashAttribute("message",  "You don't have enough points");
 				return "redirect:/rewards/{id}/view";
 			}
 		

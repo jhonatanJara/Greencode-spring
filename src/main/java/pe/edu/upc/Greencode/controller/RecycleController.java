@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import pe.edu.upc.Greencode.business.OrderGathererService;
 import pe.edu.upc.Greencode.model.entity.Gatherer;
@@ -42,12 +43,9 @@ public class RecycleController {
 	public List<Waste> listWastes = new ArrayList<Waste>();
 	
 	@GetMapping	
-	public String list(Model model, @ModelAttribute("wasteSearch") Waste wasteSearch, Authentication authentication) {
+	public String list(Model model, @ModelAttribute("wasteSearch") Waste wasteSearch) {
 		try {
 			List<Waste> wastes = wasteService.availableWastes();
-			
-			MyUserDetails user = (MyUserDetails) authentication.getPrincipal();
-			//user.getIdSegment();
 			
 			model.addAttribute("wastes", wastes);
 			model.addAttribute("recyclerWastes",listWastes);
@@ -82,7 +80,6 @@ public class RecycleController {
 			Optional<Waste> optional = wasteService.findById(id);
 			
 			if(optional.isPresent()) {
-				//wasteService.deleteById(id);
 				for(int i=0; i<listWastes.size(); i++) {
 					if(listWastes.get(i).getId()==optional.get().getId()) {
 						listWastes.remove(listWastes.get(i));
@@ -135,9 +132,10 @@ public class RecycleController {
 	
 	
 	@GetMapping("/gatherers/byDistrict")
-	public String byDistrict(Model model, @ModelAttribute("wasteSearch") Waste wasteSearch) {
+	public String byDistrict(Model model, @ModelAttribute("wasteSearch") Waste wasteSearch, Authentication authentication) {
 		try {
-			List<Gatherer> gatherers = orderGathererService.gatherersByDistrict(1);	
+			MyUserDetails user = (MyUserDetails) authentication.getPrincipal();
+			List<Gatherer> gatherers = orderGathererService.gatherersByDistrict(user.getIdSegment());	
 			
 			model.addAttribute("gatherers", gatherers);
 			model.addAttribute("wasteSearch", wasteSearch);
@@ -167,15 +165,17 @@ public class RecycleController {
 	
 	
 	@GetMapping("{id}/Request")
-	public String newOrder(@PathVariable("id") Integer id) {
+	public String newOrder(@PathVariable("id") Integer id, Authentication authentication) {
 		try {
-			Order order = orderGathererService.newOrderGatherer(1, id);
+			MyUserDetails user = (MyUserDetails) authentication.getPrincipal();
+			Order order = orderGathererService.newOrderGatherer(user.getIdSegment(), id);
 			
 			for(int i=0; i<= listWastes.size(); i++) {
 				orderGathererService.detailsOrderGatherer(listWastes.get(i), order);
 			}  
 			order = null;
 			listWastes.clear();
+			return "recycle/gatherers";
 			
 		} catch (Exception e) {
 			e.printStackTrace();

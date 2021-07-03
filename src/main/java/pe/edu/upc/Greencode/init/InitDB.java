@@ -29,9 +29,9 @@ public class InitDB implements CommandLineRunner{
 	@Override
 	public void run(String... args) throws Exception {
 		// TODO Auto-generated method stub
-		/*
+		
 		BCryptPasswordEncoder bcpe = new BCryptPasswordEncoder();
-	
+	/*
 		Optional<Recycler> optional = recyclerRepository.findById(1);
 		if (optional.isPresent()) {
 
@@ -45,6 +45,7 @@ public class InitDB implements CommandLineRunner{
 			user1.setUser(user);
 			user.addAuthority("ROLE_RECYCLER");
 			userRepository.save(user);
+			recyclerRepository.save(user1);
 		}
 		
 		Optional<Recycler> optional1 = recyclerRepository.findById(2);
@@ -60,6 +61,7 @@ public class InitDB implements CommandLineRunner{
 			user1.setUser(user);
 			user.addAuthority("ROLE_RECYCLER");
 			userRepository.save(user);
+			recyclerRepository.save(user1);
 		}
 		
 		Optional <Gatherer> optional2 = gathererRepository.findById(1);
@@ -77,6 +79,7 @@ public class InitDB implements CommandLineRunner{
 			user.addAuthority("ROLE_GATHERER");
 			
 			userRepository.save(user);
+			gathererRepository.save(jorge);
 		}
 		
 		
@@ -95,9 +98,9 @@ public class InitDB implements CommandLineRunner{
 			user.addAuthority("ROLE_GATHERER");
 			
 			userRepository.save(user);
+			gathererRepository.save(jorge);
 		}
-	*/
-	}
 	
-
+		*/
+	}
 }
