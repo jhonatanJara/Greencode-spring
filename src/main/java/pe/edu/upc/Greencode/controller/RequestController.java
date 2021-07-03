@@ -18,6 +18,7 @@ import pe.edu.upc.Greencode.business.OrderGathererService;
 import pe.edu.upc.Greencode.business.RequestRecyclersService;
 import pe.edu.upc.Greencode.model.entity.Gatherer;
 import pe.edu.upc.Greencode.model.entity.Order;
+import pe.edu.upc.Greencode.model.entity.Recycler;
 import pe.edu.upc.Greencode.model.entity.Waste;
 import pe.edu.upc.Greencode.model.entity.WasteOrder;
 import pe.edu.upc.Greencode.service.GathererService;
@@ -77,15 +78,16 @@ public class RequestController {
 	}
 	
 	/*Update*/
-	@GetMapping("{id}/update")
-	public String updateId(Model model ,@PathVariable("id") Integer id,@ModelAttribute("wasteSearch") Waste wasteSearch) {
+	@GetMapping("{id}/update/accept")
+	public String acceptId(Model model ,@PathVariable("id") Integer id,@ModelAttribute("wasteSearch") Waste wasteSearch) {
 		try {
 			Optional<Order> order= orderService.findById(id);//Jorge Jara
-			Order order1= requestRecyclersService.updateStatusOrder(id);//Jorge Jara
+			Order order1= requestRecyclersService.updateStatusOrderAccept(id);//Jorge Jara
 			List<WasteOrder> wasteOrders = order.get().getWasteOrders(); 
+			
 				if(order.isPresent()) {
 					model.addAttribute("wasteOrders", wasteOrders);
-					model.addAttribute("orderEdit", order1);
+					model.addAttribute("orderEdit", order1);	
 					model.addAttribute("wasteSearch", wasteSearch);
 				}
 				return "request/purchase";					
@@ -96,11 +98,28 @@ public class RequestController {
 		return "redirect:/request";
 	}
 	
+	@GetMapping("{id}/update/deny")
+	public String denyId(Model model ,@PathVariable("id") Integer id,@ModelAttribute("wasteSearch") Waste wasteSearch) {
+		try {
+			Optional<Order> order= orderService.findById(id);//Jorge Jara
+			requestRecyclersService.updateStatusOrderDeny(id);
+				if(order.isPresent()) {	
+					model.addAttribute("wasteSearch", wasteSearch);
+				}				
+		}catch(Exception e){
+			e.printStackTrace();
+			System.err.println(e.getMessage());
+		}
+		return "redirect:/request";
+	}
 	
 	@PostMapping("change")
 	public String updateOrder(Model model, @ModelAttribute("orderEdit") Order orderEdit,@ModelAttribute("wasteSearch") Waste wasteSearch) {
 		try {
+			Optional<Order> order= orderService.findById(orderEdit.getId());//Jorge Jara
+			Order order1= requestRecyclersService.updateStatusOrderAccept(orderEdit.getId());//Jorge Jara	
 			orderService.update(orderEdit);
+			requestRecyclersService.updatePointsRecycler(order1);
 			model.addAttribute("wasteSearch", wasteSearch);
 		} catch (Exception e) {
 			e.printStackTrace();

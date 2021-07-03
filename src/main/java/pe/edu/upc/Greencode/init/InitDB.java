@@ -1,4 +1,5 @@
 package pe.edu.upc.Greencode.init;
+
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,25 +13,25 @@ import pe.edu.upc.Greencode.model.entity.User;
 import pe.edu.upc.Greencode.model.repository.GathererRepository;
 import pe.edu.upc.Greencode.model.repository.RecyclerRepository;
 import pe.edu.upc.Greencode.model.repository.UserRepository;
-import pe.edu.upc.Greencode.utils.Segment;
 
 @Service
 public class InitDB implements CommandLineRunner{
 
 	@Autowired
-	private UserRepository userRepository;
+	private RecyclerRepository recyclerRepository;
 	
 	@Autowired
 	private GathererRepository gathererRepository;
 	
 	@Autowired
-	private RecyclerRepository recyclerRepository;
+	private UserRepository userRepository;
 	
 	@Override
 	public void run(String... args) throws Exception {
 		// TODO Auto-generated method stub
 		
 		BCryptPasswordEncoder bcpe = new BCryptPasswordEncoder();
+
 	/*
 		Optional<Recycler> optional = recyclerRepository.findById(1);
 		if (optional.isPresent()) {
@@ -47,60 +48,55 @@ public class InitDB implements CommandLineRunner{
 			userRepository.save(user);
 			recyclerRepository.save(user1);
 		}
+=======
+	
+>>>>>>> branch 'master' of https://github.com/jhonatanJara/Greencode-spring.git
 		
-		Optional<Recycler> optional1 = recyclerRepository.findById(2);
-		if(optional1.isPresent()) {
-			
-			Recycler user1 = optional1.get();
+		/*Optional <Recycler> optional = recyclerRepository.findById(1);
+		if(optional.isPresent()) {
+			Recycler sergio = optional.get();
+			//User sercas = new User("sercas", bcpe.encode("castaneda"), sergio);
 			User user = new User();
-			user.setUsername("angela");
-			user.setPassword(bcpe.encode("diaz"));
+			user.setId(sergio.getId());
+			user.setUsername("sercas");
+			user.setPassword(bcpe.encode("castaneda"));
 			user.setEnable(true);
-			user.setSegment(Segment.RECYCLER);
-			user.setIdSegment(user1.getId());
-			user1.setUser(user);
+			//user.setAuthorities(null);
+			sergio.setUser(user);
+			
+			//ROLE segmentos obejtivos
 			user.addAuthority("ROLE_RECYCLER");
+			//ACCESS
+			user.addAuthority("ACCESS_RECYCLE");
 			userRepository.save(user);
 			recyclerRepository.save(user1);
 		}
 		
-		Optional <Gatherer> optional2 = gathererRepository.findById(1);
+		
+		Optional <Gatherer> optional2 = gathererRepository.findById(2);
 		if(optional2.isPresent()) {
 			Gatherer jorge = optional2.get();
-			
+			System.out.println(jorge);
+			//User jorja = new User("jorja", bcpe.encode("jara"), jorge);
 			User user = new User();
+			user.setId(jorge.getId());
 			user.setUsername("jorje");
 			user.setPassword(bcpe.encode("jara"));
 			user.setEnable(true);
-			user.setSegment(Segment.GATHERER);
-			user.setIdSegment(jorge.getId());
-			jorge.setUser(user);
+			//user.setAuthorities(null);
+			jorge.setUser1(user);
 			
+		
+			
+			//ROLE segmentos obejtivos
 			user.addAuthority("ROLE_GATHERER");
-			
+			//ACCESS
+			user.addAuthority("ACCESS_VIEW_REQUEST");
 			userRepository.save(user);
 			gathererRepository.save(jorge);
 		}
-		
-		
-		Optional <Gatherer> optional3 = gathererRepository.findById(2);
-		if(optional3.isPresent()) {
-			Gatherer jorge = optional3.get();
-		
-			User user = new User();
-			user.setUsername("alexandra");
-			user.setPassword(bcpe.encode("gutierrez"));
-			user.setEnable(true);
-			user.setSegment(Segment.GATHERER);
-			user.setIdSegment(jorge.getId());
-			jorge.setUser(user);
-			
-			user.addAuthority("ROLE_GATHERER");
-			
-			userRepository.save(user);
-			gathererRepository.save(jorge);
-		}
-	
 		*/
+		
+
 	}
 }

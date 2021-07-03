@@ -8,52 +8,44 @@
 	<main>
 
 
-		<div class="d-flex justify-content-center">
-			<div class="row">
-				<div class="col-3 p-1">
-					<div class="card" style="width: 30rem;">
+		<div class="container p-3">
+			<div class="d-flex justify-content-center">
+				<div class="row m-2 p-1  d-flex justify-content-center">
+					<div class="d-flex justify-content-center p-2" style="max-width: 740px;">
 						<form th:action="@{/recharge/history}" method="post" th:object="${transaction}">
-						<div style="background-color: #4EB918">
-							<h3 class="text-center">Recharge Details</h3>
+							<div class="row m-2 p-1  d-flex justify-content-center">
+							<strong>Recharge online</strong>
+						</div>
 						</div>
 						<div>
 				<table class="table m-3 p-2 table-hover" >
-					<thead  class="text-white bg-success">
+					<thead  class="text-white bg-success d-flex justify-content-center p-2">
 					  <tr>
-						<th scope="col" style="width: 30rem">Available Balance: S/100.00</th>	
+						<th scope="col" style="width: 30rem">Available Balance: <td th:text="${transaction.amount}"></td></th>	
 				  </table>
 			</div>
 						<div>
 						
 				<table class="table m-3 p-2 table-hover" >
 					<thead  class="text-white bg-success">
-					  <tr>
+					  <tr class="text center">
 						<th scope="col" style="width: 20rem">Date</th>
 						<th scope="col" style="width: 20rem">Method</th>
 						<th scope="col" style="width: 20rem">Amount</th>
-								<th scope="col" style="width: 20rem">Movement</th>
+								<th scope="col" style="width: 10rem">Movement</th>
 						<th scope="col" style="width: 10rem"></th>
 					  </tr>
-					</thead>
-					<tbody class="p-2 m-3" th:each="waste : ${wastess}">
-					  <tr>
+					  <tbody  th:each="transaction : ${transaction}">
 						<tr>
-						<th scope="col" style="width: 20rem">15/02/2021</th>
-						<th scope="col" style="width: 20rem">online</th>
-						<th scope="col" style="width: 20rem">S/50.00</th>
-								<th scope="col" style="width: 20rem">recharge</th>
-						<th scope="col" style="width: 10rem"></th>
-					  </tr>
-					  <tr>
-						<th scope="col" style="width: 20rem">15/02/2021</th>
-						<th scope="col" style="width: 20rem">online</th>
-						<th scope="col" style="width: 20rem">S/50.00</th>
-								<th scope="col" style="width: 20rem">recharge</th>
-						<th scope="col" style="width: 10rem"></th>
-					  </tr>
-					  </tr>
+							<th>02/07/2021</th>
+							<td>Online</td>
+						<td th:text="${transaction.amount}"></td>
+						<td> Recharge</td>
+						</tr>
 					</tbody>
-				  </table>
+					</thead>
+					
+				</table>
 			</div>
 						</form>
 					</div>

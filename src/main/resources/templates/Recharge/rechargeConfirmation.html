@@ -17,11 +17,18 @@
 
 
 						<div class="card mb-5 p-3 m-2" style="max-width: 740px;">
+							<div  th:if="${error}" class="alert alert-danger" role="alert">
+							  <span th:text="${error}"></span>
+							</div>s
+						
 							<form th:action="@{/recharge/history}" method="post" th:object="${transaction}">
 								
 							
 								<p class="card-text">
 									Monto a Recargar: <input type="text" name="monto" th:field="*{amount}">
+								</p>
+								<p class="card-text">
+									Contraseña: <input type="text" name="password" th:value="${user.password}">
 								</p>
 								
 								<div class="d-flex justify-content-center m-3 p-2">

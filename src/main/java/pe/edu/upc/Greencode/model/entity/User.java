@@ -2,7 +2,6 @@ package pe.edu.upc.Greencode.model.entity;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,7 +12,6 @@ import javax.persistence.Id;
 import javax.persistence.Index;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
 import pe.edu.upc.Greencode.utils.Segment;
 
 @Entity
@@ -51,6 +49,8 @@ public class User {
 		this.enable = true;
 		this.authorities = new ArrayList<>();
 	}
+
+
 	public void addAuthority( String auth ) {
 		Authority authority = new Authority();
 		authority.setAuthority( auth ) ;
