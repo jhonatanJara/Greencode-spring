@@ -175,12 +175,11 @@ public class RecycleController {
 			}  
 			order = null;
 			listWastes.clear();
-			return "recycle/gatherers";
 			
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.err.println(e.getMessage());
 		}	
-		return "redirect:/recycle/gatherers";
+		return "redirect:/history/sale";
 	}
 }

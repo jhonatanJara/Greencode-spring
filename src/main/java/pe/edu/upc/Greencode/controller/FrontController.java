@@ -29,16 +29,5 @@ public class FrontController {
 		return "login";
 	}
 	
-	@GetMapping("signUp")
-	public String SignUp(Model model) {
-		try {
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-			System.err.println(e.getMessage());
-		}
-		return "signUp";
-	}
-	
 	
 }
