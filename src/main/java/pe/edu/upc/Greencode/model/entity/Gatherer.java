@@ -14,7 +14,6 @@ import javax.persistence.Index;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -27,18 +26,13 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Table(name="Gatherers",
 indexes= {@Index(columnList="last_name,first_name",name = "gatherers_index_last_first_name"),
 		@Index(columnList = "district_id", name="gatherers_index_district_id")},
-uniqueConstraints = {@UniqueConstraint(columnNames = {"email", "dni", "gatherer_user", "mobile_number"}) })
+uniqueConstraints = {@UniqueConstraint(columnNames = {"email", "dni", "mobile_number"}) })
 public class Gatherer {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "gatherer_id", nullable = false)
 	private Integer id;
 	
-	@Column(name="gatherer_user", nullable=false, length=30)
-	private String user;
-	
-	@Column(name="gatherer_password", nullable=false, length=60)
-	private String password;
 	
 	@Column(name="first_name", nullable=false, length=20)
 	private String firstName;
@@ -81,7 +75,7 @@ public class Gatherer {
 	
 	@ManyToOne
 	@JoinColumn(name="user_id", nullable = true)
-	private User user1;
+	private User user;
 	
 	@OneToMany(mappedBy = "gatherer", fetch = FetchType.LAZY)
 	private List<Account> accounts;
@@ -101,12 +95,12 @@ public class Gatherer {
 		this.points = points;
 	}
 
-	public User getUser1() {
-		return user1;
+	public User getUser() {
+		return user;
 	}
 
-	public void setUser1(User user1) {
-		this.user1 = user1;
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	@Column(name="points", nullable=true, columnDefinition = "DECIMAL(4,1)")
@@ -124,22 +118,6 @@ public class Gatherer {
 
 	public void setId(Integer id) {
 		this.id = id;
-	}
-
-	public String getUser() {
-		return user;
-	}
-
-	public void setUser(String user) {
-		this.user = user;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
 	}
 
 	public String getFirstName() {

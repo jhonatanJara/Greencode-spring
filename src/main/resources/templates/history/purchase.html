@@ -7,28 +7,48 @@
 	<header th:replace="layout/layout :: header"></header>
 	<main>
 
-		<div class="d-flex justify-content-center table-responsive">
-			<div>
-				<table class="table m-3 p-2 table-hover">
-					<thead class="bg-success text-white">
-						<tr class="text-center">
-							<th scope="col" >Date</th>
-							<th scope="col" >Recycler</th>
-							<th scope="col" style="width: 10rem"></th>
-							<th scope="col" style="width: 10rem"></th>
-						</tr>
-					</thead>
-					<tbody  th:each="order : ${orders}">
-						<tr>
-							<th th:text="${order.date}"></th>
-							<td th:text="${order.recycler.firstName}"></td>
-							<td><a th:href="@{'/history/purchase/' + ${order.id}+'/view'}" class="btn btn-success" >More details</a></td>
-							<td><a th:href="@{'/qualify/recycler/' + ${order.id}}" class="btn btn-success" >Qualify</a></td>
-						</tr>
-					</tbody>
-				</table>
+<section style="margin: 20px;">
+ 	<nav aria-label="breadcrumb">
+	  <ol class="breadcrumb">
+	    <li class="breadcrumb-item"><a href="#">Home</a></li>
+	    <li class="breadcrumb-item"><a href="#">Movements</a></li>
+	    <li class="breadcrumb-item active" aria-current="page">Employees</li>
+	  </ol>
+	</nav>
+ </section>
+	
+		<section style="margin: 25px;">
+			<div class="row" >
+				<div th:each="order : ${orders}" class="col-sm-3"
+					style="padding: 5px;">
+
+					<div class="card">
+						<div class="card-header" align="center">ORDER #0<span th:text="${order.id}"></span></div>
+						<div class="card-body">
+							<p class="card-text">
+							<strong>Date:</strong>
+							<span th:text="${order.date}"></span><br>
+							<strong>Status:</strong>
+							<span th:text="${order.status}"></span><br>
+							<strong>Total Amount:</strong>
+							<span th:text="${order.totalAmount}"></span><br>
+							<strong>Recycler:</strong>
+							<span th:text="${order.recycler.firstName+' '+order.recycler.lastName}"> </span>
+							<a th:href="@{'/qualify/recycler/' + ${order.id}}" class="btn btn-secondary" >Qualify</a>
+							</p>
+						</div>
+						<div class="card-footer" align="center">
+							<a th:href="@{'/history/purchase/' + ${order.id}+'/view'}" class="btn btn-success" >More details</a>
+						</div>
+					</div>
+
+
+				</div>
 			</div>
-		</div>
+		</section>
+	
+	
+	
 	</main>
 
 	<footer th:replace="layout/layout :: footer"></footer>

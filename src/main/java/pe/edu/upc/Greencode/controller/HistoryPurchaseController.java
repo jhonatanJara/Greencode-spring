@@ -11,13 +11,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import pe.edu.upc.Greencode.business.HistoryPurchaseService;
 import pe.edu.upc.Greencode.model.entity.Gatherer;
 import pe.edu.upc.Greencode.model.entity.Order;
 import pe.edu.upc.Greencode.model.entity.Waste;
 import pe.edu.upc.Greencode.model.entity.WasteOrder;
 import pe.edu.upc.Greencode.service.GathererService;
 import pe.edu.upc.Greencode.service.OrderService;
-import pe.edu.upc.Greencode.service.WasteOrderService;
 
 @Controller
 @RequestMapping("/history")
@@ -27,18 +28,13 @@ public class HistoryPurchaseController {
 	private OrderService orderSevice;
 	
 	@Autowired
-	private WasteOrderService wasteOrderService;
-
-	@Autowired
-	private GathererService gathererService;
-	
+	private HistoryPurchaseService historyPurchaseService;
 	
 	
 	@GetMapping("purchase")
 	public String listHistoryPurchase(Model model , @ModelAttribute("wasteSearch") Waste wasteSearch) {
 		try {
-			Optional<Gatherer> gatherer=gathererService.findById(1);
-			List<Order> orders = gatherer.get().getOrders();
+			List<Order> orders = historyPurchaseService.ordersbystatus(1);
 			model.addAttribute("orders", orders);
 			model.addAttribute("wasteSearch", wasteSearch);
 		} catch (Exception e) {
