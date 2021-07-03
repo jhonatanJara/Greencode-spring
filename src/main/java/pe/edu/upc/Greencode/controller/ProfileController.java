@@ -9,15 +9,19 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import pe.edu.upc.Greencode.model.entity.Gatherer;
 import pe.edu.upc.Greencode.model.entity.Recycler;
+import pe.edu.upc.Greencode.model.entity.User;
 import pe.edu.upc.Greencode.model.entity.Waste;
 import pe.edu.upc.Greencode.security.MyUserDetails;
 import pe.edu.upc.Greencode.service.GathererService;
 import pe.edu.upc.Greencode.service.RecyclerService;
+import pe.edu.upc.Greencode.service.UserService;
 import pe.edu.upc.Greencode.utils.Segment;
 
 @Controller
@@ -29,6 +33,9 @@ public class ProfileController {
 	
 	@Autowired
 	private RecyclerService recyclerService;
+	
+	@Autowired
+	private UserService userService;
 	
 	@GetMapping
 	public String profile(Model model,@ModelAttribute("wasteSearch") Waste wasteSearch) {
@@ -59,4 +66,37 @@ public class ProfileController {
 				return "profile/profile";
 		
 	}
+	
+	@GetMapping("gathererEdit")	// GET: /profile/{id}/edit
+	public String gathererEdit(Model model,@ModelAttribute("wasteSearch") Waste wasteSearch) {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		MyUserDetails myUserDetails = (MyUserDetails)authentication.getPrincipal();
+		
+		try {
+			Optional<Gatherer> optional = gathererService.findById(myUserDetails.getIdSegment());
+			if (optional.isPresent()) {
+				model.addAttribute("gatherer", optional.get());
+				return "profile/gathererEdit";
+			}
+		model.addAttribute("wasteSearch", wasteSearch);
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.err.println(e.getMessage());
+		}
+		return "redirect:/profile";
+	}
+	
+	@PostMapping("saveGathererEdit")	// POST: /region/saveedit
+	public String saveUserEdit(Model model, @ModelAttribute("gatherer") Gatherer gatherer,@ModelAttribute("wasteSearch") Waste wasteSearch) {		
+		try {
+			gathererService.update(gatherer);
+			model.addAttribute("wasteSearch", wasteSearch);
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.err.println(e.getMessage());
+		}		
+		return "redirect:/profile";
+	}	
+	
+	
 }

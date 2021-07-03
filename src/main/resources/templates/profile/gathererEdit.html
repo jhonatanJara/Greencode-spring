@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+				xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="layout/layout :: head(~{::title})">
+	<title>Profile </title>
+</head>
+<header th:replace="layout/layout :: header"></header>
+<main>
+	<section class="d-flex justify-content-center m-4">
+		<div class="card" style="width: 25rem;">
+						<div class="text-center"> 
+						<img th:src="${gatherer.image}" class="img-thumbnail rounded-circle mx-3 my-2"
+							width="200px;" height="200px;">
+						</div>
+						
+	      				<div class="card-body">
+	      					<div class="row gx-1" >
+	      						<div class="col-md-5">
+									<p class="card-text"> 
+										<strong> Full name:</strong><br>
+										<strong> DNI:</strong><br>
+										<strong> Mobile Number:</strong><br>
+										<strong> Email:</strong><br>
+										<strong> Address:</strong><br>
+										<strong> DateBirth:</strong>
+										<strong> Qualification:</strong>
+									</p >
+								</div>
+								<div class="col-md-7">
+							<p class="card-text">
+							
+								<form th:action="@{/profile/saveGathererEdit}" th:object="${gatherer}" method="post">
+									<div class="mb-3">
+								    <input type="hidden" class="form-control" th:field="*{id}" aria-describedby="nameHelp">			    
+								    <input type="text" class="form-control" th:field="*{firstName}" aria-describedby="nameHelp">	
+								    <input type="text" class="form-control" th:field="*{lastName}" aria-describedby="nameHelp">	
+								    <input type="text" class="form-control" th:field="*{dni}" aria-describedby="nameHelp">	
+								    <input type="text" class="form-control" th:field="*{mobileNumber}" aria-describedby="nameHelp">	
+								    <input type="text" class="form-control" th:field="*{email}" aria-describedby="nameHelp">	
+								    <input type="text" class="form-control" th:field="*{address}" aria-describedby="nameHelp">	
+								    <input type="date" class="form-control" th:field="*{dateBirth}" aria-describedby="nameHelp">	
+								    <input type="hidden" class="form-control" th:field="*{calification}" aria-describedby="nameHelp">	
+								    <input type="hidden" class="form-control" th:field="*{image}" aria-describedby="nameHelp">
+								     <input type="hidden" class="form-control" th:field="*{type}" aria-describedby="nameHelp">
+								     <input type="hidden" class="form-control" th:field="*{profit}" aria-describedby="nameHelp">
+								     <input type="hidden" class="form-control" th:field="*{district}" aria-describedby="nameHelp">
+								
+								    <input type="hidden" class="form-control" th:field="*{accounts}" aria-describedby="nameHelp">	
+								   <input type="hidden" class="form-control" th:field="*{orders}" aria-describedby="nameHelp">			
+								    <input type="hidden" class="form-control" th:field="*{points}" aria-describedby="nameHelp">	  
+								  </div>
+								  <button type="submit" class="btn btn-success">Update</button>
+								</form>
+								
+						</p>
+						
+								</div>
+							</div>
+						</div>
+					
+		</div>
+
+	</section>
+	
+</main>
+<footer th:replace="layout/layout :: footer"></footer>
+<body>
+
+</body>
+</html>

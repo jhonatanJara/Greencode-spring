@@ -32,38 +32,40 @@ public class InitDB implements CommandLineRunner{
 		// TODO Auto-generated method stub
 		
 		BCryptPasswordEncoder bcpe = new BCryptPasswordEncoder();
-/*
-	
+
+	/*
 		Optional<Recycler> optional = recyclerRepository.findById(1);
 		if (optional.isPresent()) {
 
-			Recycler user1 = optional.get();
+			Recycler sergio = optional.get();
 			User user = new User();
 			user.setUsername("sergio");
 			user.setPassword(bcpe.encode("castañeda"));
 			user.setEnable(true);
 			user.setSegment(Segment.RECYCLER);
-			user.setIdSegment(user1.getId());
-			user1.setUser(user);
+			user.setIdSegment(sergio.getId());
 			user.addAuthority("ROLE_RECYCLER");
 			userRepository.save(user);
-			recyclerRepository.save(user1);
+			sergio.setUser(user);
+			recyclerRepository.save(sergio);
 		}
 		
 		
 		Optional<Recycler> optional1 = recyclerRepository.findById(2);
 		if(optional1.isPresent()) {
 
-			Recycler user1 = optional1.get();
+			Recycler angela = optional1.get();
 			User user = new User();
 			user.setUsername("angela");
 			user.setPassword(bcpe.encode("diaz"));
 			user.setEnable(true);
 			user.setSegment(Segment.RECYCLER);
-			user.setIdSegment(user1.getId());
-			user1.setUser(user);
+			user.setIdSegment(angela.getId());
 			user.addAuthority("ROLE_RECYCLER");
 			userRepository.save(user);
+			angela.setUser(user);
+			recyclerRepository.save(angela);
+			
 		}
 		
 		Optional <Gatherer> optional2 = gathererRepository.findById(1);
@@ -75,22 +77,26 @@ public class InitDB implements CommandLineRunner{
 			user.setEnable(true);
 			user.setSegment(Segment.GATHERER);
 			user.setIdSegment(jorge.getId());
-			jorge.setUser(user);
 			user.addAuthority("ROLE_GATHERER");
 			userRepository.save(user);
+			jorge.setUser(user);
+			gathererRepository.save(jorge);
 		}
+		
 		Optional <Gatherer> optional3 = gathererRepository.findById(2);
 		if(optional3.isPresent()) {
-			Gatherer jorge = optional3.get();
+			Gatherer alexandra = optional3.get();
 			User user = new User();
 			user.setUsername("alexandra");
 			user.setPassword(bcpe.encode("gutierrez"));
 			user.setEnable(true);
 			user.setSegment(Segment.GATHERER);
-			user.setIdSegment(jorge.getId());
-			jorge.setUser(user);
+			user.setIdSegment(alexandra.getId());
 			user.addAuthority("ROLE_GATHERER");
 			userRepository.save(user);
+			alexandra.setUser(user);
+			gathererRepository.save(alexandra);
+			
 		}
 */
 	}
