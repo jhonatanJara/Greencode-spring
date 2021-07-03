@@ -5,35 +5,46 @@
 </head>
 <body>
 	<header th:replace="layout/layout :: header"></header>
-	<main class="d-flex justify-content-center align-items-center"
-		>
+	<main>
 
+		<section style="margin: 25px;">
+			<div class="row" >
+				<div th:each="order : ${orders}" class="col-sm-3"
+					style="padding: 10px;">
 
-		<div class="row" style="margin: 20px">
-			<div th:each="order : ${orders}" class="col-sm-3">
-				<div class="card" style="width: 18rem;">
-					
-					<div class="card-body">
+					<div class="card" style="background-color: #fafafa">
 
-						<h5 class="card-title-success"
-							th:text="${order.gatherer.firstName + ' ' + order.gatherer.lastName }">
-						</h5>
+						<div class="card-body">
+	
+							<h5 class="card-title-success" align="center"
+								th:text="${order.gatherer.firstName + ' ' + order.gatherer.lastName }">
+							</h5>
 
-						<p class="card-text">
-							Order # : <span th:text="${order.id}"> </span>
-						</p>
-						<p class="card-text">
-							Date : <span th:text="${order.date}"> </span>
-						</p>
-						<p class="card-text">
-							Status : <span th:text="${order.status}"> </span>
-						</p>
-						<a th:href="@{'/history/sale/' + ${order.id}+'/view'}"
-							class="btn btn-success">More details</a> <a
-							th:href="@{'/qualify/gatherer/' + ${order.id}}"
-							class="btn btn-secondary">Qualify</a>
+							<p class="card-text">
+								Order # : <span th:text="${order.id}"> </span>
+							</p>
+							<p class="card-text">
+								Date : <span th:text="${order.date}"> </span>
+							</p>
+							<p class="card-text">
+								Total Price : <span th:text="${order.totalAmount}"> </span>
+							</p>
+							<p class="card-text">
+								Status : <span th:text="${order.status}"> </span>
+							</p>
+							<a th:href="@{'/history/sale/' + ${order.id}+'/view'}"
+								class="btn btn-success" >More details</a> <a
+								th:href="@{'/qualify/gatherer/' + ${order.id}}"
+								class="btn btn-secondary">Qualify</a>
+						</div>
 					</div>
 				</div>
+			</div>
+			</section>
+		
+
+
+
 	</main>
 
 	<footer th:replace="layout/layout :: footer"></footer>

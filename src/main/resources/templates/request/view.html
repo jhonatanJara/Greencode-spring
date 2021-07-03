@@ -65,9 +65,9 @@
 
 		<section style="padding: 30px;" class="d-flex justify-content-center">
 				<div>
-					<a th:href="@{'/request/' + ${order.id} +'/update'}"
+					<a th:href="@{'/request/' + ${order.id} +'/update/accept'}"
 						class="btn btn-success m-3">Acept</a>
-					<a th:href="@{'/request'}" class="btn btn-success m-2">Deny</a>
+					<a th:href="@{'/request/'+ ${order.id} +'/update/deny'}" class="btn btn-success m-2">Deny</a>
 				</div>
 			</section>
 		

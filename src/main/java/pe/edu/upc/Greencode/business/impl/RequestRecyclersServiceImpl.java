@@ -12,9 +12,11 @@ import org.springframework.stereotype.Service;
 import pe.edu.upc.Greencode.business.RequestRecyclersService;
 import pe.edu.upc.Greencode.model.entity.Gatherer;
 import pe.edu.upc.Greencode.model.entity.Order;
+import pe.edu.upc.Greencode.model.entity.Recycler;
 import pe.edu.upc.Greencode.model.entity.Waste;
 import pe.edu.upc.Greencode.model.repository.GathererRepository;
 import pe.edu.upc.Greencode.model.repository.OrderRepository;
+import pe.edu.upc.Greencode.model.repository.RecyclerRepository;
 
 @Service
 public class RequestRecyclersServiceImpl implements RequestRecyclersService{
@@ -23,6 +25,8 @@ public class RequestRecyclersServiceImpl implements RequestRecyclersService{
 	private GathererRepository gathererRepository;
 	@Autowired
 	private OrderRepository orderRepository;
+	@Autowired
+	private RecyclerRepository recyclerRepository;
 	
 	@Override
 	public List<Order> ordersbystatus(int id) throws Exception {
@@ -43,7 +47,7 @@ public class RequestRecyclersServiceImpl implements RequestRecyclersService{
 
 	@Transactional
 	@Override
-	public Order updateStatusOrder(int order) throws Exception {
+	public Order updateStatusOrderAccept(int order) throws Exception {
 		Optional<Order> optional = orderRepository.findById(order);
 		
 		if(optional.isPresent()) {
@@ -51,6 +55,26 @@ public class RequestRecyclersServiceImpl implements RequestRecyclersService{
 			orderRepository.save(optional.get());
 		}
 		return optional.get();
+	}
+
+	
+	
+	@Transactional
+	@Override
+	public void  updatePointsRecycler(Order order) throws Exception {
+		Recycler recycler=recyclerRepository.getById(order.getRecycler().getId());
+		recycler.setPoint(recycler.getPoint()+ order.getTotalAmount()/10);
+		recyclerRepository.save(recycler);
+	}
+
+	@Transactional
+	@Override
+	public void updateStatusOrderDeny(int order) throws Exception {
+		Optional<Order> optional = orderRepository.findById(order);
+		if(optional.isPresent()) {
+			optional.get().setStatus("Denied");
+			orderRepository.save(optional.get());
+		}
 	}
 	
 }
