@@ -1,0 +1,50 @@
+insert into districts (district_name) values ('SJL');
+insert into districts (district_name) values ('Chorrillos');
+insert into districts (district_name) values ('Miraflores');
+insert into districts (district_name) values ('San Isidro');
+
+insert into categories (name, price_kilo) values ('plastic',0.70);
+insert into categories (name, price_kilo) values ('paper',0.50);
+insert into categories (name, price_kilo) values ('glass',1.20);
+insert into categories (name, price_kilo) values ('paperboard',0.40);
+insert into categories (name, price_kilo) values ('tin',0.60);
+insert into categories (name, price_kilo) values ('metal',1.50);
+insert into categories (name, price_kilo) values ('wood',3.00);
+
+insert into recyclers (address, calification, date_birth, dni,email, first_name, last_name, mobile_number, points, type,district_id, image)
+values ('Av Los Heroes nro 156', 10,'15/10/2000',75468122,'sergio1751@hotmail.com','Sergio','Castañeda',986956321,150,'recycler',1,'/images/recyclers/jorge.jpg');
+insert into recyclers (address, calification, date_birth, dni,email, first_name, last_name, mobile_number, points, type,district_id, image)
+values ('Av Margaritas nro 171', 10,'03/11/2000',74856321,'angelica@hotmail.com','Angela','Diaz Alvarado',923996581,120,'recycler',4, '/images/recyclers/angela.jpg');
+
+insert into coupons (name_coupon, date_expiration,code, score, image) values ('-20% on Saga Falabella','12/12/2021','d1sf1221',60, '/images/discount/20.png');
+insert into coupons (name_coupon, date_expiration,code, score,image) values ('-20% on Popeyes','12/10/2021','p2py1021',40,'/images/discount/20.png');
+insert into coupons (name_coupon, date_expiration,code, score,image) values ('-50% on Ripley toys','24/12/2021','p3rp2421',90,'/images/discount/50.png');
+insert into coupons (name_coupon, date_expiration,code, score,  image) values ('-20% on Tambo products','03/08/2021','p2tm0321',35, '/images/discount/20.png');
+insert into coupons (name_coupon, date_expiration,code, score,image) values ('-10% on Oeschle clothing','05/09/2021','p2oc0521',50, '/images/discount/10.png');
+insert into coupons (name_coupon, date_expiration,code, score, image) values ('-20% on Burguer King','15/10/2021','p2bk1521',60, '/images/discount/20.png');
+
+insert into wastes (name, image, category_id, available) values ('Bottles','/images/wastes/bottles.png', 1, true);
+insert into wastes (name, image, category_id, available) values ('Bottles of glass','/images/wastes/bottlesV.jpg', 3,true);
+insert into wastes (name, image, category_id, available) values ('Boxes','/images/wastes/box.jpg', 4, true);
+insert into wastes (name, image, category_id, available) values ('Metal pieces','/images/wastes/metalPieces.jpg', 6, true);
+insert into wastes (name, image, category_id, available) values ('Notebook Covers','/images/wastes/NotebookCovers.jpg', 4, true);
+insert into wastes (name, image, category_id, available) values ('Papers','/images/wastes/papers.jpg', 2, true);
+insert into wastes (name, image, category_id, available) values ('Closet','/images/wastes/closet.jpg', 7, true);
+insert into wastes (name, image, category_id, available) values ('Soda Cans','/images/wastes/latas.jpg', 5, true);
+
+insert into gatherers (address, calification, date_birth, dni,email, first_name, last_name, mobile_number,profit, type,district_id, image)
+values ('Av Las manzanas nro 254', 10,'12/08/2000',75468134,'jorge1752@hotmail.com','Jorge','Jara',986956754,21.0,'gatherer',1, '/images/gatherers/jorge.jpg');
+insert into gatherers (address, calification, date_birth, dni,email, first_name, last_name, mobile_number,profit, type,district_id, image)
+values ('Av Los Girasoles nro 144', 8,'07/09/2000',75468519,'alexa1752@hotmail.com','Alexandra','Gutierrez',986956657,16.0,'gatherer',2, '/images/gatherers/alexandra.jpg');
+insert into gatherers (address, calification, date_birth, dni,email, first_name, last_name, mobile_number,profit, type,district_id, image)
+values ('Av Rosas del arbol nro 184', 9,'13/07/2000',75468247,'fernando1752@hotmail.com','Fernando','Reyes',986956816,32.0,'gatherer',1, '/images/gatherers/fernando.jpg');
+insert into gatherers (address, calification, date_birth, dni,email, first_name, last_name, mobile_number,profit, type,district_id,image)
+values ('Av Jesus Albino Negro nro 387', 7,'11/04/2000',75468642,'fredy1752@hotmail.com','Fredy','Vargas',986956554,41.0,'gatherer',2, '/images/gatherers/fredy.jpg');
+insert into gatherers (address, calification, date_birth, dni,email, first_name, last_name, mobile_number,profit, type,district_id, image)
+values ('Av Alan Garcia  nro 547', 4,'04/09/2000',75468225,'alan1752@hotmail.com','Alan','Garcia',986956227,18.0,'gatherer',3, '/images/gatherers/alan.jpg');
+insert into gatherers (address, calification, date_birth, dni,email, first_name, last_name, mobile_number,profit, type,district_id, image)
+values ('Av La Mar nro 250', 5,'11/10/2000',75468167,'ana1752@hotmail.com','Ana','Flores',986956347,22.0,'gatherer',4,'/images/gatherers/ana.jpg');
+insert into gatherers (address, calification, date_birth, dni,email, first_name, last_name, mobile_number,profit, type,district_id,image)
+values ('Av Miguel Grau nro 322', 3,'08/02/2000',75468227,'camila1752@hotmail.com','Camila','Fernandez',986956647,29.0,'gatherer',2,'/images/gatherers/camila.jpg');
+insert into gatherers (address, calification, date_birth, dni,email, first_name, last_name, mobile_number,profit, type,district_id,image)
+values ('Av Las Rosas nro 652', 7,'07/03/2000',75468549,'lucia1752@hotmail.com','Lucía','Gómez',986956817,35.0,'gatherer',4,'/images/gatherers/lucia.jpg');
